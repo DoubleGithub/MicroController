@@ -1,0 +1,106 @@
+A51 MACRO ASSEMBLER  KEYBOARD_SIMPLE                                                      11/10/2016 21:17:40 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\keyboard_simple.obj
+ASSEMBLER INVOKED BY: C:\MySoftWare\keil_v5\C51\BIN\A51.EXE keyboard_simple.asm SET(SMALL) DEBUG PRINT(.\Listings\keyboa
+                      rd_simple.lst) OBJECT(.\Objects\keyboard_simple.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1                     ORG 0000H
+
+0000 020100            2                     LJMP MAIN
+
+0100                   3                     ORG 0100H
+
+0100 120110            4     MAIN:   LCALL CK
+
+0103 20D5FA            5             JB F0 , $-3        ;判断标志位F0(PEW.5)
+
+0106 E9                6             MOV A , R1         ;     
+
+0107 900132            7             MOV DPTR , #TABLE  ;根据R1参量显示相应的数值
+
+010A 93                8             MOVC A , @A+DPTR   ;
+
+010B F590              9             MOV P1 , A         ;
+
+010D 020100           10             LJMP MAIN
+
+0110 D2D5             11     CK:     SETB F0            ;设置标志位
+
+0112 78EF             12             MOV R0 , #0EFH     ;给P3初值，即P3.4=0
+
+0114 7900             13             MOV R1 , #00       ;指向TABLE的参量
+
+0116 7B04             14             MOV R3 , #4        ;扫描行
+
+0118                  15     LOOP1:
+
+0118 E8               16             MOV A , R0  
+
+0119 F5B0             17             MOV P3 , A
+
+011B 00               18             NOP
+
+011C E5B0             19             MOV A  , P3
+
+011E D3               20             SETB C             ;置位C
+
+011F 7A04             21             MOV R2 , #4        ;判断在哪一列
+
+0121                  22             LOOP:
+
+0121 13               23             RRC A              ;扫描的数据带C左移一位
+
+0122 500B             24             JNC CK1            ;扫描到数据，跳转
+
+0124 09               25             INC R1             ;显示参数加1
+
+0125 DAFA             26             DJNZ R2 , LOOP        
+
+0127 E8               27             MOV A , R0         ;
+
+0128 23               28             RL A               ;改变扫描列
+
+0129 F8               29             MOV R0 , A         ;
+
+012A DBEC             30             DJNZ R3 , LOOP1
+
+012C 020110           31             LJMP CK             
+
+012F C2D5             32     CK1:    CLR F0             ;复位标志位
+
+0131 22               33             RET        
+
+0132 00010203         34     TABLE:  DB 00,01,02,03,04,05,06,07,08,09,10,11,12,13,14,15   
+
+0136 04050607                
+013A 08090A0B                
+013E 0C0D0E0F                
+                      35             END
+
+A51 MACRO ASSEMBLER  KEYBOARD_SIMPLE                                                      11/10/2016 21:17:40 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+CK . . . . . . . .  C ADDR   0110H   A   
+CK1. . . . . . . .  C ADDR   012FH   A   
+F0 . . . . . . . .  B ADDR   00D0H.5 A   
+LOOP . . . . . . .  C ADDR   0121H   A   
+LOOP1. . . . . . .  C ADDR   0118H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+TABLE. . . . . . .  C ADDR   0132H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

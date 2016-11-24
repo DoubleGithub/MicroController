@@ -1,0 +1,32 @@
+		ORG 0000H
+		LJMP MAIN
+		ORG 0100H
+MAIN:	MOV DPTR , #2002H       ;地址位赋值
+		MOV A,#01H
+		MOV B,#14
+		LOOP:MOVX @DPTR ,A
+		INC A
+		INC DPTR 
+		DJNZ B,LOOP
+		
+		MOV DPTR,#2000H         ;从2000H开始逐个读取数据
+		MOV R0,#16
+		MOV R1,#00H
+		MOV B,#16
+		MOV A,#00H
+LOOP1:  MOVX A, @DPTR
+		INC DPTR
+		JZ ADDER
+		DJNZ R0,LOOP1
+		SJMP DONE
+		
+ADDER:  INC R1                  ;计数
+		DEC R0
+		SJMP LOOP1
+	
+DONE:   MOV DPTR,#2010H         ;计数值放入2010H单元
+		MOV A,R1
+		MOVX @DPTR,A
+		
+		SJMP $
+		END

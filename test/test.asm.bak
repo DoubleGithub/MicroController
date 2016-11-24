@@ -1,0 +1,10 @@
+		ORG 0000H
+		LJMP MAIN
+		ORG 0100H
+MAIN:	MOV R0 , #30H
+		MOV R1 , #50H
+		
+LOOP:	MOVX A , @R0
+        JZ DONE
+DONE:   SJMP $
+		 END  

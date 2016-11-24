@@ -1,0 +1,94 @@
+A51 MACRO ASSEMBLER  SHIYAN_3                                                             10/18/2016 21:09:23 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\shiyan_3.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE shiyan_3.asm SET(SMALL) DEBUG PRINT(.\Listings\shiyan_3.lst) OBJECT(.\O
+                      bjects\shiyan_3.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1                     ORG 0000H
+
+0000 020100            2                     LJMP MAIN
+
+0100                   3                     ORG 0100H
+
+0100 902002            4     MAIN:   MOV DPTR , #2002H       ;地址位赋值
+
+0103 7401              5                     MOV A,#01H
+
+0105 75F00E            6                     MOV B,#14
+
+0108 F0                7                     LOOP:MOVX @DPTR ,A
+
+0109 04                8                     INC A
+
+010A A3                9                     INC DPTR 
+
+010B D5F0FA           10                     DJNZ B,LOOP
+
+                      11                     
+
+010E 902000           12                     MOV DPTR,#2000H         ;从2000H开始逐个读取数据
+
+0111 7810             13                     MOV R0,#16
+
+0113 7900             14                     MOV R1,#00H
+
+0115 75F010           15                     MOV B,#16
+
+0118 7400             16                     MOV A,#00H
+
+011A E0               17     LOOP1:  MOVX A, @DPTR
+
+011B A3               18                     INC DPTR
+
+011C 6004             19                     JZ ADDER
+
+011E D8FA             20                     DJNZ R0,LOOP1
+
+0120 8004             21                     SJMP DONE
+
+                      22                     
+
+0122 09               23     ADDER:  INC R1                  ;计数
+
+0123 18               24                     DEC R0
+
+0124 80F4             25                     SJMP LOOP1
+
+                      26             
+
+0126 902010           27     DONE:   MOV DPTR,#2010H         ;计数值放入2010H单元
+
+0129 E9               28                     MOV A,R1
+
+012A F0               29                     MOVX @DPTR,A
+
+                      30                     
+
+012B 80FE             31                     SJMP $
+
+                      32                     END
+
+A51 MACRO ASSEMBLER  SHIYAN_3                                                             10/18/2016 21:09:23 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ADDER. . . . . . .  C ADDR   0122H   A   
+B. . . . . . . . .  D ADDR   00F0H   A   
+DONE . . . . . . .  C ADDR   0126H   A   
+LOOP . . . . . . .  C ADDR   0108H   A   
+LOOP1. . . . . . .  C ADDR   011AH   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

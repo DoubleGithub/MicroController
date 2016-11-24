@@ -1,0 +1,306 @@
+A51 MACRO ASSEMBLER  KEYBOARD                                                             11/08/2016 15:37:38 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\keyboard.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE keyboard.asm SET(SMALL) DEBUG PRINT(.\Listings\keyboard.lst) OBJECT(.\O
+                      bjects\keyboard.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1                     ORG 0000H
+
+0000 75B0FF            2     MAIN:   MOV P3 , #0FFH
+
+0003 C2B0              3                     CLR P3.0 
+
+0005 E5B0              4                     MOV A , P3
+
+0007 54F0              5                     ANL A , #0F0H
+
+0009 64F0              6                     XRL A , #0F0H
+
+000B 600E              7                     JZ NOKEY1
+
+000D 120108            8                     LCALL DELAY10MS
+
+0010 E5B0              9                     MOV A , P3
+
+0012 54F0             10                     ANL A , #0F0H
+
+0014 64F0             11                     XRL A , #0F0H
+
+0016 6003             12                     JZ NOKEY1               
+
+0018 02006A           13                     LJMP DIS1
+
+                      14     
+
+001B                  15     NOKEY1: 
+
+001B 75B0FF           16                     MOV P3 , #0FFH
+
+001E C2B1             17                     CLR P3.1 
+
+0020 E5B0             18                     MOV A , P3
+
+0022 54F0             19                     ANL A , #0F0H
+
+0024 64F0             20                     XRL A , #0F0H
+
+0026 600E             21                     JZ NOKEY2
+
+0028 120108           22                     LCALL DELAY10MS
+
+002B E5B0             23                     MOV A , P3
+
+002D 54F0             24                     ANL A , #0F0H
+
+002F 64F0             25                     XRL A , #0F0H
+
+0031 6003             26                     JZ NOKEY2               
+
+0033 020079           27                     LJMP DIS2
+
+                      28     
+
+0036                  29     NOKEY2:
+
+0036 75B0FF           30                     MOV P3 , #0FFH
+
+0039 C2B2             31                     CLR P3.2 
+
+003B E5B0             32                     MOV A , P3
+
+003D 54F0             33                     ANL A , #0F0H
+
+003F 64F0             34                     XRL A , #0F0H
+
+0041 600E             35                     JZ NOKEY3
+
+0043 120108           36                     LCALL DELAY10MS
+
+0046 E5B0             37                     MOV A , P3
+
+0048 54F0             38                     ANL A , #0F0H
+
+004A 64F0             39                     XRL A , #0F0H
+
+004C 6003             40                     JZ NOKEY3               
+
+004E 020088           41                     LJMP DIS3
+
+                      42     
+
+0051                  43     NOKEY3:
+
+0051 75B0FF           44                     MOV P3 , #0FFH
+
+0054 C2B3             45                     CLR P3.3 
+
+0056 E5B0             46                     MOV A , P3
+
+0058 54F0             47                     ANL A , #0F0H
+
+005A 64F0             48                     XRL A , #0F0H
+
+005C 120108           49                     LCALL DELAY10MS
+
+005F E5B0             50                     MOV A , P3
+
+0061 54F0             51                     ANL A , #0F0H
+
+0063 64F0             52                     XRL A , #0F0H
+
+0065 6099             53                     JZ MAIN         
+
+0067 020097           54                     LJMP DIS4
+
+                      55                     
+
+006A 20E439           56     DIS1:   JB ACC.4 , NUM0
+
+006D 20E54E           57                     JB ACC.5 , NUM4
+
+A51 MACRO ASSEMBLER  KEYBOARD                                                             11/08/2016 15:37:38 PAGE     2
+
+0070 20E663           58                     JB ACC.6 , NUM8
+
+0073 20E778           59                     JB ACC.7 , NUMC
+
+0076 020000           60                     LJMP MAIN
+
+0079 20E430           61     DIS2:   JB ACC.4 , NUM1
+
+007C 20E545           62                     JB ACC.5 , NUM5
+
+007F 20E65A           63                     JB ACC.6 , NUM9
+
+0082 20E76F           64                     JB ACC.7 , NUMD
+
+0085 020000           65                     LJMP MAIN
+
+0088 20E427           66     DIS3:   JB ACC.4 , NUM2
+
+008B 20E53C           67                     JB ACC.5 , NUM6
+
+008E 20E651           68                     JB ACC.6 , NUMA
+
+0091 20E766           69                     JB ACC.7 , NUME
+
+0094 020000           70                     LJMP MAIN
+
+0097 20E41E           71     DIS4:   JB ACC.4 , NUM3
+
+009A 20E533           72                     JB ACC.5 , NUM7
+
+009D 20E648           73                     JB ACC.6 , NUMB
+
+00A0 20E75D           74                     JB ACC.7 , NUMF
+
+00A3 020000           75                     LJMP MAIN
+
+                      76     
+
+00A6 759000           77     NUM0:   MOV P1 , #00
+
+00A9 020000           78                     LJMP MAIN
+
+00AC 759001           79     NUM1:   MOV P1 , #01
+
+00AF 020000           80                     LJMP MAIN
+
+00B2 759002           81     NUM2:   MOV P1 , #02
+
+00B5 020000           82                     LJMP MAIN
+
+00B8 759003           83     NUM3:   MOV P1 , #03
+
+00BB 020000           84                     LJMP MAIN
+
+00BE 759004           85     NUM4:   MOV P1 , #04
+
+00C1 020000           86                     LJMP MAIN
+
+00C4 759005           87     NUM5:   MOV P1 , #05
+
+00C7 020000           88                     LJMP MAIN
+
+00CA 759006           89     NUM6:   MOV P1 , #06
+
+00CD 020000           90                     LJMP MAIN
+
+00D0 759007           91     NUM7:   MOV P1 , #07
+
+00D3 020000           92                     LJMP MAIN
+
+00D6 759008           93     NUM8:   MOV P1 , #08
+
+00D9 020000           94                     LJMP MAIN
+
+00DC 759009           95     NUM9:   MOV P1 , #09
+
+00DF 020000           96                     LJMP MAIN
+
+00E2 75900A           97     NUMA:   MOV P1 , #10
+
+00E5 020000           98                     LJMP MAIN
+
+00E8 75900B           99     NUMB:   MOV P1 , #11
+
+00EB 020000          100                     LJMP MAIN
+
+00EE 75900C          101     NUMC:   MOV P1 , #12
+
+00F1 020000          102                     LJMP MAIN
+
+00F4 75900D          103     NUMD:   MOV P1 , #13
+
+00F7 020000          104                     LJMP MAIN
+
+00FA 75900E          105     NUME:   MOV P1 , #14
+
+00FD 020000          106                     LJMP MAIN
+
+0100 75900F          107     NUMF:   MOV P1 , #15
+
+0103 020000          108                     LJMP MAIN               
+
+                     109                     
+
+0106 80FE            110                     SJMP $
+
+0108                 111     DELAY10MS:
+
+0108 7D0A            112                     MOV R5 , #10
+
+010A                 113                     D0:
+
+010A 7CF9            114                     MOV R4 , #249
+
+010C                 115                     D1:
+
+010C 00              116                     NOP
+
+010D 00              117                     NOP
+
+010E DCFC            118                     DJNZ R4 , D1
+
+0110 DDF8            119                     DJNZ R5 , D0
+
+0112 00              120                     NOP
+
+0113 00              121                     NOP
+
+0114 22              122                     RET             
+
+                     123                     
+
+A51 MACRO ASSEMBLER  KEYBOARD                                                             11/08/2016 15:37:38 PAGE     3
+
+                     124                     END
+
+A51 MACRO ASSEMBLER  KEYBOARD                                                             11/08/2016 15:37:38 PAGE     4
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ACC. . . . . . . .  D ADDR   00E0H   A   
+D0 . . . . . . . .  C ADDR   010AH   A   
+D1 . . . . . . . .  C ADDR   010CH   A   
+DELAY10MS. . . . .  C ADDR   0108H   A   
+DIS1 . . . . . . .  C ADDR   006AH   A   
+DIS2 . . . . . . .  C ADDR   0079H   A   
+DIS3 . . . . . . .  C ADDR   0088H   A   
+DIS4 . . . . . . .  C ADDR   0097H   A   
+MAIN . . . . . . .  C ADDR   0000H   A   
+NOKEY1 . . . . . .  C ADDR   001BH   A   
+NOKEY2 . . . . . .  C ADDR   0036H   A   
+NOKEY3 . . . . . .  C ADDR   0051H   A   
+NUM0 . . . . . . .  C ADDR   00A6H   A   
+NUM1 . . . . . . .  C ADDR   00ACH   A   
+NUM2 . . . . . . .  C ADDR   00B2H   A   
+NUM3 . . . . . . .  C ADDR   00B8H   A   
+NUM4 . . . . . . .  C ADDR   00BEH   A   
+NUM5 . . . . . . .  C ADDR   00C4H   A   
+NUM6 . . . . . . .  C ADDR   00CAH   A   
+NUM7 . . . . . . .  C ADDR   00D0H   A   
+NUM8 . . . . . . .  C ADDR   00D6H   A   
+NUM9 . . . . . . .  C ADDR   00DCH   A   
+NUMA . . . . . . .  C ADDR   00E2H   A   
+NUMB . . . . . . .  C ADDR   00E8H   A   
+NUMC . . . . . . .  C ADDR   00EEH   A   
+NUMD . . . . . . .  C ADDR   00F4H   A   
+NUME . . . . . . .  C ADDR   00FAH   A   
+NUMF . . . . . . .  C ADDR   0100H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

@@ -1,0 +1,53 @@
+A51 MACRO ASSEMBLER  TEST                                                                 10/25/2016 21:33:05 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\test.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE test.asm SET(SMALL) DEBUG PRINT(.\Listings\test.lst) OBJECT(.\Objects\t
+                      est.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1                     ORG 0000H
+
+0000 020100            2                     LJMP MAIN
+
+0100                   3                     ORG 0100H
+
+0100 7820              4     MAIN:   MOV R0 , #20H
+
+0102 7960              5                     MOV R1 , #60H
+
+0104 75F00A            6                     MOV B  , #10
+
+0107 E6                7     LOOP:   MOV A , @R0
+
+0108 F7                8                     MOV @R1, A
+
+0109 08                9                     INC R0
+
+010A 09               10                     INC R1
+
+010B D5F0F9           11                     DJNZ B , LOOP
+
+010E 80FE             12                     SJMP $
+
+                      13                             END
+
+A51 MACRO ASSEMBLER  TEST                                                                 10/25/2016 21:33:05 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+LOOP . . . . . . .  C ADDR   0107H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
