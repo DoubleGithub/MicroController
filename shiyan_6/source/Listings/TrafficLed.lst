@@ -1,0 +1,244 @@
+A51 MACRO ASSEMBLER  TRAFFICLED                                                           11/07/2016 13:03:39 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\TrafficLed.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE TrafficLed.asm SET(SMALL) DEBUG PRINT(.\Listings\TrafficLed.lst) OBJECT
+                      (.\Objects\TrafficLed.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1                     ORG 0000H
+
+0000 020100            2                     LJMP MAIN 
+
+0100                   3                     ORG 0100H
+
+0100                   4     MAIN:
+
+0100 7580FB            5                     MOV P0 ,#0FBH              ;四个路口全亮
+
+0103 75906D            6                     MOV P1 ,#01101101B
+
+0106 120151            7                     LCALL DELAY2S
+
+0109 7590AE            8                     MOV P1 ,#10101110B         ;东西绿，南北红 
+
+010C 7580FB            9                     MOV P0 ,#11111011B
+
+010F                  10                     rec:            
+
+010F 12017E           11                     LCALL DELAY45S            ;延时45s
+
+                      12                     
+
+0112 7F03             13                     MOV R7 ,#3
+
+0114                  14                     TWINKLE1:
+
+0114 7590CF           15                     MOV P1 ,#11001111B         ;闪烁三次
+
+0117 7580F3           16                     MOV P0 ,#11110011B
+
+011A 120160           17                     LCALL DELAY0_5S
+
+011D 7590EF           18                     MOV P1 ,#11101111B
+
+0120 7580FB           19                     MOV P0 ,#11111011B
+
+0123 120160           20                     LCALL DELAY0_5S
+
+0126 DFEC             21                     DJNZ R7 , TWINKLE1              
+
+                      22                     
+
+0128 759075           23                     MOV P1 ,#01110101B          ;东西红，南北绿
+
+012B 7580FD           24                     MOV P0 ,#11111101B
+
+012E 12016F           25                     LCALL DELAY30S              ;延时30s
+
+                      26                                     
+
+0131 7E03             27                     MOV R6 ,#3
+
+0133                  28                     TWINKLE2:
+
+0133 759079           29                     MOV P1 ,#01111001B        ;闪烁三次
+
+0136 7580FE           30                     MOV P0 ,#11111110B
+
+0139 120160           31                     LCALL DELAY0_5S
+
+013C 75907D           32                     MOV P1 ,#01111101B
+
+013F 7580FF           33                     MOV P0 ,#11111111B
+
+0142 120160           34                     LCALL DELAY0_5S
+
+0145 DEEC             35                     DJNZ R6 , TWINKLE2
+
+                      36                                     
+
+0147 7590AE           37                     MOV P1 ,#10101110B
+
+014A 7580FB           38                     MOV P0 ,#11111011B
+
+014D 80C0             39                     jmp rec
+
+014F 80FE             40                     SJMP $
+
+                      41                             
+
+0151                  42     DELAY2S:
+
+0151 7B02             43                     MOV R3 , #2
+
+0153                  44                     D2: 
+
+0153 7DFA             45                     MOV R5 , #250
+
+0155                  46                     D0:             
+
+0155 7CFA             47                     MOV R4 , #250
+
+0157                  48                     D1:
+
+0157 00               49                     NOP 
+
+0158 00               50                     NOP
+
+0159 DCFC             51                     DJNZ R4 ,D1
+
+015B DDF8             52                     DJNZ R5 ,D0
+
+015D DBF4             53                     DJNZ R3 ,D2     
+
+015F 22               54                     RET
+
+                      55     
+
+0160                  56     DELAY0_5S:
+
+0160 7B02             57                     MOV R3 , #2
+
+A51 MACRO ASSEMBLER  TRAFFICLED                                                           11/07/2016 13:03:39 PAGE     2
+
+0162                  58                     D4: 
+
+0162 7DFA             59                     MOV R5 , #250
+
+0164                  60                     D5:             
+
+0164 7CFA             61                     MOV R4 , #250
+
+0166                  62                     D6:
+
+0166 00               63                     NOP 
+
+0167 00               64                     NOP
+
+0168 DCFC             65                     DJNZ R4 ,D6
+
+016A DDF8             66                     DJNZ R5 ,D5
+
+016C DBF4             67                     DJNZ R3 ,D4     
+
+016E 22               68                     RET
+
+                      69                     
+
+016F                  70     DELAY30S:
+
+016F 7B78             71                     MOV R3 , #120
+
+0171                  72                     D7: 
+
+0171 7DFA             73                     MOV R5 , #250
+
+0173                  74                     D8:             
+
+0173 7CFA             75                     MOV R4 , #250
+
+0175                  76                     D9:
+
+0175 00               77                     NOP 
+
+0176 00               78                     NOP
+
+0177 DCFC             79                     DJNZ R4 ,D9
+
+0179 DDF8             80                     DJNZ R5 ,D8
+
+017B DBF4             81                     DJNZ R3 ,D7             
+
+017D 22               82                     RET
+
+                      83                     
+
+017E                  84     DELAY45S:
+
+017E 7BB4             85                     MOV R3 , #180
+
+0180                  86                     D10: 
+
+0180 7DFA             87                     MOV R5 , #250
+
+0182                  88                     D11:            
+
+0182 7CFA             89                     MOV R4 , #250
+
+0184                  90                     D12:
+
+0184 00               91                     NOP 
+
+0185 00               92                     NOP
+
+0186 DCFC             93                     DJNZ R4 ,D12
+
+0188 DDF8             94                     DJNZ R5 ,D11
+
+018A DBF4             95                     DJNZ R3 ,D10    
+
+018C 22               96                     RET
+
+                      97                     
+
+                      98                     END
+
+A51 MACRO ASSEMBLER  TRAFFICLED                                                           11/07/2016 13:03:39 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+D0 . . . . . . . .  C ADDR   0155H   A   
+D1 . . . . . . . .  C ADDR   0157H   A   
+D10. . . . . . . .  C ADDR   0180H   A   
+D11. . . . . . . .  C ADDR   0182H   A   
+D12. . . . . . . .  C ADDR   0184H   A   
+D2 . . . . . . . .  C ADDR   0153H   A   
+D4 . . . . . . . .  C ADDR   0162H   A   
+D5 . . . . . . . .  C ADDR   0164H   A   
+D6 . . . . . . . .  C ADDR   0166H   A   
+D7 . . . . . . . .  C ADDR   0171H   A   
+D8 . . . . . . . .  C ADDR   0173H   A   
+D9 . . . . . . . .  C ADDR   0175H   A   
+DELAY0_5S. . . . .  C ADDR   0160H   A   
+DELAY2S. . . . . .  C ADDR   0151H   A   
+DELAY30S . . . . .  C ADDR   016FH   A   
+DELAY45S . . . . .  C ADDR   017EH   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+REC. . . . . . . .  C ADDR   010FH   A   
+TWINKLE1 . . . . .  C ADDR   0114H   A   
+TWINKLE2 . . . . .  C ADDR   0133H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

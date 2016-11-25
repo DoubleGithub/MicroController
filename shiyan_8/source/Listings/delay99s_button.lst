@@ -1,0 +1,217 @@
+A51 MACRO ASSEMBLER  DELAY99S_BUTTON                                                      11/14/2016 17:46:48 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\delay99s_button.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE delay99s_button.asm SET(SMALL) DEBUG PRINT(.\Listings\delay99s_button.l
+                      st) OBJECT(.\Objects\delay99s_button.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1                     ORG 0000H
+
+0000 020100            2                     LJMP MAIN
+
+0100                   3                     ORG 0100H
+
+0100 7A00              4     MAIN:   MOV R2 , #00                      ;按键次数
+
+0102 7863              5     MAIN1:  MOV R0 , #99              ;倒计时秒数
+
+0104 7964              6                     MOV R1 , #100             ;循环次数         
+
+0106 900171            7                     MOV DPTR , #TABLE
+
+0109 75806F            8                     MOV P0 , #6FH
+
+010C 75A06F            9                     MOV p2 , #6FH
+
+                      10     
+
+010F                  11     KEYCHECK:
+
+010F 30B506           12                     JNB P3.5 , TMP
+
+0112 EA               13                     MOV A , R2
+
+0113 60FA             14                     JZ KEYCHECK
+
+0115 02011F           15                     LJMP S1
+
+0118                  16                     TMP:    
+
+                      17                     ;LCALL DELAY10MS                
+
+                      18                     ;JNB P3.5 , TMP1
+
+                      19                     ;LJMP S1
+
+                      20                     ;TMP1:
+
+0118 120164           21                     LCALL DELAY10MS 
+
+011B 30B5F1           22                     JNB P3.5 , KEYCHECK
+
+011E 0A               23                     INC R2
+
+                      24                                     
+
+011F EA               25                     S1:MOV A ,R2
+
+0120 75F003           26                     MOV B ,#3
+
+0123 84               27                     DIV AB
+
+0124 E5F0             28                     MOV A , B
+
+0126 B40103           29                     X1:CJNE A , #1 , X2
+
+0129 020135           30                     LJMP NEXT
+
+012C B40203           31                     X2:CJNE A , #2 , X3
+
+012F 02010F           32                     LJMP KEYCHECK
+
+0132 020102           33                     X3:LJMP MAIN1
+
+0135                  34     NEXT:   
+
+0135 E8               35                     MOV A , R0
+
+0136 75F00A           36                     MOV B , #10
+
+0139 84               37                     DIV AB
+
+013A 93               38                     MOVC A,@A+DPTR
+
+013B F580             39                     MOV P0 , A
+
+013D E5F0             40                     MOV A , B
+
+013F 93               41                     MOVC A,@A+DPTR
+
+0140 F5A0             42                     MOV P2 , A
+
+0142 12014B           43                     LCALL DELAY1S
+
+0145 EA               44                     MOV A , R2
+
+0146 18               45                     DEC R0
+
+                      46                     ;DJNZ R1 , NEXT
+
+0147 D9C6             47                     DJNZ R1 , KEYCHECK
+
+0149 80FE             48                     SJMP $
+
+                      49                     
+
+014B                  50     DELAY1S:   ;误差 0us
+
+                      51                     ;MOV R7,#167
+
+014B 7F50             52                     MOV R7,#80
+
+014D                  53                     DL0:
+
+014D 7EAB             54                     MOV R6,#171
+
+014F                  55                     DL1:
+
+014F 7D10             56                     MOV R5,#16
+
+                      57                     ;DJNZ R5,$
+
+A51 MACRO ASSEMBLER  DELAY99S_BUTTON                                                      11/14/2016 17:46:48 PAGE     2
+
+0151                  58                     DL2:
+
+0151 30B508           59                     Z1:JNB P3.5 , RETURN
+
+0154 DDFB             60                     DJNZ R5,DL2
+
+0156 DEF7             61                     DJNZ R6,DL1
+
+0158 DFF3             62                     DJNZ R7,DL0
+
+015A 00               63                     NOP
+
+015B 22               64                     RET
+
+015C                  65                     RETURN:
+
+015C 120164           66                     LCALL DELAY10MS
+
+015F 30B5EF           67                     JNB P3.5 , Z1
+
+0162 0A               68                     INC R2
+
+0163 22               69                     RET
+
+                      70             
+
+0164                  71     DELAY10MS:   ;误差 0us
+
+0164 7F01             72         MOV R7,#01H
+
+0166                  73             DL3:
+
+0166 7E26             74         MOV R6,#26H
+
+0168                  75             DL4:
+
+0168 7D82             76         MOV R5,#82H
+
+016A DDFE             77         DJNZ R5,$
+
+016C DEFA             78         DJNZ R6,DL4
+
+016E DFF6             79         DJNZ R7,DL3
+
+0170 22               80         RET
+
+0171 3F065B4F         81     TABLE:  DB 3FH,06H,5BH,4FH,66H,6DH,7DH,07H
+
+0175 666D7D07                
+0179 7F6F777C         82             DB 7FH,6FH,77H,7CH,39H,5EH,79H,71H
+
+017D 395E7971                
+                      83                     END
+
+A51 MACRO ASSEMBLER  DELAY99S_BUTTON                                                      11/14/2016 17:46:48 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+DELAY10MS. . . . .  C ADDR   0164H   A   
+DELAY1S. . . . . .  C ADDR   014BH   A   
+DL0. . . . . . . .  C ADDR   014DH   A   
+DL1. . . . . . . .  C ADDR   014FH   A   
+DL2. . . . . . . .  C ADDR   0151H   A   
+DL3. . . . . . . .  C ADDR   0166H   A   
+DL4. . . . . . . .  C ADDR   0168H   A   
+KEYCHECK . . . . .  C ADDR   010FH   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+MAIN1. . . . . . .  C ADDR   0102H   A   
+NEXT . . . . . . .  C ADDR   0135H   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+RETURN . . . . . .  C ADDR   015CH   A   
+S1 . . . . . . . .  C ADDR   011FH   A   
+TABLE. . . . . . .  C ADDR   0171H   A   
+TMP. . . . . . . .  C ADDR   0118H   A   
+X1 . . . . . . . .  C ADDR   0126H   A   
+X2 . . . . . . . .  C ADDR   012CH   A   
+X3 . . . . . . . .  C ADDR   0132H   A   
+Z1 . . . . . . . .  C ADDR   0151H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

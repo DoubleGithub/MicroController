@@ -1,0 +1,98 @@
+		ORG 0000H
+		LJMP MAIN 
+		ORG 0100H
+MAIN:
+		MOV P0 ,#0FBH              ;四个路口全亮
+		MOV P1 ,#01101101B
+		LCALL DELAY2S
+		MOV P1 ,#10101110B         ;东西绿，南北红 
+		MOV P0 ,#11111011B
+		rec:		
+		LCALL DELAY45S            ;延时45s
+		
+		MOV R7 ,#3
+		TWINKLE1:
+		MOV P1 ,#11001111B         ;闪烁三次
+		MOV P0 ,#11110011B
+		LCALL DELAY0_5S
+		MOV P1 ,#11101111B
+		MOV P0 ,#11111011B
+		LCALL DELAY0_5S
+		DJNZ R7 , TWINKLE1		
+		
+		MOV P1 ,#01110101B          ;东西红，南北绿
+		MOV P0 ,#11111101B
+		LCALL DELAY30S              ;延时30s
+				
+		MOV R6 ,#3
+		TWINKLE2:
+		MOV P1 ,#01111001B        ;闪烁三次
+		MOV P0 ,#11111110B
+		LCALL DELAY0_5S
+		MOV P1 ,#01111101B
+		MOV P0 ,#11111111B
+		LCALL DELAY0_5S
+		DJNZ R6 , TWINKLE2
+				
+		MOV P1 ,#10101110B
+		MOV P0 ,#11111011B
+		jmp rec
+		SJMP $
+			
+DELAY2S:
+		MOV R3 , #2
+		D2: 
+		MOV R5 , #250
+		D0:		
+		MOV R4 , #250
+		D1:
+		NOP 
+		NOP
+		DJNZ R4 ,D1
+		DJNZ R5 ,D0
+		DJNZ R3 ,D2	
+		RET
+
+DELAY0_5S:
+		MOV R3 , #2
+		D4: 
+		MOV R5 , #250
+		D5:		
+		MOV R4 , #250
+		D6:
+		NOP 
+		NOP
+		DJNZ R4 ,D6
+		DJNZ R5 ,D5
+		DJNZ R3 ,D4	
+		RET
+		
+DELAY30S:
+		MOV R3 , #120
+		D7: 
+		MOV R5 , #250
+		D8:		
+		MOV R4 , #250
+		D9:
+		NOP 
+		NOP
+		DJNZ R4 ,D9
+		DJNZ R5 ,D8
+		DJNZ R3 ,D7		
+		RET
+		
+DELAY45S:
+		MOV R3 , #180
+		D10: 
+		MOV R5 , #250
+		D11:		
+		MOV R4 , #250
+		D12:
+		NOP 
+		NOP
+		DJNZ R4 ,D12
+		DJNZ R5 ,D11
+		DJNZ R3 ,D10	
+		RET
+		
+		END

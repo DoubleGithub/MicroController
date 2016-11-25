@@ -1,0 +1,74 @@
+A51 MACRO ASSEMBLER  SHIYAN_1                                                             10/24/2016 15:27:01 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\shiyan_1.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE shiyan_1.asm SET(SMALL) DEBUG PRINT(.\Listings\shiyan_1.lst) OBJECT(.\O
+                      bjects\shiyan_1.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1                     ORG 0000H               
+
+0000 755034            2     MAIN:   MOV 50H,#34H
+
+0003 755112            3                     MOV 51H,#12H
+
+0006 755256            4                     MOV 52H,#56H
+
+0009 755378            5                     MOV 53H,#78H
+
+000C 755491            6                     MOV 54H,#91H
+
+000F 755567            7                     MOV 55H,#67H
+
+0012 E550              8                     MOV A,50H    ;50H高四位转移到51H低四位
+
+0014 C4                9                     SWAP A
+
+0015 540F             10                     ANL A,#0FH
+
+0017 F551             11                     MOV 51H,A
+
+0019 E550             12                     MOV A,50H    ;50H低四位转移到52H低四位
+
+001B 540F             13                     ANL A,#0FH
+
+001D F552             14                     MOV 52H,A
+
+001F E553             15                     MOV A,53H    ;53H低四位转移到55H高四位
+
+0021 C4               16                     SWAP A
+
+0022 54F0             17                     ANL A,#0F0H
+
+0024 F5F0             18                     MOV B,A
+
+0026 E554             19                     MOV A,54H    ;54H低四位转移到55H低四位
+
+0028 540F             20                     ANL A,#0FH
+
+002A 45F0             21                     ORL A,B
+
+002C F555             22                     MOV 55H,A       
+
+002E 80FE             23                     SJMP $
+
+                      24                     END
+
+A51 MACRO ASSEMBLER  SHIYAN_1                                                             10/24/2016 15:27:01 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+MAIN . . . . . . .  C ADDR   0000H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

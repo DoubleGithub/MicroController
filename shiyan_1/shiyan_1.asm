@@ -1,0 +1,24 @@
+		ORG 0000H		
+MAIN:	MOV 50H,#34H
+		MOV 51H,#12H
+		MOV 52H,#56H
+		MOV 53H,#78H
+		MOV 54H,#91H
+		MOV 55H,#67H
+		MOV A,50H    ;50H高四位转移到51H低四位
+		SWAP A
+		ANL A,#0FH
+		MOV 51H,A
+		MOV A,50H    ;50H低四位转移到52H低四位
+		ANL A,#0FH
+		MOV 52H,A
+		MOV A,53H    ;53H低四位转移到55H高四位
+		SWAP A
+		ANL A,#0F0H
+		MOV B,A
+		MOV A,54H    ;54H低四位转移到55H低四位
+		ANL A,#0FH
+		ORL A,B
+		MOV 55H,A	
+		SJMP $
+		END

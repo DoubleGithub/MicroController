@@ -1,0 +1,105 @@
+A51 MACRO ASSEMBLER  DELAY99S                                                             11/14/2016 15:50:49 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\delay99s.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE delay99s.asm SET(SMALL) DEBUG PRINT(.\Listings\delay99s.lst) OBJECT(.\O
+                      bjects\delay99s.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1                     ORG 0000H
+
+0000 020100            2                     LJMP MAIN
+
+0100                   3                     ORG 0100H
+
+0100 7809              4     MAIN:   MOV R0 , #9              ;倒计时秒数
+
+0102 790A              5                     MOV R1 , #10             ;循环次数
+
+                       6                     ;MOV R2 , #00                     ;按键次数
+
+0104 90012B            7                     MOV DPTR , #TABLE
+
+0107 E8                8     NEXT:   MOV A , R0
+
+0108 75F00A            9                     MOV B , #10
+
+010B 84               10                     DIV AB
+
+010C 93               11                     MOVC A,@A+DPTR
+
+010D F580             12                     MOV P0 , A
+
+010F E5F0             13                     MOV A , B
+
+0111 93               14                     MOVC A,@A+DPTR
+
+0112 F5A0             15                     MOV P2 , A
+
+0114 12011D           16                     LCALL DELAY1S
+
+0117 EA               17                     MOV A , R2
+
+0118 18               18                     DEC R0
+
+0119 D9EC             19                     DJNZ R1 , NEXT
+
+011B 80FE             20                     SJMP $
+
+                      21                     
+
+011D                  22     DELAY1S:   ;误差 0us
+
+011D 7FA7             23                     MOV R7,#167
+
+011F                  24                     DL0:
+
+011F 7EAB             25                     MOV R6,#171
+
+0121                  26                     DL1:
+
+0121 7D10             27                     MOV R5,#16
+
+0123 DDFE             28                     DJNZ R5,$
+
+0125 DEFA             29                     DJNZ R6,DL1
+
+0127 DFF6             30                     DJNZ R7,DL0
+
+0129 00               31                     NOP
+
+012A 22               32                     RET
+
+012B 3F065B4F         33     TABLE:  DB 3FH,06H,5BH,4FH,66H,6DH,7DH,07H
+
+012F 666D7D07                
+0133 7F6F777C         34             DB 7FH,6FH,77H,7CH,39H,5EH,79H,71H
+
+0137 395E7971                
+                      35                     END
+
+A51 MACRO ASSEMBLER  DELAY99S                                                             11/14/2016 15:50:49 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+DELAY1S. . . . . .  C ADDR   011DH   A   
+DL0. . . . . . . .  C ADDR   011FH   A   
+DL1. . . . . . . .  C ADDR   0121H   A   
+MAIN . . . . . . .  C ADDR   0100H   A   
+NEXT . . . . . . .  C ADDR   0107H   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+TABLE. . . . . . .  C ADDR   012BH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

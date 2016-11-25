@@ -1,0 +1,112 @@
+A51 MACRO ASSEMBLER  CCC                                                                  11/14/2016 15:28:24 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\CCC.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE CCC.ASM SET(SMALL) DEBUG PRINT(.\Listings\CCC.lst) OBJECT(.\Objects\CCC
+                      .obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1     org 0000h
+
+0000 0140              2     ajmp main
+
+0040                   3     org 0040h
+
+0040                   4     main:
+
+0040 757F99            5     mov 7fh,#99h
+
+0043 1156              6     acall display
+
+0045                   7     loop:
+
+0045 1156              8     acall display
+
+0047 1173              9     acall delay_1s
+
+0049 E57F             10     mov a,7fh
+
+004B 6007             11     jz out
+
+004D 2499             12     add a,#99h
+
+004F D4               13     da a
+
+0050 F57F             14     mov 7fh,a
+
+0052 0145             15     ajmp loop
+
+0054 80FE             16     out:sjmp $
+
+0056                  17     display:
+
+0056 E57F             18     mov a,7fh
+
+0058 55F0             19     anl a,0f0h
+
+005A C4               20     swap a
+
+005B 900069           21     mov dptr,#table
+
+005E 93               22     movc a,@a+dptr
+
+005F F580             23     mov p0,a
+
+0061 E57F             24     mov a,7fh
+
+0063 550F             25     anl a,0fh
+
+0065 93               26     movc a,@a+dptr
+
+0066 F5A0             27     mov p2,a
+
+0068 22               28     ret
+
+0069 3F065B4F         29     table: db 3fh,06h,5bh,4fh,66h,6dh,7dh,07h,7fh,6fh
+
+006D 666D7D07                
+0071 7F6F                    
+0073                  30     delay_1s:
+
+0073 7F64             31     mov r7,#100
+
+0075 7E14             32     del:mov r6,#20
+
+0077 7DF8             33     de:mov r5,#248
+
+0079 DDFE             34     djnz r5,$
+
+007B DEFA             35     djnz r6,de
+
+007D DFF6             36     djnz r7,del
+
+007F 22               37     ret
+
+                      38     end
+
+A51 MACRO ASSEMBLER  CCC                                                                  11/14/2016 15:28:24 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+DE . . . . . . . .  C ADDR   0077H   A   
+DEL. . . . . . . .  C ADDR   0075H   A   
+DELAY_1S . . . . .  C ADDR   0073H   A   
+DISPLAY. . . . . .  C ADDR   0056H   A   
+LOOP . . . . . . .  C ADDR   0045H   A   
+MAIN . . . . . . .  C ADDR   0040H   A   
+OUT. . . . . . . .  C ADDR   0054H   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+TABLE. . . . . . .  C ADDR   0069H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
