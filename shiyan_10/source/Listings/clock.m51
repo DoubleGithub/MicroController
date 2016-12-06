@@ -1,0 +1,216 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        11/28/2016  15:37:25  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\STARTUP.obj, .\Objects\clock.obj TO .\Objects\clock PRINT (.\Listings\clock.m51)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\STARTUP.obj (?C_STARTUP)
+  .\Objects\clock.obj (CLOCK)
+
+
+LINK MAP OF MODULE:  .\Objects\clock (?C_STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+* OVERLAP * CODE    0000H     41ADH     ABSOLUTE     
+            CODE    41ADH     000CH     UNIT         ?C_C51STARTUP
+
+
+
+UNRESOLVED EXTERNAL SYMBOLS:
+   ?C_START
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\clock (?C_STARTUP)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C_STARTUP
+  C:41ADH         SEGMENT       ?C_C51STARTUP
+  I:0008H         SEGMENT       ?STACK
+  C:0000H         PUBLIC        ?C_STARTUP
+  D:00E0H         SYMBOL        ACC
+  D:00F0H         SYMBOL        B
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  N:0000H         SYMBOL        IBPSTACK
+  N:0100H         SYMBOL        IBPSTACKTOP
+  N:0080H         SYMBOL        IDATALEN
+  C:41B0H         SYMBOL        IDATALOOP
+  N:0000H         SYMBOL        PBPSTACK
+  N:0100H         SYMBOL        PBPSTACKTOP
+  N:0000H         SYMBOL        PDATALEN
+  N:0000H         SYMBOL        PDATASTART
+  N:0000H         SYMBOL        PPAGE
+  N:0000H         SYMBOL        PPAGEENABLE
+  D:00A0H         SYMBOL        PPAGE_SFR
+  D:0081H         SYMBOL        SP
+  C:41ADH         SYMBOL        STARTUP1
+  N:0000H         SYMBOL        XBPSTACK
+BL51 BANKED LINKER/LOCATER V6.22                                                      11/28/2016  15:37:25  PAGE 2
+
+
+  N:0000H         SYMBOL        XBPSTACKTOP
+  N:0000H         SYMBOL        XDATALEN
+  N:0000H         SYMBOL        XDATASTART
+  C:0000H         LINE#         126
+  C:41ADH         LINE#         133
+  C:41AFH         LINE#         134
+  C:41B0H         LINE#         135
+  C:41B1H         LINE#         136
+  C:41B3H         LINE#         185
+  C:41B6H         LINE#         196
+  -------         ENDMOD        ?C_STARTUP
+
+  -------         MODULE        CLOCK
+  D:00E0H         SYMBOL        ACC
+  N:0023H         SYMBOL        BUF
+  C:4173H         SYMBOL        CLOCK
+  C:413FH         SYMBOL        DEL
+  C:412EH         SYMBOL        DS1
+  C:4132H         SYMBOL        DS2
+  B:00A8H.7       SYMBOL        EA
+  B:00A8H.3       SYMBOL        ET1
+  C:4167H         SYMBOL        GET
+  N:0020H         SYMBOL        HBF
+  N:0021H         SYMBOL        MBF
+  D:0090H         SYMBOL        P1
+  N:CFA0H         SYMBOL        PORT
+  D:00D0H         SYMBOL        PSW
+  C:41A8H         SYMBOL        QUIT
+  N:0022H         SYMBOL        SBF
+  C:4100H         SYMBOL        START
+  C:4159H         SYMBOL        TABLE
+  D:008DH         SYMBOL        TH1
+  D:008BH         SYMBOL        TL1
+  D:0089H         SYMBOL        TMOD
+  B:0088H.6       SYMBOL        TR1
+  C:0000H         LINE#         8
+  C:401BH         LINE#         10
+  C:4100H         LINE#         12
+  C:4102H         LINE#         14
+  C:4104H         LINE#         15
+  C:4105H         LINE#         16
+  C:4106H         LINE#         17
+  C:4107H         LINE#         18
+  C:4108H         LINE#         19
+  C:410AH         LINE#         20
+  C:410BH         LINE#         21
+  C:410CH         LINE#         22
+  C:410DH         LINE#         23
+  C:410EH         LINE#         24
+  C:4110H         LINE#         25
+  C:4111H         LINE#         26
+  C:4112H         LINE#         27
+  C:4113H         LINE#         29
+  C:4116H         LINE#         30
+  C:4119H         LINE#         31
+  C:411CH         LINE#         33
+  C:411FH         LINE#         34
+BL51 BANKED LINKER/LOCATER V6.22                                                      11/28/2016  15:37:25  PAGE 3
+
+
+  C:4122H         LINE#         35
+  C:4125H         LINE#         36
+  C:4128H         LINE#         37
+  C:412AH         LINE#         38
+  C:412CH         LINE#         39
+  C:412EH         LINE#         41
+  C:4130H         LINE#         42
+  C:4132H         LINE#         43
+  C:4135H         LINE#         44
+  C:4136H         LINE#         45
+  C:4138H         LINE#         46
+  C:4139H         LINE#         48
+  C:413AH         LINE#         49
+  C:413BH         LINE#         50
+  C:413DH         LINE#         51
+  C:413FH         LINE#         52
+  C:4140H         LINE#         53
+  C:4142H         LINE#         54
+  C:4143H         LINE#         55
+  C:4144H         LINE#         56
+  C:4145H         LINE#         57
+  C:4146H         LINE#         58
+  C:4147H         LINE#         59
+  C:4149H         LINE#         61
+  C:414BH         LINE#         62
+  C:414DH         LINE#         63
+  C:414FH         LINE#         65
+  C:4151H         LINE#         66
+  C:4153H         LINE#         68
+  C:4155H         LINE#         69
+  C:4157H         LINE#         70
+  C:4159H         LINE#         71
+  C:415AH         LINE#         72
+  C:415BH         LINE#         73
+  C:4167H         LINE#         76
+  C:4168H         LINE#         77
+  C:416AH         LINE#         78
+  C:416BH         LINE#         80
+  C:416CH         LINE#         81
+  C:416DH         LINE#         82
+  C:416EH         LINE#         83
+  C:4170H         LINE#         84
+  C:4171H         LINE#         85
+  C:4172H         LINE#         86
+  C:4173H         LINE#         87
+  C:4176H         LINE#         88
+  C:4179H         LINE#         89
+  C:417BH         LINE#         90
+  C:417DH         LINE#         91
+  C:417FH         LINE#         92
+  C:4181H         LINE#         93
+  C:4184H         LINE#         94
+  C:4187H         LINE#         95
+  C:4189H         LINE#         96
+  C:418AH         LINE#         97
+  C:418BH         LINE#         98
+  C:418DH         LINE#         99
+BL51 BANKED LINKER/LOCATER V6.22                                                      11/28/2016  15:37:25  PAGE 4
+
+
+  C:4190H         LINE#         100
+  C:4193H         LINE#         101
+  C:4195H         LINE#         102
+  C:4196H         LINE#         103
+  C:4197H         LINE#         104
+  C:4199H         LINE#         105
+  C:419CH         LINE#         106
+  C:419FH         LINE#         107
+  C:41A1H         LINE#         108
+  C:41A2H         LINE#         109
+  C:41A3H         LINE#         110
+  C:41A5H         LINE#         111
+  C:41A8H         LINE#         112
+  C:41AAH         LINE#         113
+  C:41ACH         LINE#         114
+  -------         ENDMOD        CLOCK
+
+*** WARNING L5: CODE SPACE MEMORY OVERLAP
+    FROM:    0000H
+    TO:      0002H
+
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  ?C_START
+    MODULE:  .\Objects\STARTUP.obj (?C_STARTUP)
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  ?C_START
+    MODULE:  .\Objects\STARTUP.obj (?C_STARTUP)
+    ADDRESS: 41B7H
+
+Program Size: data=9.0 xdata=0 code=16828
+LINK/LOCATE RUN COMPLETE.  3 WARNING(S),  0 ERROR(S)

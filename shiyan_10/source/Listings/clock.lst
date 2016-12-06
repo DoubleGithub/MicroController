@@ -1,0 +1,281 @@
+A51 MACRO ASSEMBLER  CLOCK                                                                11/28/2016 15:37:25 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\clock.obj
+ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE clock.asm SET(SMALL) DEBUG PRINT(.\Listings\clock.lst) OBJECT(.\Objects
+                      \clock.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1             ;数码显示实验 
+
+  CFA0                 2                     PORT EQU 0CFA0H  
+
+  0023                 3                     BUF EQU 23H ;存放计数值 
+
+  0022                 4                     SBF EQU 22H ;存放秒值 
+
+  0021                 5                     MBF EQU 21H ;存放分值 
+
+  0020                 6                     HBF EQU 20H     ;存放小时 
+
+0000                   7                     ORG 0000H 
+
+0000 024100            8                     LJMP START 
+
+401B                   9                     ORG 401BH 
+
+401B 024173           10                     LJMP CLOCK 
+
+4100                  11                     ORG 4100H 
+
+4100 7840             12     START:  MOV R0,#40H ;40H-45H是显示缓冲区依次存放时高位、时低位以及
+                             分高位、
+
+                      13                                             ;分低位以及秒高位、秒低位
+
+4102 7400             14             MOV A,#00H ;  
+
+4104 F6               15             MOV @R0,A ;  
+
+4105 08               16             INC R0 
+
+4106 F6               17             MOV @R0,A 
+
+4107 08               18             INC R0 
+
+4108 740A             19             MOV A,#0AH 
+
+410A F6               20             MOV @R0,A 
+
+410B 08               21             INC R0 
+
+410C F6               22             MOV @R0,A 
+
+410D 08               23             INC R0 
+
+410E 7400             24             MOV A,#00H 
+
+4110 F6               25             MOV @R0,A 
+
+4111 08               26             INC R0 
+
+4112 F6               27             MOV @R0,A 
+
+                      28      
+
+4113 758910           29             MOV TMOD,#10H ;定时器1初始化为方式1 
+
+4116 758D3C           30             MOV TH1,#3CH ;置时间常数延时0.1秒 
+
+4119 758BAF           31             MOV TL1,#0AFH 
+
+                      32      
+
+411C 752300           33             MOV BUF,#00H ;置0 
+
+411F 752200           34             MOV SBF,#00H 
+
+4122 752100           35             MOV MBF,#00H 
+
+4125 752000           36                     MOV HBF,#00H
+
+4128 D2AB             37             SETB ET1 
+
+412A D2AF             38             SETB EA 
+
+412C D28E             39             SETB TR1 
+
+                      40      
+
+412E 7840             41     DS1:    MOV R0,#40H ;置显示缓冲区首址 
+
+4130 7A20             42             MOV R2,#20H ;置扫描初值,点亮最左边的LED6 
+
+4132 90CFA0           43     DS2:    MOV DPTR,#PORT  
+
+4135 E6               44             MOV A,@R0 ;得到的段显码输出到段数据口 
+
+4136 3159             45             ACALL TABLE 
+
+4138 F0               46             MOVX @DPTR,A  
+
+                      47       
+
+4139 EA               48             MOV A,R2 ;向位数据口P1输出位显码 
+
+413A F4               49             CPL A 
+
+413B F590             50             MOV P1,A  
+
+413D 7BFF             51             MOV R3,#0FFH ;延时一小段时间 
+
+413F 00               52     DEL:    NOP 
+
+4140 DBFD             53                     DJNZ R3,DEL 
+
+4142 08               54                     INC R0 ;显示缓冲字节加一 
+
+4143 C3               55                     CLR C 
+
+4144 EA               56                     MOV A,R2 
+
+A51 MACRO ASSEMBLER  CLOCK                                                                11/28/2016 15:37:25 PAGE     2
+
+4145 13               57                     RRC A ;显码右移一位 
+
+4146 FA               58                     MOV R2,A ;最末一位是否显示完毕?,如无则 
+
+4147 70E9             59                     JNZ DS2 ;继续往下显示 
+
+                      60      
+
+4149 7845             61                     MOV R0,#45H 
+
+414B E522             62                     MOV A,SBF ;把秒值分别放于44H,45H中 
+
+414D 3167             63                     ACALL GET 
+
+                      64      
+
+414F E521             65                     MOV A,MBF ;把分值分别放入42H,43H中 
+
+4151 3167             66                     ACALL GET 
+
+                      67      
+
+4153 E520             68                     MOV A, HBF;把小时分别放入40H,41H中 
+
+4155 3167             69                     ACALL  GET  
+
+4157 80D5             70             SJMP DS1 ;转DS1从头显示起 
+
+4159 04               71     TABLE:  INC A ;取与数字对应的段码 
+
+415A 83               72                     MOVC A,@A+PC 
+
+415B 22               73                     RET 
+
+415C 3F065B4F         74                     DB 3FH,06H,5BH,4FH,66H,6DH,7DH, 07H, 7FH,6FH, 40H 
+
+4160 666D7D07                
+4164 7F6F40                  
+                      75      
+
+4167 F9               76     GET:    MOV R1,A ;把从时、分或秒字节中取来的值的高 
+
+4168 540F             77             ANL A,#0FH ;位屏蔽掉,并送入缓冲区 
+
+416A F6               78             MOV @R0,A 
+
+                      79      
+
+416B 18               80             DEC R0 
+
+416C E9               81             MOV A,R1 ;把从时、分或秒字节中取来的值的低 
+
+416D C4               82             SWAP A ;位屏蔽掉,并送入缓冲区 
+
+416E 540F             83             ANL A,#0FH 
+
+4170 F6               84             MOV @R0,A 
+
+4171 18               85             DEC R0 ;R0指针下移一位 
+
+4172 22               86             RET 
+
+4173 758B3C           87     CLOCK:  MOV TL1,#3CH ;置时间常数 
+
+4176 758DAF           88             MOV TH1,#0AFH 
+
+4179 C0D0             89             PUSH PSW  
+
+417B C0E0             90             PUSH ACC 
+
+417D 0523             91             INC BUF ;计数加一 
+
+417F E523             92             MOV A,BUF ;计到10否?没有则转到QUIT退出中断 
+
+4181 B40A24           93             CJNE A,#0AH,QUIT 
+
+4184 752300           94             MOV BUF,#00H ;置初值 
+
+4187 E522             95             MOV A,SBF 
+
+4189 04               96             INC A ;秒值加一,经十进制调整后放入 
+
+418A D4               97             DA A ;秒字节 
+
+418B F522             98             MOV SBF,A 
+
+418D B46018           99             CJNE A,#60H,QUIT ;计到60否?没有则转到QUIT退出中断 
+
+4190 752200          100             MOV SBF,#00H ;是,秒字节清零 
+
+4193 E521            101             MOV A,MBF 
+
+4195 04              102             INC A ;分值加一,经十进制调整后放入 
+
+4196 D4              103             DA A ;分字节 
+
+4197 F521            104             MOV MBF,A 
+
+4199 B4600C          105             CJNE A,#60H,QUIT ;分值为60否?不是则退出中断 
+
+419C 752100          106             MOV MBF,#00H ;是,清零 
+
+419F E520            107                     MOV  A,HBF 
+
+41A1 04              108                     INC  A; 
+
+41A2 D4              109                     DA  A 
+
+41A3 F520            110                     MOV  HBF,A 
+
+41A5 B42400          111                     CJNE A,#24H,QUIT     ;时值为24否不是则退出中断
+
+41A8 D0E0            112     QUIT:   POP ACC 
+
+41AA D0D0            113             POP PSW 
+
+41AC 32              114             RETI ;中断返回 
+
+                     115             END
+
+A51 MACRO ASSEMBLER  CLOCK                                                                11/28/2016 15:37:25 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ACC. . . . . . . .  D ADDR   00E0H   A   
+BUF. . . . . . . .  N NUMB   0023H   A   
+CLOCK. . . . . . .  C ADDR   4173H   A   
+DEL. . . . . . . .  C ADDR   413FH   A   
+DS1. . . . . . . .  C ADDR   412EH   A   
+DS2. . . . . . . .  C ADDR   4132H   A   
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+ET1. . . . . . . .  B ADDR   00A8H.3 A   
+GET. . . . . . . .  C ADDR   4167H   A   
+HBF. . . . . . . .  N NUMB   0020H   A   
+MBF. . . . . . . .  N NUMB   0021H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+PORT . . . . . . .  N NUMB   CFA0H   A   
+PSW. . . . . . . .  D ADDR   00D0H   A   
+QUIT . . . . . . .  C ADDR   41A8H   A   
+SBF. . . . . . . .  N NUMB   0022H   A   
+START. . . . . . .  C ADDR   4100H   A   
+TABLE. . . . . . .  C ADDR   4159H   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
