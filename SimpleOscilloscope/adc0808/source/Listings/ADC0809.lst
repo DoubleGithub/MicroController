@@ -1,0 +1,184 @@
+A51 MACRO ASSEMBLER  ADC0809                                                              12/05/2016 23:17:04 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02b
+OBJECT MODULE PLACED IN .\Objects\ADC0809.obj
+ASSEMBLER INVOKED BY: C:\MySoftWare\keil\C51\BIN\A51.EXE ADC0809.ASM SET(SMALL) DEBUG PRINT(.\Listings\ADC0809.lst) OBJE
+                      CT(.\Objects\ADC0809.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     ;本程序用到单元(30H~34H,3DH,3EH)
+                       2     ;(30H~34H)用于存放显示数据，(30H~33H)用于存放测量数据，34H用于存放通
+                             道号
+                       3     ;R1用于存放0809检测出来的8个数据
+                       4     ;(3DH(低位)、3EH(高位))用于存放0809检测出来数据计算结果
+0000                   5           ORG 0000H
+0000 0130              6           AJMP MAIN
+0013                   7           ORG 0013H
+0013 014E              8           AJMP INT_1
+0030                   9           ORG 0030H
+                      10     ;======================================
+                      11     ;主程序
+0030 7830             12     MAIN: MOV R0,#30H      ;存放数据首地址
+0032 7A0F             13           MOV R2,#0FH      ;计算数据存放单元个数
+0034 E4               14           CLR A
+0035 F6               15     QING: MOV @R0,A        ;将数据存放单元清零
+0036 08               16           INC R0
+0037 DAFC             17           DJNZ R2,QING
+                      18           ;MOV R4,#08H      ;8路计数初值
+0039 7C01             19               MOV R4,#01H      ;8路计数初值
+003B 753400           20           MOV 34H,#00H     ;初始通道显示单元为1号通道
+003E D28A             21           SETB IT1         ;INT1置为边沿触发
+0040 D2AF             22           SETB EA          ;开中断
+0042 D2AA             23           SETB EX1         ;允许INT1中断
+0044 907FF8           24           MOV DPTR,#7FF8H  ;指向0809通道0
+0047 7400             25           MOV A,#00H       ;此指令可缺省
+0049 F0               26           MOVX @DPTR,A     ;启动A/D转换
+004A 1165             27     HERE: ACALL JI_SUAN
+004C 014A             28           AJMP HERE        ;等待中断
+                      29     ;==========================================
+                      30     ;中断子程序
+004E C2AA             31     INT_1: CLR EX1
+0050 C0D0             32           PUSH PSW         ;保护现场
+0052 E0               33           MOVX A,@DPTR     ;读A/D转换结果
+0053 F9               34           MOV R1,A         ;存数据
+0054 A3               35           INC DPTR         ;更新通道
+0055 E534             36           MOV A,34H
+0057 04               37           INC A
+0058 F534             38           MOV 34H,A
+005A DC05             39           DJNZ R4,LOOP     ;巡回未完继续
+                      40           ;MOV R4,#08H      ;重新赋初值
+005C 7C01             41               MOV R4,#01H      ;重新赋初值
+005E 907FF8           42           MOV DPTR,#7FF8H
+0061                  43     LOOP:
+0061 F0               44           MOVX @DPTR,A     ;启动A/D转换
+0062 D0D0             45           POP PSW
+0064 32               46           RETI             ;返回中断
+                      47     
+                      48     ;========================================
+                      49     ;数据计算
+0065                  50     JI_SUAN:
+0065 E9               51           MOV A,R1
+0066 75F014           52           MOV B,#20          ;基准电压为5伏，分辨率为5/256约为20毫伏 
+0069 A4               53           MUL AB           ;显示数值单位为毫伏
+006A FF               54           MOV R7,A         ;测量出来的数据乘20毫伏即为实际电压值，但还是�
+                             �六进制
+006B E5F0             55           MOV A,B          ;高位存放在R6里，低位存放在R7里
+A51 MACRO ASSEMBLER  ADC0809                                                              12/05/2016 23:17:04 PAGE     2
+
+006D FE               56           MOV R6,A
+006E 7D10             57           MOV R5,#16
+                      58     ;=========================================
+                      59     ;双字节十六进制转双字节BCD码
+0070                  60     SBIN_SBCD:
+0070 753D00           61           MOV 3DH,#00H     ;数据计算结果清零
+0073 753E00           62           MOV 3EH,#00H
+0076                  63     SBIN_SBCD1:
+0076 EF               64           MOV A,R7  ;R7左移一位并送回
+0077 33               65           RLC A
+0078 FF               66           MOV R7,A
+0079 EE               67           MOV A,R6  ;R6左移一位并送回
+007A 33               68           RLC A
+007B FE               69           MOV R6,A
+007C E53D             70           MOV A,3DH
+007E 353D             71           ADDC A,3DH
+0080 D4               72           DA A       ;T_S乘2并调整后送回
+0081 F53D             73           MOV 3DH,A
+0083 E53E             74           MOV A,3EH
+0085 353E             75           ADDC A,3EH
+0087 D4               76           DA A       ;T_M乘2并调整后送回
+0088 F53E             77           MOV 3EH,A
+008A DDEA             78           DJNZ R5,SBIN_SBCD1 ;循环运行16次得到BCD码结果
+                      79     ;=====================================
+                      80     ;双字节BCD码制转4个单字节BCD码
+008C                  81     SBCD_DBCD:
+008C E53D             82           MOV A,3DH
+008E F5F0             83           MOV B,A
+0090 540F             84           ANL A,#0FH ;将T_S里面的数据存放寄存器B里后再进行与操作得到低四
+                             位
+0092 F530             85           MOV 30H,A  ;并存放到数码管显示的第一位地址40H里面
+0094 E5F0             86           MOV A,B
+0096 C4               87           SWAP A     ;从寄存器取回原来保存的数，再进行高低位互换
+0097 540F             88           ANL A,#0FH ;进行与操作后得到高四位
+0099 F531             89           MOV 31H,A  ;最后存放到数码管显示的第二位地址41H里面
+009B E53E             90           MOV A,3EH  ;同上
+009D F5F0             91           MOV B,A
+009F 540F             92           ANL A,#0FH
+00A1 F532             93           MOV 32H,A
+00A3 E5F0             94           MOV A,B
+00A5 C4               95           SWAP A
+00A6 540F             96           ANL A,#0FH
+00A8 F533             97           MOV 33H,A
+                      98     
+                      99     ;=======================================
+                     100     ;显示子程序
+                     101     
+00AA 7D32            102     DIS:     MOV R5,#50      ;显示循环次数，即改变显示延时刷新时间
+00AC 7930            103     DIS1:    MOV R1,#30H      ;把显示数据第一位放在R0里
+00AE 7A04            104              MOV R2,#04H      ;把显示的位码放在R1里
+00B0 7B05            105              MOV R3,#05H      ;把显示的长度放在R2里
+00B2 E7              106     DIS2:    MOV A,@R1
+00B3 540F            107              ANL A,#0FH       ;屏蔽显示数据的高四位
+00B5 F5F0            108              MOV B,A
+00B7 EA              109              MOV A,R2
+00B8 540F            110              ANL A,#0FH       ;屏蔽位码的高四位
+00BA C4              111              SWAP A
+00BB 45F0            112              ORL A,B
+00BD F580            113              MOV P0,A         ;送总显示数据到P0显示
+00BF 1200D3          114              LCALL DELY4ms    ;调用延时4ms
+00C2 09              115              INC R1           ;取下一个显示数据
+00C3 1A              116              DEC R2
+00C4 DBEC            117              DJNZ R3,DIS2     ;四位显示晚后重新开始显示
+00C6 DDE4            118              DJNZ R5,DIS1
+00C8 E534            119              MOV A,34H        ;显示完后判断通道好是否为8
+                     120              ;CJNE A,#08H,HUI
+A51 MACRO ASSEMBLER  ADC0809                                                              12/05/2016 23:17:04 PAGE     3
+
+00CA B40103          121                      CJNE A,#01H,HUI
+00CD 753400          122              MOV 34H,#00H
+00D0 D2AA            123     HUI:     SETB EX1         ;显示完毕再允许中断
+00D2 22              124              RET
+                     125     ;=====================================
+                     126     ;延时子程序
+00D3 7E08            127     DELY4ms: MOV R6,#8         ;延时4毫秒
+00D5 7FF8            128     D1:      MOV R7,#248
+00D7 DFFE            129              DJNZ R7,$
+00D9 DEFA            130              DJNZ R6,D1
+00DB 22              131              RET
+                     132              END
+A51 MACRO ASSEMBLER  ADC0809                                                              12/05/2016 23:17:04 PAGE     4
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+D1 . . . . . . . .  C ADDR   00D5H   A   
+DELY4MS. . . . . .  C ADDR   00D3H   A   
+DIS. . . . . . . .  C ADDR   00AAH   A   
+DIS1 . . . . . . .  C ADDR   00ACH   A   
+DIS2 . . . . . . .  C ADDR   00B2H   A   
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+EX1. . . . . . . .  B ADDR   00A8H.2 A   
+HERE . . . . . . .  C ADDR   004AH   A   
+HUI. . . . . . . .  C ADDR   00D0H   A   
+INT_1. . . . . . .  C ADDR   004EH   A   
+IT1. . . . . . . .  B ADDR   0088H.2 A   
+JI_SUAN. . . . . .  C ADDR   0065H   A   
+LOOP . . . . . . .  C ADDR   0061H   A   
+MAIN . . . . . . .  C ADDR   0030H   A   
+P0 . . . . . . . .  D ADDR   0080H   A   
+PSW. . . . . . . .  D ADDR   00D0H   A   
+QING . . . . . . .  C ADDR   0035H   A   
+SBCD_DBCD. . . . .  C ADDR   008CH   A   
+SBIN_SBCD. . . . .  C ADDR   0070H   A   
+SBIN_SBCD1 . . . .  C ADDR   0076H   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

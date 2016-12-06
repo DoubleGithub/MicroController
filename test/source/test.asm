@@ -1,0 +1,109 @@
+		ORG 0000H
+		LJMP MAIN
+		ORG 0040H
+	MAIN:
+		MOV 40H , #2
+		MOV 41H , #3
+		MOV 42H , #5
+		MOV 43H , #9
+		MOV 44H , #5
+		MOV 45H , #0
+		MOV DPTR , #TABLE
+		MOV TL0 , #0B0H
+		MOV TH0 , #3CH
+		MOV R6 , #20   ;计数初值
+		MOV TMOD , #01H
+		SETB ET0 
+		SETB EA 
+		SETB TR0
+	START:
+		MOV R0 , #40H
+		MOV R1 , #6
+		MOV R2 , #0FEH
+	LOOP:
+		MOV A , @R0
+		MOVC A , @A+DPTR
+		MOV P2 , A
+		MOV P3 , R2
+		LCALL DELAY5MS
+		MOV P3 , #0FFH
+		INC R0 
+		MOV A , R2
+		RL A 
+		MOV R2 , A
+		DJNZ R1 , LOOP
+		LJMP START
+	
+		ORG 000BH
+		LJMP TIME0
+		ORG 0100H
+	TIME0:
+		PUSH PSW 
+		PUSH ACC
+		MOV TL0 , #0B0H
+		MOV TH0 , #3CH
+		DJNZ R6 , OUT
+		MOV R6 , #20
+		MOV A , 45H
+		INC A
+		MOV 45H , A
+		CJNE A , #10 , OUT
+		MOV  45H , #00
+		MOV A , 44H
+		INC A
+		MOV 44H , A
+		CJNE A , #6 , OUT 
+		MOV 44H , #00
+		MOV A , 43H
+		INC A
+		MOV 43H , A
+		CJNE A , #10 ,OUT
+		MOV  43H , #00
+		MOV A , 42H
+		INC A
+		MOV 42H , A
+		CJNE A , #6 , OUT 
+		MOV 42H , #00
+		MOV A , 41H
+		INC A
+		MOV 41H , A
+		CJNE A , # 4 , TMP
+		MOV A , 40H
+		CJNE A , #2 , TMP
+		LJMP CLEAR
+		TMP:
+		MOV A , 41H
+		CJNE A , # 10 , OUT
+		MOV 41H , #00
+		MOV A , 40H
+		INC A
+		MOV 40H , A
+		AJMP OUT
+		CLEAR:
+		MOV 40H , #0
+		MOV 41H , #0
+		MOV 42H , #0
+		MOV 43H , #0
+		MOV 44H , #0
+		MOV 45H , #0
+	OUT:	
+		POP ACC
+		POP PSW
+		RETI
+	
+	DELAY5MS:
+		MOV R5 , #5
+		D0:
+		MOV R4 , #249
+		D1:
+		NOP
+		NOP
+		DJNZ R4 , D1
+		DJNZ R5 , D0
+		NOP
+		NOP
+		RET
+	TABLE:  
+		DB 3FH,06H,5BH,4FH,66H,6DH,7DH,07H
+        DB 7FH,6FH,77H,7CH,39H,5EH,79H,71H
+		END 

@@ -1,0 +1,638 @@
+C51 COMPILER V9.56.0.0   12864_1                                                           12/04/2016 22:04:32 PAGE 1   
+
+
+C51 COMPILER V9.56.0.0, COMPILATION OF MODULE 12864_1
+OBJECT MODULE PLACED IN .\Objects\12864-1.obj
+COMPILER INVOKED BY: C:\MySoftWare\keil_v5\C51\BIN\C51.EXE ..\documents\12864\12864preview\12864-1.c OPTIMIZE(8,SPEED) B
+                    -ROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\12864-1.lst) TABS(2) OBJECT(.\Objects\12864-1.obj)
+
+line level    source
+
+   1          #include <STC12c5a32s2.H> 
+*** WARNING C318 IN LINE 1 OF ..\documents\12864\12864preview\12864-1.c: can't open file 'STC12c5a32s2.H'
+   2          #include<intrins.h>
+   3          sbit RS=P0^0; //并行的指令/数据选择信号, H数据, L命令
+*** ERROR C202 IN LINE 3 OF ..\documents\12864\12864preview\12864-1.c: 'P0': undefined identifier
+   4          sbit RW=P0^1; //并行读写选择信号, H读, L写
+*** ERROR C202 IN LINE 4 OF ..\documents\12864\12864preview\12864-1.c: 'P0': undefined identifier
+   5          sbit E=P0^2; //并行使能端, H有效, L无效
+*** ERROR C202 IN LINE 5 OF ..\documents\12864\12864preview\12864-1.c: 'P0': undefined identifier
+   6          sbit PSB=P0^3; //并/串接口选择, H并,L串
+*** ERROR C202 IN LINE 6 OF ..\documents\12864\12864preview\12864-1.c: 'P0': undefined identifier
+   7          sbit led=P0^4;
+*** ERROR C202 IN LINE 7 OF ..\documents\12864\12864preview\12864-1.c: 'P0': undefined identifier
+   8          sbit jiakey=P1^0;
+*** ERROR C202 IN LINE 8 OF ..\documents\12864\12864preview\12864-1.c: 'P1': undefined identifier
+   9          sbit jiankey=P1^1;
+*** ERROR C202 IN LINE 9 OF ..\documents\12864\12864preview\12864-1.c: 'P1': undefined identifier
+  10          sbit ledkey=P1^2;
+*** ERROR C202 IN LINE 10 OF ..\documents\12864\12864preview\12864-1.c: 'P1': undefined identifier
+  11          #define  LcdData P2
+  12          #define ADC_POWER 0x80
+  13          #define ADC_FLAG  0x10
+  14          #define ADC_START 0x08
+  15          #define ADC_SPEED 0x60
+  16          char ch=7;
+  17          int dati=0;
+  18          int dat[100];
+  19          int over=0;
+  20          int temp=0;
+  21          int jm=0;
+  22          int mode=0;
+  23          int delnop=0;
+  24          //////////////////////////////
+  25          void T_C_init (void){
+  26   1        TMOD = 0x11; //高4位控制T/C1 [ GATE，C/T，M1，M0，GATE，C/T，M1，M0 ]
+*** ERROR C202 IN LINE 26 OF ..\documents\12864\12864preview\12864-1.c: 'TMOD': undefined identifier
+  27   1        //EA = 1; //中断总开关
+  28   1      
+  29   1        TH0 = 0x00; //16位计数寄存器T0高8位
+*** ERROR C202 IN LINE 29 OF ..\documents\12864\12864preview\12864-1.c: 'TH0': undefined identifier
+  30   1        TL0 = 0x00; //16位计数寄存器T0低8位（0x3CB0 = 50mS延时）
+*** ERROR C202 IN LINE 30 OF ..\documents\12864\12864preview\12864-1.c: 'TL0': undefined identifier
+  31   1        ET0 = 1; //T/C0中断开关
+*** ERROR C202 IN LINE 31 OF ..\documents\12864\12864preview\12864-1.c: 'ET0': undefined identifier
+  32   1        TR0 = 1; //T/C0启动开关
+*** ERROR C202 IN LINE 32 OF ..\documents\12864\12864preview\12864-1.c: 'TR0': undefined identifier
+  33   1      }
+  34          void T_C0 (void) interrupt 1  using 1{ //切换寄存器组到1
+  35   1        TH0 = 0x00; //16位计数寄存器T0高8位（重新写入初值）
+*** ERROR C202 IN LINE 35 OF ..\documents\12864\12864preview\12864-1.c: 'TH0': undefined identifier
+  36   1        TL0 = 0x00; //16位计数寄存器T0低8位
+*** ERROR C202 IN LINE 36 OF ..\documents\12864\12864preview\12864-1.c: 'TL0': undefined identifier
+  37   1        jm++;
+  38   1        if(jm==10)
+C51 COMPILER V9.56.0.0   12864_1                                                           12/04/2016 22:04:32 PAGE 2   
+
+  39   1        {
+  40   2          jm=0;
+  41   2          if(ledkey==0)
+*** ERROR C202 IN LINE 41 OF ..\documents\12864\12864preview\12864-1.c: 'ledkey': undefined identifier
+  42   2            {
+  43   3            led=~led;
+*** ERROR C202 IN LINE 43 OF ..\documents\12864\12864preview\12864-1.c: 'led': undefined identifier
+  44   3            }
+  45   2          if(jiakey==0)
+*** ERROR C202 IN LINE 45 OF ..\documents\12864\12864preview\12864-1.c: 'jiakey': undefined identifier
+  46   2            {
+  47   3            if(mode==3)
+  48   3            {
+  49   4            }
+  50   3            else
+  51   3            {
+  52   4            mode++;
+  53   4            }
+  54   3            }
+  55   2          if(jiankey==0)
+*** ERROR C202 IN LINE 55 OF ..\documents\12864\12864preview\12864-1.c: 'jiankey': undefined identifier
+  56   2            {
+  57   3            if(mode==0)
+  58   3            {
+  59   4            }
+  60   3            else
+  61   3            {
+  62   4            mode--;
+  63   4            }
+  64   3            }
+  65   2        } 
+  66   1      }
+  67          //////////////////////////////////////
+  68          unsigned char Lcd_CheckBusy(void)
+  69          {
+  70   1          unsigned char Busy;
+  71   1         LcdData=0xff;
+*** ERROR C202 IN LINE 71 OF ..\documents\12864\12864preview\12864-1.c: 'P2': undefined identifier
+  72   1          RS=0;
+*** ERROR C202 IN LINE 72 OF ..\documents\12864\12864preview\12864-1.c: 'RS': undefined identifier
+  73   1          RW=1;
+*** ERROR C202 IN LINE 73 OF ..\documents\12864\12864preview\12864-1.c: 'RW': undefined identifier
+  74   1          E=1;
+*** ERROR C202 IN LINE 74 OF ..\documents\12864\12864preview\12864-1.c: 'E': undefined identifier
+  75   1          _nop_(); 
+  76   1          Busy=LcdData&0x80;
+*** ERROR C202 IN LINE 76 OF ..\documents\12864\12864preview\12864-1.c: 'P2': undefined identifier
+  77   1          E=0;
+*** ERROR C202 IN LINE 77 OF ..\documents\12864\12864preview\12864-1.c: 'E': undefined identifier
+  78   1          return Busy;
+  79   1      }
+  80          /*********************************
+  81          向LCD写入字节数据
+  82          **********************************/
+  83          void Lcd_WriteData(unsigned char Data)
+  84          {  
+  85   1        while(Lcd_CheckBusy());
+  86   1        RS=1;
+*** ERROR C202 IN LINE 86 OF ..\documents\12864\12864preview\12864-1.c: 'RS': undefined identifier
+  87   1        RW=0;
+*** ERROR C202 IN LINE 87 OF ..\documents\12864\12864preview\12864-1.c: 'RW': undefined identifier
+  88   1        E=0;
+C51 COMPILER V9.56.0.0   12864_1                                                           12/04/2016 22:04:32 PAGE 3   
+
+*** ERROR C202 IN LINE 88 OF ..\documents\12864\12864preview\12864-1.c: 'E': undefined identifier
+  89   1        _nop_();  
+  90   1        _nop_(); 
+  91   1        LcdData=Data;
+*** ERROR C202 IN LINE 91 OF ..\documents\12864\12864preview\12864-1.c: 'P2': undefined identifier
+  92   1        E=1;
+*** ERROR C202 IN LINE 92 OF ..\documents\12864\12864preview\12864-1.c: 'E': undefined identifier
+  93   1        _nop_();
+  94   1        _nop_();
+  95   1        E=0;
+*** ERROR C202 IN LINE 95 OF ..\documents\12864\12864preview\12864-1.c: 'E': undefined identifier
+  96   1      }
+  97          
+  98          /***********************************
+  99          从LCD中读出数据
+ 100          ************************************/
+ 101          unsigned char Lcd_ReadData(void)
+ 102          {
+ 103   1        unsigned char Temp;
+ 104   1        while(Lcd_CheckBusy());
+ 105   1        LcdData=0xff;
+*** ERROR C202 IN LINE 105 OF ..\documents\12864\12864preview\12864-1.c: 'P2': undefined identifier
+ 106   1        RS=1;
+*** ERROR C202 IN LINE 106 OF ..\documents\12864\12864preview\12864-1.c: 'RS': undefined identifier
+ 107   1        RW=1;
+*** ERROR C202 IN LINE 107 OF ..\documents\12864\12864preview\12864-1.c: 'RW': undefined identifier
+ 108   1        E=1;
+*** ERROR C202 IN LINE 108 OF ..\documents\12864\12864preview\12864-1.c: 'E': undefined identifier
+ 109   1        _nop_();
+ 110   1          Temp=LcdData;
+*** ERROR C202 IN LINE 110 OF ..\documents\12864\12864preview\12864-1.c: 'P2': undefined identifier
+ 111   1          E=0;
+*** ERROR C202 IN LINE 111 OF ..\documents\12864\12864preview\12864-1.c: 'E': undefined identifier
+ 112   1          return Temp;
+ 113   1      }
+ 114          
+ 115          /*************************************
+ 116          想LCD中写入指令代码
+ 117          **************************************/
+ 118          void Lcd_WriteCmd(unsigned char CmdCode)
+ 119          {  
+ 120   1        while(Lcd_CheckBusy());
+ 121   1          RS=0;
+*** ERROR C202 IN LINE 121 OF ..\documents\12864\12864preview\12864-1.c: 'RS': undefined identifier
+ 122   1          RW=0;
+*** ERROR C202 IN LINE 122 OF ..\documents\12864\12864preview\12864-1.c: 'RW': undefined identifier
+ 123   1          E=0;
+*** ERROR C202 IN LINE 123 OF ..\documents\12864\12864preview\12864-1.c: 'E': undefined identifier
+ 124   1          _nop_();  
+ 125   1        _nop_();
+ 126   1          LcdData=CmdCode;
+*** ERROR C202 IN LINE 126 OF ..\documents\12864\12864preview\12864-1.c: 'P2': undefined identifier
+ 127   1          _nop_(); 
+ 128   1        _nop_();
+ 129   1          E=1;
+*** ERROR C202 IN LINE 129 OF ..\documents\12864\12864preview\12864-1.c: 'E': undefined identifier
+ 130   1          _nop_();  
+ 131   1        _nop_();
+ 132   1          E=0;
+*** ERROR C202 IN LINE 132 OF ..\documents\12864\12864preview\12864-1.c: 'E': undefined identifier
+ 133   1      }
+ 134          /**************************************
+C51 COMPILER V9.56.0.0   12864_1                                                           12/04/2016 22:04:32 PAGE 4   
+
+ 135          为加速逻辑运算而设置的掩码表，这是以牺牲空间而换取时间的办法
+ 136          ***************************************/
+ 137          code unsigned int LcdMaskTab[]={0x0001,0x0002,0x0004,0x0008,0x0010,0x0020,0x0040,0x0080,0x0100,0x0200,0x04
+             -00,0x0800,0x1000,0x2000,0x4000,0x8000};
+ 138          /***************************************
+ 139          向LCD指定坐标写入一个象素,象素颜色有两种，0代表白（无显示），1代表黑（有显示）
+ 140          ****************************************/
+ 141          void Lcd_PutPixel(unsigned char x,unsigned char y,unsigned char Color)
+ 142          {
+ 143   1        unsigned char z,w;
+ 144   1        unsigned int Temp;
+ 145   1        if(x>=128||y>=64)
+ 146   1          return;
+ 147   1        Color=Color%2;
+ 148   1        w=15-x%16;//确定对这个字的第多少位进行操作
+ 149   1        x=x/16;//确定为一行上的第几字
+ 150   1      
+ 151   1        if(y<32) //如果为上页
+ 152   1          z=0x80;
+ 153   1        else     //否则如果为下页
+ 154   1          z=0x88;
+ 155   1      
+ 156   1        y=y%32;
+ 157   1        EA=0;
+*** ERROR C202 IN LINE 157 OF ..\documents\12864\12864preview\12864-1.c: 'EA': undefined identifier
+ 158   1        Lcd_WriteCmd(0x36);
+ 159   1        Lcd_WriteCmd(y+0x80);        //行地址
+ 160   1        Lcd_WriteCmd(x+z);     //列地址 
+ 161   1        Temp=Lcd_ReadData();//先空读一次
+ 162   1        Temp=(unsigned int)Lcd_ReadData()<<8;//再读出高8位
+ 163   1        Temp|=(unsigned int)Lcd_ReadData();//再读出低8位
+ 164   1        EA=1;
+*** ERROR C202 IN LINE 164 OF ..\documents\12864\12864preview\12864-1.c: 'EA': undefined identifier
+ 165   1        if(Color==1) //如果写入颜色为1
+ 166   1          Temp|=LcdMaskTab[w];//在此处查表实现加速
+ 167   1        else         //如果写入颜色为0
+ 168   1          Temp&=~LcdMaskTab[w];//在此处查表实现加速
+ 169   1        EA=0;
+*** ERROR C202 IN LINE 169 OF ..\documents\12864\12864preview\12864-1.c: 'EA': undefined identifier
+ 170   1        Lcd_WriteCmd(y+0x80);        //行地址
+ 171   1        Lcd_WriteCmd(x+z);     //列地址
+ 172   1         Lcd_WriteData(Temp>>8);//先写入高8位，再写入低8位
+ 173   1         Lcd_WriteData(Temp&0x00ff);
+ 174   1        Lcd_WriteCmd(0x30);
+ 175   1        EA=1;
+*** ERROR C202 IN LINE 175 OF ..\documents\12864\12864preview\12864-1.c: 'EA': undefined identifier
+ 176   1      }
+ 177          /*****************************************
+ 178          清除Lcd全屏，如果清除模式Mode为0，则为全屏清除为颜色0（无任何显示）
+ 179          否则为全屏清除为颜色1(全屏填充显示)
+ 180          ******************************************/
+ 181          void Lcd_Clear(unsigned char Mode)
+ 182          {
+ 183   1        unsigned char x,y,ii;
+ 184   1        unsigned char Temp;
+ 185   1        if(Mode%2==0)
+ 186   1          Temp=0x00;
+ 187   1        else
+ 188   1          Temp=0xff;
+ 189   1        Lcd_WriteCmd(0x36);//扩充指令 绘图显示
+ 190   1        for(ii=0;ii<9;ii+=8)   
+ 191   1          for(y=0;y<0x20;y++)     
+C51 COMPILER V9.56.0.0   12864_1                                                           12/04/2016 22:04:32 PAGE 5   
+
+ 192   1            for(x=0;x<8;x++)
+ 193   1            {   
+ 194   2              EA=0;
+*** ERROR C202 IN LINE 194 OF ..\documents\12864\12864preview\12864-1.c: 'EA': undefined identifier
+ 195   2              Lcd_WriteCmd(y+0x80);        //行地址
+ 196   2              Lcd_WriteCmd(x+0x80+ii);     //列地址     
+ 197   2              Lcd_WriteData(Temp); //写数据 D15－D8 
+ 198   2              Lcd_WriteData(Temp); //写数据 D7－D0 
+ 199   2              EA=1;
+*** ERROR C202 IN LINE 199 OF ..\documents\12864\12864preview\12864-1.c: 'EA': undefined identifier
+ 200   2            }
+ 201   1        Lcd_WriteCmd(0x30);
+ 202   1      }
+ 203          
+ 204          /****************************************
+ 205          LCD初始化
+ 206          *****************************************/
+ 207          void Lcd_Reset()
+ 208          {  
+ 209   1        PSB=1;
+*** ERROR C202 IN LINE 209 OF ..\documents\12864\12864preview\12864-1.c: 'PSB': undefined identifier
+ 210   1        Lcd_WriteCmd(0x30);       //选择基本指令集
+ 211   1        Lcd_WriteCmd(0x0c);       //开显示(无游标、不反白)
+ 212   1        Lcd_WriteCmd(0x01);       //清除显示，并且设定地址指针为00H
+ 213   1        Lcd_WriteCmd(0x06);       //指定在资料的读取及写入时，设定游标的移动方向及指定显示的移位
+ 214   1      }
+ 215          //////////////////////////////////////
+ 216          void Delay(int n)
+ 217          {
+ 218   1      int x;
+ 219   1      while(n--)
+ 220   1        {
+ 221   2        x=5000;
+ 222   2        while(x--);
+ 223   2        }
+ 224   1      }
+ 225          void InitADC()
+ 226          {
+ 227   1      P1ASF=0X80;
+*** ERROR C202 IN LINE 227 OF ..\documents\12864\12864preview\12864-1.c: 'P1ASF': undefined identifier
+ 228   1      ADC_RES=0;
+*** ERROR C202 IN LINE 228 OF ..\documents\12864\12864preview\12864-1.c: 'ADC_RES': undefined identifier
+ 229   1      ADC_CONTR=ADC_POWER|ADC_SPEED|ADC_START|ch;
+*** ERROR C202 IN LINE 229 OF ..\documents\12864\12864preview\12864-1.c: 'ADC_CONTR': undefined identifier
+ 230   1      Delay(2);
+ 231   1      EADC=1;
+*** ERROR C202 IN LINE 231 OF ..\documents\12864\12864preview\12864-1.c: 'EADC': undefined identifier
+ 232   1      }
+ 233          void adc_isr() interrupt 5 using 1
+ 234          {
+ 235   1      ADC_CONTR&=!ADC_FLAG;
+*** ERROR C202 IN LINE 235 OF ..\documents\12864\12864preview\12864-1.c: 'ADC_CONTR': undefined identifier
+ 236   1      if(over==0)
+ 237   1      {
+ 238   2        for(temp=0;temp<delnop;temp++)
+ 239   2        {
+ 240   3          _nop_();
+ 241   3        }
+ 242   2        dat[dati]=ADC_RES;
+*** ERROR C202 IN LINE 242 OF ..\documents\12864\12864preview\12864-1.c: 'ADC_RES': undefined identifier
+ 243   2        dati++;
+ 244   2        if(dati>100)
+C51 COMPILER V9.56.0.0   12864_1                                                           12/04/2016 22:04:32 PAGE 6   
+
+ 245   2        {
+ 246   3        dati=0;
+ 247   3        over=1;
+ 248   3        }
+ 249   2      }
+ 250   1      ADC_CONTR=ADC_POWER|ADC_SPEED|ADC_START|ch;
+*** ERROR C202 IN LINE 250 OF ..\documents\12864\12864preview\12864-1.c: 'ADC_CONTR': undefined identifier
+ 251   1      }
+ 252          //////////////////////////////////////
+ 253          void disp_0(char x,char y)
+ 254          {
+ 255   1      Lcd_PutPixel(x+1,y+1,1);
+ 256   1      Lcd_PutPixel(x+1,y+2,1);
+ 257   1      Lcd_PutPixel(x+1,y+3,1);
+ 258   1      Lcd_PutPixel(x+2,y+0,1);
+ 259   1      Lcd_PutPixel(x+2,y+4,1);
+ 260   1      Lcd_PutPixel(x+3,y+1,1);
+ 261   1      Lcd_PutPixel(x+3,y+2,1);
+ 262   1      Lcd_PutPixel(x+3,y+3,1);
+ 263   1      }
+ 264          void disp_1(char x,char y)
+ 265          {
+ 266   1      Lcd_PutPixel(x+1,y+1,1);
+ 267   1      Lcd_PutPixel(x+1,y+4,1);
+ 268   1      Lcd_PutPixel(x+2,y+0,1);
+ 269   1      Lcd_PutPixel(x+2,y+1,1);
+ 270   1      Lcd_PutPixel(x+2,y+2,1);
+ 271   1      Lcd_PutPixel(x+2,y+3,1);
+ 272   1      Lcd_PutPixel(x+2,y+4,1);
+ 273   1      Lcd_PutPixel(x+3,y+4,1);
+ 274   1      }
+ 275          void disp_2(char x,char y)
+ 276          {
+ 277   1      Lcd_PutPixel(x+1,y+0,1);
+ 278   1      Lcd_PutPixel(x+1,y+2,1);
+ 279   1      Lcd_PutPixel(x+1,y+3,1);
+ 280   1      Lcd_PutPixel(x+1,y+4,1);
+ 281   1      Lcd_PutPixel(x+2,y+0,1);
+ 282   1      Lcd_PutPixel(x+2,y+2,1);
+ 283   1      Lcd_PutPixel(x+2,y+4,1);
+ 284   1      Lcd_PutPixel(x+3,y+0,1);
+ 285   1      Lcd_PutPixel(x+3,y+1,1);
+ 286   1      Lcd_PutPixel(x+3,y+2,1);
+ 287   1      Lcd_PutPixel(x+3,y+4,1);
+ 288   1      }
+ 289          void disp_3(char x,char y)
+ 290          {
+ 291   1      Lcd_PutPixel(x+1,y+0,1);
+ 292   1      Lcd_PutPixel(x+1,y+2,1);
+ 293   1      Lcd_PutPixel(x+1,y+4,1);
+ 294   1      Lcd_PutPixel(x+2,y+0,1);
+ 295   1      Lcd_PutPixel(x+2,y+2,1);
+ 296   1      Lcd_PutPixel(x+2,y+4,1);
+ 297   1      Lcd_PutPixel(x+3,y+0,1);
+ 298   1      Lcd_PutPixel(x+3,y+1,1);
+ 299   1      Lcd_PutPixel(x+3,y+2,1);
+ 300   1      Lcd_PutPixel(x+3,y+3,1);
+ 301   1      Lcd_PutPixel(x+3,y+4,1);
+ 302   1      }
+ 303          void disp_4(char x,char y)
+ 304          {
+ 305   1      Lcd_PutPixel(x+1,y+0,1);
+C51 COMPILER V9.56.0.0   12864_1                                                           12/04/2016 22:04:32 PAGE 7   
+
+ 306   1      Lcd_PutPixel(x+1,y+1,1);
+ 307   1      Lcd_PutPixel(x+1,y+2,1);
+ 308   1      Lcd_PutPixel(x+2,y+2,1);
+ 309   1      Lcd_PutPixel(x+3,y+0,1);
+ 310   1      Lcd_PutPixel(x+3,y+1,1);
+ 311   1      Lcd_PutPixel(x+3,y+2,1);
+ 312   1      Lcd_PutPixel(x+3,y+3,1);
+ 313   1      Lcd_PutPixel(x+3,y+4,1);
+ 314   1      }
+ 315          void disp_5(char x,char y)
+ 316          {
+ 317   1      Lcd_PutPixel(x+1,y+0,1);
+ 318   1      Lcd_PutPixel(x+1,y+1,1);
+ 319   1      Lcd_PutPixel(x+1,y+2,1);
+ 320   1      Lcd_PutPixel(x+1,y+4,1);
+ 321   1      Lcd_PutPixel(x+2,y+0,1);
+ 322   1      Lcd_PutPixel(x+2,y+2,1);
+ 323   1      Lcd_PutPixel(x+2,y+4,1);
+ 324   1      Lcd_PutPixel(x+3,y+0,1);
+ 325   1      Lcd_PutPixel(x+3,y+2,1);
+ 326   1      Lcd_PutPixel(x+3,y+3,1);
+ 327   1      Lcd_PutPixel(x+3,y+4,1);
+ 328   1      }
+ 329          disp_p(char x,char y)
+ 330          {
+ 331   1      Lcd_PutPixel(x+0,y+0,1);
+ 332   1      Lcd_PutPixel(x+1,y+0,1);
+ 333   1      Lcd_PutPixel(x+1,y+1,1);
+ 334   1      Lcd_PutPixel(x+2,y+0,1);
+ 335   1      Lcd_PutPixel(x+2,y+1,1);
+ 336   1      Lcd_PutPixel(x+2,y+2,1);
+ 337   1      Lcd_PutPixel(x+3,y+0,1);
+ 338   1      Lcd_PutPixel(x+3,y+1,1);
+ 339   1      Lcd_PutPixel(x+4,y+0,1);
+ 340   1      }
+ 341          disp_k(char x,char y)
+ 342          {
+ 343   1      Lcd_PutPixel(x+0,y+0,1);
+ 344   1      Lcd_PutPixel(x+0,y+1,1);
+ 345   1      Lcd_PutPixel(x+0,y+2,1);
+ 346   1      Lcd_PutPixel(x+0,y+3,1);
+ 347   1      Lcd_PutPixel(x+0,y+4,1);
+ 348   1      Lcd_PutPixel(x+1,y+2,1);
+ 349   1      Lcd_PutPixel(x+2,y+1,1);
+ 350   1      Lcd_PutPixel(x+2,y+3,1);
+ 351   1      Lcd_PutPixel(x+3,y+0,1);
+ 352   1      Lcd_PutPixel(x+3,y+4,1);
+ 353   1      }
+ 354          void disp_hz(char x,char y)
+ 355          {
+ 356   1      Lcd_PutPixel(x+0,y+0,1);
+ 357   1      Lcd_PutPixel(x+0,y+1,1);
+ 358   1      Lcd_PutPixel(x+0,y+2,1);
+ 359   1      Lcd_PutPixel(x+0,y+3,1);
+ 360   1      Lcd_PutPixel(x+0,y+4,1);
+ 361   1      Lcd_PutPixel(x+1,y+2,1);
+ 362   1      Lcd_PutPixel(x+2,y+0,1);
+ 363   1      Lcd_PutPixel(x+2,y+1,1);
+ 364   1      Lcd_PutPixel(x+2,y+2,1);
+ 365   1      Lcd_PutPixel(x+2,y+3,1);
+ 366   1      Lcd_PutPixel(x+2,y+4,1);
+ 367   1      Lcd_PutPixel(x+4,y+1,1);
+C51 COMPILER V9.56.0.0   12864_1                                                           12/04/2016 22:04:32 PAGE 8   
+
+ 368   1      Lcd_PutPixel(x+4,y+3,1);
+ 369   1      Lcd_PutPixel(x+4,y+4,1);
+ 370   1      Lcd_PutPixel(x+5,y+1,1);
+ 371   1      Lcd_PutPixel(x+5,y+2,1);
+ 372   1      Lcd_PutPixel(x+5,y+4,1);
+ 373   1      }
+ 374          void disp_ledon(char x,char y)
+ 375          {
+ 376   1      Lcd_PutPixel(x+1,y+0,1);
+ 377   1      Lcd_PutPixel(x+1,y+1,1);
+ 378   1      Lcd_PutPixel(x+1,y+2,1);
+ 379   1      Lcd_PutPixel(x+1,y+3,1);
+ 380   1      Lcd_PutPixel(x+1,y+4,1);
+ 381   1      Lcd_PutPixel(x+2,y+1,1);
+ 382   1      Lcd_PutPixel(x+2,y+2,1);
+ 383   1      Lcd_PutPixel(x+2,y+3,1);
+ 384   1      Lcd_PutPixel(x+3,y+0,1);
+ 385   1      Lcd_PutPixel(x+3,y+4,1);
+ 386   1      Lcd_PutPixel(x+4,y+2,1);
+ 387   1      }
+ 388          void disp_ledoff(char x,char y)
+ 389          {
+ 390   1      Lcd_PutPixel(x+1,y+0,1);
+ 391   1      Lcd_PutPixel(x+1,y+1,1);
+ 392   1      Lcd_PutPixel(x+1,y+2,1);
+ 393   1      Lcd_PutPixel(x+1,y+3,1);
+ 394   1      Lcd_PutPixel(x+1,y+4,1);
+ 395   1      Lcd_PutPixel(x+2,y+1,1);
+ 396   1      Lcd_PutPixel(x+2,y+2,1);
+ 397   1      Lcd_PutPixel(x+2,y+3,1);
+ 398   1      }
+ 399          void clr(unsigned char starx,unsigned char stary,unsigned char endx,unsigned char endy)
+ 400          {
+ 401   1      char x=0;
+ 402   1      char y=0;
+ 403   1      for(x=starx;x<endx;x++)
+ 404   1      {
+ 405   2        for(y=stary;y<endy;y++)
+ 406   2        {
+ 407   3          Lcd_PutPixel(x,y,0);
+ 408   3        }
+ 409   2      }
+ 410   1      }
+ 411          void disp_bj(void)
+ 412          {
+ 413   1      int x=0;
+ 414   1      int y=0;
+ 415   1      for(x=13;x<114;x++)
+ 416   1      {
+ 417   2      Lcd_PutPixel(x,0,1);
+ 418   2      }
+ 419   1      for(x=13;x<114;x++)
+ 420   1      {
+ 421   2      Lcd_PutPixel(x,52,1);
+ 422   2      }
+ 423   1      for(y=0;y<52;y++)
+ 424   1      {
+ 425   2      Lcd_PutPixel(13,y,1);
+ 426   2      }
+ 427   1      for(y=0;y<52;y++)
+ 428   1      {
+ 429   2      Lcd_PutPixel(114,y,1);
+C51 COMPILER V9.56.0.0   12864_1                                                           12/04/2016 22:04:32 PAGE 9   
+
+ 430   2      }
+ 431   1      Lcd_PutPixel(13,51,0);
+ 432   1      Lcd_PutPixel(13,41,0);
+ 433   1      Lcd_PutPixel(13,31,0);
+ 434   1      Lcd_PutPixel(13,21,0);
+ 435   1      Lcd_PutPixel(13,11,0);
+ 436   1      Lcd_PutPixel(13,1,0);
+ 437   1      Lcd_PutPixel(114,51,0);
+ 438   1      Lcd_PutPixel(114,41,0);
+ 439   1      Lcd_PutPixel(114,31,0);
+ 440   1      Lcd_PutPixel(114,21,0);
+ 441   1      Lcd_PutPixel(114,11,0);
+ 442   1      Lcd_PutPixel(114,1,0);
+ 443   1      Lcd_PutPixel(14,52,0);
+ 444   1      Lcd_PutPixel(24,52,0);
+ 445   1      Lcd_PutPixel(34,52,0);
+ 446   1      Lcd_PutPixel(44,52,0);
+ 447   1      Lcd_PutPixel(54,52,0);
+ 448   1      Lcd_PutPixel(64,52,0);
+ 449   1      Lcd_PutPixel(74,52,0);
+ 450   1      Lcd_PutPixel(84,52,0);
+ 451   1      Lcd_PutPixel(94,52,0);
+ 452   1      Lcd_PutPixel(104,52,0);
+ 453   1      disp_0(5,50);
+ 454   1      disp_1(5,40);
+ 455   1      disp_2(5,30);
+ 456   1      disp_3(5,20);
+ 457   1      disp_4(5,10);
+ 458   1      disp_5(5,0);
+ 459   1      disp_0(117,50);
+ 460   1      disp_1(117,40);
+ 461   1      disp_2(117,30);
+ 462   1      disp_3(117,20);
+ 463   1      disp_4(117,10);
+ 464   1      disp_5(117,0);
+ 465   1      disp_1(13,58);
+ 466   1      disp_hz(18,58);
+ 467   1      disp_1(38,58);
+ 468   1      disp_0(43,58);
+ 469   1      disp_hz(48,58);
+ 470   1      disp_1(63,58);
+ 471   1      disp_0(68,58);
+ 472   1      disp_0(73,58);
+ 473   1      disp_hz(78,58);
+ 474   1      disp_1(88,58);
+ 475   1      disp_k(93,58);
+ 476   1      disp_hz(98,58);
+ 477   1      }
+ 478          //////////////////////////////////////
+ 479          main()
+ 480          {
+ 481   1      int x=0;
+ 482   1      int y=0;
+ 483   1      T_C_init();
+ 484   1      Lcd_Reset();
+ 485   1      Lcd_Clear(0);
+ 486   1      InitADC();
+ 487   1      disp_bj();
+ 488   1      EA=1;
+*** ERROR C202 IN LINE 488 OF ..\documents\12864\12864preview\12864-1.c: 'EA': undefined identifier
+ 489   1      while(1)
+ 490   1      {
+C51 COMPILER V9.56.0.0   12864_1                                                           12/04/2016 22:04:32 PAGE 10  
+
+ 491   2      if(over)
+ 492   2        {
+ 493   3          for(x=0;x<100;x++)
+ 494   3          {
+ 495   4            for(y=1;y<52;y++)
+ 496   4            {
+ 497   5            Lcd_PutPixel(x+14,y,0);
+ 498   5            }
+ 499   4            Lcd_PutPixel(x+14,51-(dat[x]/5),1);
+ 500   4          }
+ 501   3          if(led)
+*** ERROR C202 IN LINE 501 OF ..\documents\12864\12864preview\12864-1.c: 'led': undefined identifier
+ 502   3          {
+ 503   4          clr(5,58,10,63);
+ 504   4          disp_ledon(5,58);
+ 505   4          }
+ 506   3          else
+ 507   3          {
+ 508   4          clr(5,58,10,63);
+ 509   4          disp_ledoff(5,58);
+ 510   4          }
+ 511   3        switch(mode)
+ 512   3        {
+ 513   4        case 0:
+ 514   4          delnop=0;
+ 515   4          disp_p(91,54);
+ 516   4          clr(66,54,71,57);
+ 517   4          clr(41,54,46,57);
+ 518   4          clr(16,54,21,57);
+ 519   4        break;
+ 520   4        case 1:
+ 521   4          delnop=10;
+ 522   4          disp_p(66,54);
+ 523   4          clr(91,54,96,57);
+ 524   4          clr(41,54,46,57);
+ 525   4          clr(16,54,21,57);
+ 526   4        break;
+ 527   4        case 2:
+ 528   4          delnop=100;
+ 529   4          disp_p(41,54);
+ 530   4          clr(91,54,96,57);
+ 531   4          clr(66,54,71,57);
+ 532   4          clr(16,54,21,57);
+ 533   4        break;
+ 534   4        case 3:
+ 535   4          delnop=1000;
+ 536   4          disp_p(16,54);
+ 537   4          clr(91,54,96,57);
+ 538   4          clr(41,54,46,57);
+ 539   4          clr(66,54,71,57);
+ 540   4        break;
+ 541   4        default:
+ 542   4        break;
+ 543   4        }
+ 544   3        over=0;
+ 545   3        }
+ 546   2      }
+ 547   1      }
+
+C51 COMPILATION COMPLETE.  1 WARNING(S),  59 ERROR(S)

@@ -1,0 +1,43 @@
+A51 MACRO ASSEMBLER  TEST                                                                 12/04/2016 23:39:28 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\test.obj
+ASSEMBLER INVOKED BY: C:\MySoftWare\keil_v5\C51\BIN\A51.EXE test.asm SET(SMALL) DEBUG PRINT(.\Listings\test.lst) OBJECT(
+                      .\Objects\test.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1              ORG 0000H      LJMP MAIN      ORG 0100HMAIN:        MOV R0, 11H      MOV R1, 
+                             0BCH      CALL HEX2BCD      ;µ÷ÓÃ×Ó³ÌÐò°ÑR0 R1ÖÐµÄÊ×Öª£×ª»»³ÉBCDÂëª£ËÍµ½R2 R3 R4 ;-------
+                             ÏÂÃæª£°ÑÍòÇ§°ÙÊ®¸öÎ»ª£·Ö±ð´æÈëR4 R3 R2 R1 R0      MOV A,   R4      MOV B,   #16      DIV
+                              AB                ;³ÒÔ16ª£Ä¿µÄÊÇ·ÖÀë³ö¸ß¡¢µÍËÄÎ»      MOV R1, A            ;´æ·ÅÊ®Î»    
+                               MOV R0, B            ;´æ·Å¸öÎ» ;      MOV A,   R2      MOV R4, A            ;´æ·ÅÍòÎ» 
+                             ;      MOV A,   R3      MOV B,   #16      DIV AB      MOV R3, A      MOV R2, B      
+                             SJMP $                 ;µ½´Ëª£Íê³ÉÁËÌâÄ¿ÒªÇó ;--------------------------------------------
+                             ---------------------- ;Á½¸ö×Ö½ÚµÄ¶þ½øÖÆÊ×ª»»³ÉBCDÂëµÄ³ÌÐòÈçÏÂª¤ ;¹¦ÄÜª¤16Î»¶þ½øÖÆÊ±ä»»³É
+                             Îª BCD Âëª¥ ;Èë¿Úª¤R0 R1 ÖÐÊÇ 16 Î»¶þ½øÖÆÊª£ÆäÖÐR0ÖÐÊÇ¸ß 8 Î»ª¥ ;³ö¿Úª¤R2 R3 R4 ÖÐÊÇ BCD 
+                             Âëª£ÆäÖÐR2ÖÐÊÇÍòÎ»ª£R3ÖÐÊÇÇ§¡¢°ÙÎ»ª£R4ÖÐÊÇÊ®¡¢¸öÎ»¡£ HEX2BCD:      CLR A      MOV R2, A 
+                                        ;ÏÈÇåÁã      MOV R3, A       MOV R4, A       MOV R5, #16          ;¹²×ª»»Ê®Áù
+                             Î»Ê LOOP:      CLR C      MOV A,   R1           ;´Ó´×ª»»ÊµÄ¸ß¶ËÒÆ³öÒ»Î»µ½Cy      RLC A 
+                                  MOV R1, A      MOV A,   R0      RLC A      MOV R0, A               MOV A,   R4   
+                                     ;ËÍµ½BCDÂëµÄµÍ¶Ë      ADDC A,   R4           ;´ø½øÎ»¼Ó¡£×ÔÉíÏà¼Ó,Ïàµ±ÓÚ×óÒÆÒ»Î»  
+                                 DA   A                 ;Ê®½øÖÆµ÷Õû,±ä³ÉBCDÂë      MOV R4, A      MOV A,   R3      AD
+                             DC A,   R3      DA   A      MOV R3, A      MOV A,   R2      ADDC A,   R2      MOV R2, 
+                             A      DJNZ R5, LOOP         ;¹²×ª»»Ê®ÁùÎ»Ê      RET         END 
+
+*** WARNING #A41 IN 1 (test.asm, LINE 1): MISSING 'END' STATEMENT
+A51 MACRO ASSEMBLER  TEST                                                                 12/04/2016 23:39:28 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  1 WARNING(S), 0 ERROR(S)

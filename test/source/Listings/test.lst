@@ -1,0 +1,267 @@
+A51 MACRO ASSEMBLER  TEST                                                                 12/03/2016 22:04:07 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\test.obj
+ASSEMBLER INVOKED BY: C:\MySoftWare\keil_v5\C51\BIN\A51.EXE test.asm SET(SMALL) DEBUG PRINT(.\Listings\test.lst) OBJECT(
+                      .\Objects\test.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1                     ORG 0000H
+
+0000 020040            2                     LJMP MAIN
+
+0040                   3                     ORG 0040H
+
+0040                   4             MAIN:
+
+0040 754002            5                     MOV 40H , #2
+
+0043 754103            6                     MOV 41H , #3
+
+0046 754205            7                     MOV 42H , #5
+
+0049 754309            8                     MOV 43H , #9
+
+004C 754405            9                     MOV 44H , #5
+
+004F 754500           10                     MOV 45H , #0
+
+0052 90017D           11                     MOV DPTR , #TABLE
+
+0055 758AB0           12                     MOV TL0 , #0B0H
+
+0058 758C3C           13                     MOV TH0 , #3CH
+
+005B 7E14             14                     MOV R6 , #20   ;计数初值
+
+005D 758901           15                     MOV TMOD , #01H
+
+0060 D2A9             16                     SETB ET0 
+
+0062 D2AF             17                     SETB EA 
+
+0064 D28C             18                     SETB TR0
+
+0066                  19             START:
+
+0066 7840             20                     MOV R0 , #40H
+
+0068 7906             21                     MOV R1 , #6
+
+006A 7AFE             22                     MOV R2 , #0FEH
+
+006C                  23             LOOP:
+
+006C E6               24                     MOV A , @R0
+
+006D 93               25                     MOVC A , @A+DPTR
+
+006E F5A0             26                     MOV P2 , A
+
+0070 8AB0             27                     MOV P3 , R2
+
+0072 120170           28                     LCALL DELAY5MS
+
+0075 75B0FF           29                     MOV P3 , #0FFH
+
+0078 08               30                     INC R0 
+
+0079 EA               31                     MOV A , R2
+
+007A 23               32                     RL A 
+
+007B FA               33                     MOV R2 , A
+
+007C D9EE             34                     DJNZ R1 , LOOP
+
+007E 020066           35                     LJMP START
+
+                      36             
+
+000B                  37                     ORG 000BH
+
+000B 020100           38                     LJMP TIME0
+
+0100                  39                     ORG 0100H
+
+0100                  40             TIME0:
+
+0100 C0D0             41                     PUSH PSW 
+
+0102 C0E0             42                     PUSH ACC
+
+0104 758AB0           43                     MOV TL0 , #0B0H
+
+0107 758C3C           44                     MOV TH0 , #3CH
+
+010A DE5F             45                     DJNZ R6 , OUT
+
+010C 7E14             46                     MOV R6 , #20
+
+010E E545             47                     MOV A , 45H
+
+0110 04               48                     INC A
+
+0111 F545             49                     MOV 45H , A
+
+0113 B40A55           50                     CJNE A , #10 , OUT
+
+0116 754500           51                     MOV  45H , #00
+
+0119 E544             52                     MOV A , 44H
+
+011B 04               53                     INC A
+
+011C F544             54                     MOV 44H , A
+
+011E B4064A           55                     CJNE A , #6 , OUT 
+
+0121 754400           56                     MOV 44H , #00
+
+0124 E543             57                     MOV A , 43H
+
+A51 MACRO ASSEMBLER  TEST                                                                 12/03/2016 22:04:07 PAGE     2
+
+0126 04               58                     INC A
+
+0127 F543             59                     MOV 43H , A
+
+0129 B40A3F           60                     CJNE A , #10 ,OUT
+
+012C 754300           61                     MOV  43H , #00
+
+012F E542             62                     MOV A , 42H
+
+0131 04               63                     INC A
+
+0132 F542             64                     MOV 42H , A
+
+0134 B40634           65                     CJNE A , #6 , OUT 
+
+0137 754200           66                     MOV 42H , #00
+
+013A E541             67                     MOV A , 41H
+
+013C 04               68                     INC A
+
+013D F541             69                     MOV 41H , A
+
+013F B40408           70                     CJNE A , # 4 , TMP
+
+0142 E540             71                     MOV A , 40H
+
+0144 B40203           72                     CJNE A , #2 , TMP
+
+0147 020159           73                     LJMP CLEAR
+
+014A                  74                     TMP:
+
+014A E541             75                     MOV A , 41H
+
+014C B40A1C           76                     CJNE A , # 10 , OUT
+
+014F 754100           77                     MOV 41H , #00
+
+0152 E540             78                     MOV A , 40H
+
+0154 04               79                     INC A
+
+0155 F540             80                     MOV 40H , A
+
+0157 216B             81                     AJMP OUT
+
+0159                  82                     CLEAR:
+
+0159 754000           83                     MOV 40H , #0
+
+015C 754100           84                     MOV 41H , #0
+
+015F 754200           85                     MOV 42H , #0
+
+0162 754300           86                     MOV 43H , #0
+
+0165 754400           87                     MOV 44H , #0
+
+0168 754500           88                     MOV 45H , #0
+
+016B                  89             OUT:    
+
+016B D0E0             90                     POP ACC
+
+016D D0D0             91                     POP PSW
+
+016F 32               92                     RETI
+
+                      93             
+
+0170                  94             DELAY5MS:
+
+0170 7D05             95                     MOV R5 , #5
+
+0172                  96                     D0:
+
+0172 7CF9             97                     MOV R4 , #249
+
+0174                  98                     D1:
+
+0174 00               99                     NOP
+
+0175 00              100                     NOP
+
+0176 DCFC            101                     DJNZ R4 , D1
+
+0178 DDF8            102                     DJNZ R5 , D0
+
+017A 00              103                     NOP
+
+017B 00              104                     NOP
+
+017C 22              105                     RET
+
+017D                 106             TABLE:  
+
+017D 3F065B4F        107                     DB 3FH,06H,5BH,4FH,66H,6DH,7DH,07H
+
+0181 666D7D07                
+0185 7F6F777C        108             DB 7FH,6FH,77H,7CH,39H,5EH,79H,71H
+
+0189 395E7971                
+                     109                     END 
+
+A51 MACRO ASSEMBLER  TEST                                                                 12/03/2016 22:04:07 PAGE     3
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ACC. . . . . . . .  D ADDR   00E0H   A   
+CLEAR. . . . . . .  C ADDR   0159H   A   
+D0 . . . . . . . .  C ADDR   0172H   A   
+D1 . . . . . . . .  C ADDR   0174H   A   
+DELAY5MS . . . . .  C ADDR   0170H   A   
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+ET0. . . . . . . .  B ADDR   00A8H.1 A   
+LOOP . . . . . . .  C ADDR   006CH   A   
+MAIN . . . . . . .  C ADDR   0040H   A   
+OUT. . . . . . . .  C ADDR   016BH   A   
+P2 . . . . . . . .  D ADDR   00A0H   A   
+P3 . . . . . . . .  D ADDR   00B0H   A   
+PSW. . . . . . . .  D ADDR   00D0H   A   
+START. . . . . . .  C ADDR   0066H   A   
+TABLE. . . . . . .  C ADDR   017DH   A   
+TH0. . . . . . . .  D ADDR   008CH   A   
+TIME0. . . . . . .  C ADDR   0100H   A   
+TL0. . . . . . . .  D ADDR   008AH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TMP. . . . . . . .  C ADDR   014AH   A   
+TR0. . . . . . . .  B ADDR   0088H.4 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

@@ -1,0 +1,226 @@
+BL51 BANKED LINKER/LOCATER V6.22                                                        12/05/2016  23:17:05  PAGE 1
+
+
+BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
+C:\MYSOFTWARE\KEIL\C51\BIN\BL51.EXE .\Objects\STARTUP.obj, .\Objects\ADC0809.obj TO .\Objects\adc0808 PRINT (.\Listings\
+>> adc0808.m51)
+
+
+INPUT MODULES INCLUDED:
+  .\Objects\STARTUP.obj (?C_STARTUP)
+  .\Objects\ADC0809.obj (ADC0809)
+
+
+LINK MAP OF MODULE:  .\Objects\adc0808 (?C_STARTUP)
+
+
+            TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
+            -----------------------------------------------------
+
+            * * * * * * *   D A T A   M E M O R Y   * * * * * * *
+            REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
+            IDATA   0008H     0001H     UNIT         ?STACK
+
+            * * * * * * *   C O D E   M E M O R Y   * * * * * * *
+            CODE    0000H     0003H     ABSOLUTE     
+* OVERLAP * CODE    0000H     00DCH     ABSOLUTE     
+                    00DCH     0724H                  *** GAP ***
+            CODE    0800H     000CH     UNIT         ?C_C51STARTUP
+
+
+
+UNRESOLVED EXTERNAL SYMBOLS:
+   ?C_START
+
+
+
+SYMBOL TABLE OF MODULE:  .\Objects\adc0808 (?C_STARTUP)
+
+  VALUE           TYPE          NAME
+  ----------------------------------
+
+  -------         MODULE        ?C_STARTUP
+  C:0800H         SEGMENT       ?C_C51STARTUP
+  I:0008H         SEGMENT       ?STACK
+  C:0000H         PUBLIC        ?C_STARTUP
+  D:00E0H         SYMBOL        ACC
+  D:00F0H         SYMBOL        B
+  D:0083H         SYMBOL        DPH
+  D:0082H         SYMBOL        DPL
+  N:0000H         SYMBOL        IBPSTACK
+  N:0100H         SYMBOL        IBPSTACKTOP
+  N:0080H         SYMBOL        IDATALEN
+  C:0803H         SYMBOL        IDATALOOP
+  N:0000H         SYMBOL        PBPSTACK
+  N:0100H         SYMBOL        PBPSTACKTOP
+  N:0000H         SYMBOL        PDATALEN
+  N:0000H         SYMBOL        PDATASTART
+  N:0000H         SYMBOL        PPAGE
+  N:0000H         SYMBOL        PPAGEENABLE
+  D:00A0H         SYMBOL        PPAGE_SFR
+  D:0081H         SYMBOL        SP
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/05/2016  23:17:05  PAGE 2
+
+
+  C:0800H         SYMBOL        STARTUP1
+  N:0000H         SYMBOL        XBPSTACK
+  N:0000H         SYMBOL        XBPSTACKTOP
+  N:0000H         SYMBOL        XDATALEN
+  N:0000H         SYMBOL        XDATASTART
+  C:0000H         LINE#         126
+  C:0800H         LINE#         133
+  C:0802H         LINE#         134
+  C:0803H         LINE#         135
+  C:0804H         LINE#         136
+  C:0806H         LINE#         185
+  C:0809H         LINE#         196
+  -------         ENDMOD        ?C_STARTUP
+
+  -------         MODULE        ADC0809
+  D:00F0H         SYMBOL        B
+  C:00D5H         SYMBOL        D1
+  C:00D3H         SYMBOL        DELY4MS
+  C:00AAH         SYMBOL        DIS
+  C:00ACH         SYMBOL        DIS1
+  C:00B2H         SYMBOL        DIS2
+  B:00A8H.7       SYMBOL        EA
+  B:00A8H.2       SYMBOL        EX1
+  C:004AH         SYMBOL        HERE
+  C:00D0H         SYMBOL        HUI
+  C:004EH         SYMBOL        INT_1
+  B:0088H.2       SYMBOL        IT1
+  C:0065H         SYMBOL        JI_SUAN
+  C:0061H         SYMBOL        LOOP
+  C:0030H         SYMBOL        MAIN
+  D:0080H         SYMBOL        P0
+  D:00D0H         SYMBOL        PSW
+  C:0035H         SYMBOL        QING
+  C:008CH         SYMBOL        SBCD_DBCD
+  C:0070H         SYMBOL        SBIN_SBCD
+  C:0076H         SYMBOL        SBIN_SBCD1
+  C:0000H         LINE#         6
+  C:0013H         LINE#         8
+  C:0030H         LINE#         12
+  C:0032H         LINE#         13
+  C:0034H         LINE#         14
+  C:0035H         LINE#         15
+  C:0036H         LINE#         16
+  C:0037H         LINE#         17
+  C:0039H         LINE#         19
+  C:003BH         LINE#         20
+  C:003EH         LINE#         21
+  C:0040H         LINE#         22
+  C:0042H         LINE#         23
+  C:0044H         LINE#         24
+  C:0047H         LINE#         25
+  C:0049H         LINE#         26
+  C:004AH         LINE#         27
+  C:004CH         LINE#         28
+  C:004EH         LINE#         31
+  C:0050H         LINE#         32
+  C:0052H         LINE#         33
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/05/2016  23:17:05  PAGE 3
+
+
+  C:0053H         LINE#         34
+  C:0054H         LINE#         35
+  C:0055H         LINE#         36
+  C:0057H         LINE#         37
+  C:0058H         LINE#         38
+  C:005AH         LINE#         39
+  C:005CH         LINE#         41
+  C:005EH         LINE#         42
+  C:0061H         LINE#         44
+  C:0062H         LINE#         45
+  C:0064H         LINE#         46
+  C:0065H         LINE#         51
+  C:0066H         LINE#         52
+  C:0069H         LINE#         53
+  C:006AH         LINE#         54
+  C:006BH         LINE#         55
+  C:006DH         LINE#         56
+  C:006EH         LINE#         57
+  C:0070H         LINE#         61
+  C:0073H         LINE#         62
+  C:0076H         LINE#         64
+  C:0077H         LINE#         65
+  C:0078H         LINE#         66
+  C:0079H         LINE#         67
+  C:007AH         LINE#         68
+  C:007BH         LINE#         69
+  C:007CH         LINE#         70
+  C:007EH         LINE#         71
+  C:0080H         LINE#         72
+  C:0081H         LINE#         73
+  C:0083H         LINE#         74
+  C:0085H         LINE#         75
+  C:0087H         LINE#         76
+  C:0088H         LINE#         77
+  C:008AH         LINE#         78
+  C:008CH         LINE#         82
+  C:008EH         LINE#         83
+  C:0090H         LINE#         84
+  C:0092H         LINE#         85
+  C:0094H         LINE#         86
+  C:0096H         LINE#         87
+  C:0097H         LINE#         88
+  C:0099H         LINE#         89
+  C:009BH         LINE#         90
+  C:009DH         LINE#         91
+  C:009FH         LINE#         92
+  C:00A1H         LINE#         93
+  C:00A3H         LINE#         94
+  C:00A5H         LINE#         95
+  C:00A6H         LINE#         96
+  C:00A8H         LINE#         97
+  C:00AAH         LINE#         102
+  C:00ACH         LINE#         103
+  C:00AEH         LINE#         104
+  C:00B0H         LINE#         105
+  C:00B2H         LINE#         106
+  C:00B3H         LINE#         107
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/05/2016  23:17:05  PAGE 4
+
+
+  C:00B5H         LINE#         108
+  C:00B7H         LINE#         109
+  C:00B8H         LINE#         110
+  C:00BAH         LINE#         111
+  C:00BBH         LINE#         112
+  C:00BDH         LINE#         113
+  C:00BFH         LINE#         114
+  C:00C2H         LINE#         115
+  C:00C3H         LINE#         116
+  C:00C4H         LINE#         117
+  C:00C6H         LINE#         118
+  C:00C8H         LINE#         119
+  C:00CAH         LINE#         121
+  C:00CDH         LINE#         122
+  C:00D0H         LINE#         123
+  C:00D2H         LINE#         124
+  C:00D3H         LINE#         127
+  C:00D5H         LINE#         128
+  C:00D7H         LINE#         129
+  C:00D9H         LINE#         130
+  C:00DBH         LINE#         131
+  -------         ENDMOD        ADC0809
+
+*** WARNING L5: CODE SPACE MEMORY OVERLAP
+    FROM:    0000H
+    TO:      0002H
+
+*** WARNING L1: UNRESOLVED EXTERNAL SYMBOL
+    SYMBOL:  ?C_START
+    MODULE:  .\Objects\STARTUP.obj (?C_STARTUP)
+
+*** WARNING L2: REFERENCE MADE TO UNRESOLVED EXTERNAL
+    SYMBOL:  ?C_START
+    MODULE:  .\Objects\STARTUP.obj (?C_STARTUP)
+    ADDRESS: 080AH
+
+******************************************************************************
+* RESTRICTED VERSION WITH 0800H BYTE CODE SIZE LIMIT; USED: 00BFH BYTE ( 9%) *
+******************************************************************************
+
+Program Size: data=9.0 xdata=0 code=235
+LINK/LOCATE RUN COMPLETE.  3 WARNING(S),  0 ERROR(S)

@@ -1,0 +1,296 @@
+A51 MACRO ASSEMBLER  CLOCK                                                                12/04/2016 23:50:10 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.2.5.0
+OBJECT MODULE PLACED IN .\Objects\CLOCK.obj
+ASSEMBLER INVOKED BY: C:\MySoftWare\keil_v5\C51\BIN\A51.EXE CLOCK.asm SET(SMALL) DEBUG PRINT(.\Listings\CLOCK.lst) OBJEC
+                      T(.\Objects\CLOCK.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+                       1     
+
+                       2                     ; µ ± ±÷” µ—È 
+
+  CFA0                 3             PORT EQU 0CFA0H  
+
+                       4                  
+
+  0023                 5             BUF EQU 23H ;¥Ê∑≈º∆ ÷µ 
+
+  0022                 6             SBF EQU 22H ;¥Ê∑≈√Î÷µ 
+
+  0021                 7             MBF EQU 21H ;¥Ê∑≈∑÷÷µ 
+
+  0020                 8                     HBF EQU 20H;¥Ê∑≈–° ± 
+
+0000                   9             ORG 0000H 
+
+0000 024100           10             LJMP START 
+
+401B                  11             ORG 401BH 
+
+401B 024172           12             LJMP CLOCK 
+
+4100                  13             ORG 4100H 
+
+4100 7840             14     START:  MOV R0,#40H ;40H-45H «œ‘ æª∫≥Â«¯£¨“¿¥Œ¥Ê∑≈√Î∏ﬂŒª°¢√ÎµÕŒª
+
+                      15                                             ;“‘º∞∑÷∏ﬂŒª°¢∑÷µ◊Œª“‘º∞–° ±∏ﬂŒª°¢–° ±µÕŒª 
+
+4102 7400             16             MOV A,#00H ;  
+
+4104 F6               17             MOV @R0,A ;  
+
+4105 08               18             INC R0 
+
+4106 F6               19             MOV @R0,A 
+
+4107 08               20             INC R0 
+
+                      21     
+
+4108 F6               22             MOV @R0,A 
+
+4109 08               23             INC R0 
+
+410A F6               24             MOV @R0,A 
+
+410B 08               25             INC R0 
+
+410C F6               26             MOV @R0,A 
+
+410D 08               27             INC R0 
+
+410E F6               28             MOV @R0,A 
+
+                      29     
+
+410F 758910           30             MOV TMOD,#10H ;∂® ±∆˜1≥ı ºªØŒ™∑Ω Ω1 
+
+4112 758D38           31             MOV TH1,#38H ;÷√ ±º‰≥£ ™¢—” ±0.1√Î 
+
+4115 758B00           32             MOV TL1,#00H 
+
+                      33     
+
+4118 752300           34             MOV BUF,#00H ;÷√0 
+
+411B 752200           35             MOV SBF,#00H 
+
+411E 752100           36             MOV MBF,#00H 
+
+4121 752000           37                     MOV HBF,#00H 
+
+                      38     
+
+4124 D2AB             39             SETB ET1 
+
+4126 D2AF             40             SETB EA 
+
+4128 D28E             41             SETB TR1 
+
+                      42     
+
+412A 7840             43        DS1: MOV R0,#40H ;÷√œ‘ æª∫≥Â«¯ ◊÷∑ 
+
+412C 7A20             44             MOV R2,#20H ;÷√…®√Ë≥ı÷µ,µ„¡¡◊Ó◊Û±ﬂµƒLED6 
+
+412E 90CFA0           45        DS2: MOV DPTR,#PORT  
+
+4131 E6               46             MOV A,@R0 ;µ√µΩµƒ∂Œœ‘¬Î ‰≥ˆµΩ∂Œ æ›ø⁄ 
+
+4132 3158             47             ACALL TABLE 
+
+4134 F0               48             MOVX @DPTR,A  
+
+                      49     
+
+4135 EA               50             MOV A,R2 ;œÚŒª æ›ø⁄P1 ‰≥ˆŒªœ‘¬Î 
+
+4136 F4               51             CPL A 
+
+4137 F590             52             MOV P1,A  
+
+                      53     
+
+4139 7BFF             54             MOV R3,#0FFH ;—” ±“ª–°∂Œ ±º‰ 
+
+413B 00               55        DEL: NOP 
+
+413C DBFD             56             DJNZ R3,DEL
+
+                      57             
+
+A51 MACRO ASSEMBLER  CLOCK                                                                12/04/2016 23:50:10 PAGE     2
+
+413E 85FF90           58             MOV P1 , 0FFH   ;œ˚≥Õœ”∞œ÷œÛ 
+
+                      59     
+
+4141 08               60             INC R0 ;œ‘ æª∫≥Â◊÷Ω⁄º”“ª 
+
+4142 C3               61             CLR C 
+
+4143 EA               62             MOV A,R2 
+
+4144 13               63             RRC A ;œ‘¬Î”““∆“ªŒª 
+
+4145 FA               64             MOV R2,A ;◊Óƒ©“ªŒª «∑Òœ‘ æÕÍ±œ?,»ÁŒﬁ‘Ú 
+
+4146 70E6             65             JNZ DS2 ;ºÃ–¯Õ˘œ¬œ‘ æ 
+
+                      66     
+
+4148 7845             67             MOV R0,#45H 
+
+414A E522             68             MOV A,SBF ;∞—√Î÷µ∑÷±∑≈”⁄44H,45H÷– 
+
+414C 3166             69             ACALL GET 
+
+                      70     
+
+414E E521             71             MOV A,MBF ;∞—∑÷÷µ∑÷±∑≈»Î42H,43H÷– 
+
+4150 3166             72             ACALL GET 
+
+                      73     
+
+4152 E520             74                     MOV A, HBF;∞—–° ±∑÷±∑≈»Î40H,41H÷– 
+
+4154 3166             75                     ACALL  GET  
+
+4156 80D2             76             SJMP DS1 ;◊™DS1¥”Õ∑œ‘ æ∆ 
+
+4158 04               77      TABLE: INC A ;»°”Î ◊÷∂‘”¶µƒ∂Œ¬Î 
+
+4159 83               78             MOVC A,@A+PC 
+
+415A 22               79             RET 
+
+415B 3F065B4F         80             DB 3FH,06H,5BH,4FH,66H,6DH,7DH, 07H, 7FH,6FH, 40H 
+
+415F 666D7D07                
+4163 7F6F40                  
+                      81     
+
+4166 F9               82        GET: MOV R1,A ;∞—¥” ±°¢∑÷ªÚ√Î◊÷Ω⁄÷–»°¿¥µƒ÷µµƒ∏ﬂ 
+
+4167 540F             83             ANL A,#0FH ;Œª∆¡±ŒµÙ,≤¢ÀÕ»Îª∫≥Â«¯ 
+
+4169 F6               84             MOV @R0,A 
+
+                      85     
+
+416A 18               86             DEC R0 
+
+416B E9               87             MOV A,R1 ;∞—¥” ±°¢∑÷ªÚ√Î◊÷Ω⁄÷–»°¿¥µƒ÷µµƒµÕ 
+
+416C C4               88             SWAP A ;Œª∆¡±ŒµÙ,≤¢ÀÕ»Îª∫≥Â«¯ 
+
+416D 540F             89             ANL A,#0FH 
+
+416F F6               90             MOV @R0,A 
+
+4170 18               91             DEC R0 ;R0÷∏’Îœ¬“∆“ªŒª 
+
+4171 22               92             RET 
+
+4172 758B38           93      CLOCK: MOV TL1,#038H ;÷√ ±º‰≥£  
+
+4175 758D00           94             MOV TH1,#00H 
+
+4178 C0D0             95             PUSH PSW  
+
+                      96                  
+
+417A C0E0             97             PUSH ACC 
+
+417C 0523             98             INC BUF ;º∆ º”“ª 
+
+417E E523             99             MOV A,BUF ;º∆µΩ10∑Ò?√ª”–‘Ú◊™µΩQUITÕÀ≥ˆ÷–∂œ 
+
+4180 B40A27          100             CJNE A,#0AH,QUIT 
+
+4183 752300          101             MOV BUF,#00H ;÷√≥ı÷µ 
+
+4186 E522            102             MOV A,SBF 
+
+4188 7401            103             MOV A , #1 ;√Î÷µº”“ª,æ≠ ÆΩ¯÷∆µ˜’˚∫Û∑≈»Î 
+
+418A D4              104             DA A ;√Î◊÷Ω⁄ 
+
+418B F522            105             MOV SBF,A 
+
+418D B4601A          106             CJNE A,#60H,QUIT ;º∆µΩ60∑Ò?√ª”–‘Ú◊™µΩQUITÕÀ≥ˆ÷–∂œ 
+
+4190 752200          107             MOV SBF,#00H ; «,√Î◊÷Ω⁄«Â¡„ 
+
+4193 E521            108             MOV A,MBF 
+
+4195 7401            109             MOV A , #1 ;∑÷÷µº”“ª,æ≠ ÆΩ¯÷∆µ˜’˚∫Û∑≈»Î 
+
+4197 D4              110             DA A ;∑÷◊÷Ω⁄ 
+
+4198 F521            111             MOV MBF,A 
+
+419A B4600D          112             CJNE A,#60H,QUIT ;∑÷÷µŒ™60∑Ò?≤ª «‘ÚÕÀ≥ˆ÷–∂œ 
+
+419D 752100          113             MOV MBF,#00H ; «,«Â¡„ 
+
+41A0 E520            114                     MOV  A,HBF 
+
+41A2 7401            115                     MOV A , #1; 
+
+41A4 D4              116                     DA  A 
+
+41A5 F520            117                     MOV  HBF,A 
+
+41A7 B42400          118                     CJNE A,#24H,QUIT   ; ±÷µŒ™24∑Ò,≤ª «‘ÚÕÀ≥ˆ÷–∂œ 
+
+41AA D0E0            119     QUIT:   POP ACC 
+
+41AC D0D0            120                     POP PSW 
+
+41AE 32              121                     RETI ;÷–∂œ∑µªÿ 
+
+A51 MACRO ASSEMBLER  CLOCK                                                                12/04/2016 23:50:10 PAGE     3
+
+                     122             END
+
+A51 MACRO ASSEMBLER  CLOCK                                                                12/04/2016 23:50:10 PAGE     4
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+ACC. . . . . . . .  D ADDR   00E0H   A   
+BUF. . . . . . . .  N NUMB   0023H   A   
+CLOCK. . . . . . .  C ADDR   4172H   A   
+DEL. . . . . . . .  C ADDR   413BH   A   
+DS1. . . . . . . .  C ADDR   412AH   A   
+DS2. . . . . . . .  C ADDR   412EH   A   
+EA . . . . . . . .  B ADDR   00A8H.7 A   
+ET1. . . . . . . .  B ADDR   00A8H.3 A   
+GET. . . . . . . .  C ADDR   4166H   A   
+HBF. . . . . . . .  N NUMB   0020H   A   
+MBF. . . . . . . .  N NUMB   0021H   A   
+P1 . . . . . . . .  D ADDR   0090H   A   
+PORT . . . . . . .  N NUMB   CFA0H   A   
+PSW. . . . . . . .  D ADDR   00D0H   A   
+QUIT . . . . . . .  C ADDR   41AAH   A   
+SBF. . . . . . . .  N NUMB   0022H   A   
+START. . . . . . .  C ADDR   4100H   A   
+TABLE. . . . . . .  C ADDR   4158H   A   
+TH1. . . . . . . .  D ADDR   008DH   A   
+TL1. . . . . . . .  D ADDR   008BH   A   
+TMOD . . . . . . .  D ADDR   0089H   A   
+TR1. . . . . . . .  B ADDR   0088H.6 A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)

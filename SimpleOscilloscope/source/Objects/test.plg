@@ -1,0 +1,30 @@
+<html>
+<body>
+<pre>
+<h1>µVision Build Log</h1>
+<h2>Project:</h2>
+E:\Workspace\MicroController\SimpleOscilloscope\source\test.uvproj
+Project File Date:  12/04/2016
+
+<h2>Output:</h2>
+compiling 12864.c...
+12864.c(261): warning C290: missing return value
+12864.c(274): warning C290: missing return value
+12864.c(589): warning C290: missing return value
+12864.c(601): warning C290: missing return value
+12864.c(612): warning C290: missing return value
+12864.c - 0 Error(s), 5 Warning(s).
+compiling 12864.c...
+12864.c(261): warning C290: missing return value
+12864.c(274): warning C290: missing return value
+12864.c(589): warning C290: missing return value
+12864.c(601): warning C290: missing return value
+12864.c(612): warning C290: missing return value
+12864.c - 0 Error(s), 5 Warning(s).
+compiling 12864.c...
+12864.c(261): warning C290: missing return value
+12864.c(274): warning C290: missing return value
+12864.c(589): warning C290: missing return value
+12864.c(601): warning C290: missing return value
+12864.c(612): warning C290: missing return value
+12864.c - 0 Error(s), 5 Warning(s).
