@@ -123,8 +123,8 @@ void Lcd_PutPixel(unsigned char x,unsigned char y,unsigned char Color)
 	//EA=0;
 	Lcd_WriteCmd(y+0x80);        //行地址
 	Lcd_WriteCmd(x+z);     //列地址
-   Lcd_WriteData(Temp>>8);//先写入高8位，再写入低8位
-   Lcd_WriteData(Temp&0x00ff);
+	Lcd_WriteData(Temp>>8);//先写入高8位，再写入低8位
+	Lcd_WriteData(Temp&0x00ff);
 	Lcd_WriteCmd(0x30);
 	//EA=1;
 }
@@ -168,587 +168,587 @@ void Lcd_Reset()
 //////////////////////////////////////
 void InitADC()
 {
-P1ASF=0X80;
-ADC_RES=0;
-ADC_CONTR=0xef;
-EADC=1;
+	P1ASF=0X80;
+	ADC_RES=0;
+	ADC_CONTR=0xef;
+	EADC=1;
 }
 void adc_isr() interrupt 5 using 1
 {
-ADC_CONTR=0xef;
-if(over==0)
-{
-	temp=delnop;
-	while(temp)
+	ADC_CONTR=0xef;
+	if(over==0)
 	{
-	temp--;
+		temp=delnop;
+		while(temp)
+		{
+		temp--;
+		}
+		dat[dati]=ADC_RES;
+		dati++;
+		if(dati>101)
+		{
+		dati=0;
+		over=1;
+		}
 	}
-	dat[dati]=ADC_RES;
-	dati++;
-	if(dati>101)
-	{
-	dati=0;
-	over=1;
-	}
-}
 }
 //////////////////////////////////////
 void disp_0(unsigned char x,unsigned char y)
 {
-Lcd_PutPixel(x+0,y+1,1);
-Lcd_PutPixel(x+0,y+2,1);
-Lcd_PutPixel(x+0,y+3,1);
-Lcd_PutPixel(x+1,y+0,1);
-Lcd_PutPixel(x+1,y+4,1);
-Lcd_PutPixel(x+2,y+1,1);
-Lcd_PutPixel(x+2,y+2,1);
-Lcd_PutPixel(x+2,y+3,1);
+	Lcd_PutPixel(x+0,y+1,1);
+	Lcd_PutPixel(x+0,y+2,1);
+	Lcd_PutPixel(x+0,y+3,1);
+	Lcd_PutPixel(x+1,y+0,1);
+	Lcd_PutPixel(x+1,y+4,1);
+	Lcd_PutPixel(x+2,y+1,1);
+	Lcd_PutPixel(x+2,y+2,1);
+	Lcd_PutPixel(x+2,y+3,1);
 }
 void disp_1(unsigned char x,unsigned char y)
 {
-Lcd_PutPixel(x+0,y+1,1);
-Lcd_PutPixel(x+0,y+4,1);
-Lcd_PutPixel(x+1,y+0,1);
-Lcd_PutPixel(x+1,y+1,1);
-Lcd_PutPixel(x+1,y+2,1);
-Lcd_PutPixel(x+1,y+3,1);
-Lcd_PutPixel(x+1,y+4,1);
-Lcd_PutPixel(x+2,y+4,1);
+	Lcd_PutPixel(x+0,y+1,1);
+	Lcd_PutPixel(x+0,y+4,1);
+	Lcd_PutPixel(x+1,y+0,1);
+	Lcd_PutPixel(x+1,y+1,1);
+	Lcd_PutPixel(x+1,y+2,1);
+	Lcd_PutPixel(x+1,y+3,1);
+	Lcd_PutPixel(x+1,y+4,1);
+	Lcd_PutPixel(x+2,y+4,1);
 }
 void disp_2(unsigned char x,unsigned char y)
 {
-Lcd_PutPixel(x+0,y+0,1);
-Lcd_PutPixel(x+0,y+2,1);
-Lcd_PutPixel(x+0,y+3,1);
-Lcd_PutPixel(x+0,y+4,1);
-Lcd_PutPixel(x+1,y+0,1);
-Lcd_PutPixel(x+1,y+2,1);
-Lcd_PutPixel(x+1,y+4,1);
-Lcd_PutPixel(x+2,y+0,1);
-Lcd_PutPixel(x+2,y+1,1);
-Lcd_PutPixel(x+2,y+2,1);
-Lcd_PutPixel(x+2,y+4,1);
+	Lcd_PutPixel(x+0,y+0,1);
+	Lcd_PutPixel(x+0,y+2,1);
+	Lcd_PutPixel(x+0,y+3,1);
+	Lcd_PutPixel(x+0,y+4,1);
+	Lcd_PutPixel(x+1,y+0,1);
+	Lcd_PutPixel(x+1,y+2,1);
+	Lcd_PutPixel(x+1,y+4,1);
+	Lcd_PutPixel(x+2,y+0,1);
+	Lcd_PutPixel(x+2,y+1,1);
+	Lcd_PutPixel(x+2,y+2,1);
+	Lcd_PutPixel(x+2,y+4,1);
 }
 void disp_4(unsigned char x,unsigned char y)
 {
-Lcd_PutPixel(x+0,y+0,1);
-Lcd_PutPixel(x+0,y+1,1);
-Lcd_PutPixel(x+0,y+2,1);
-Lcd_PutPixel(x+1,y+2,1);
-Lcd_PutPixel(x+2,y+0,1);
-Lcd_PutPixel(x+2,y+1,1);
-Lcd_PutPixel(x+2,y+2,1);
-Lcd_PutPixel(x+2,y+3,1);
-Lcd_PutPixel(x+2,y+4,1);
+	Lcd_PutPixel(x+0,y+0,1);
+	Lcd_PutPixel(x+0,y+1,1);
+	Lcd_PutPixel(x+0,y+2,1);
+	Lcd_PutPixel(x+1,y+2,1);
+	Lcd_PutPixel(x+2,y+0,1);
+	Lcd_PutPixel(x+2,y+1,1);
+	Lcd_PutPixel(x+2,y+2,1);
+	Lcd_PutPixel(x+2,y+3,1);
+	Lcd_PutPixel(x+2,y+4,1);
 }
 void disp_5(unsigned char x,unsigned char y)
 {
-Lcd_PutPixel(x+0,y+0,1);
-Lcd_PutPixel(x+0,y+1,1);
-Lcd_PutPixel(x+0,y+2,1);
-Lcd_PutPixel(x+0,y+4,1);
-Lcd_PutPixel(x+1,y+0,1);
-Lcd_PutPixel(x+1,y+2,1);
-Lcd_PutPixel(x+1,y+4,1);
-Lcd_PutPixel(x+2,y+0,1);
-Lcd_PutPixel(x+2,y+2,1);
-Lcd_PutPixel(x+2,y+3,1);
-Lcd_PutPixel(x+2,y+4,1);
+	Lcd_PutPixel(x+0,y+0,1);
+	Lcd_PutPixel(x+0,y+1,1);
+	Lcd_PutPixel(x+0,y+2,1);
+	Lcd_PutPixel(x+0,y+4,1);
+	Lcd_PutPixel(x+1,y+0,1);
+	Lcd_PutPixel(x+1,y+2,1);
+	Lcd_PutPixel(x+1,y+4,1);
+	Lcd_PutPixel(x+2,y+0,1);
+	Lcd_PutPixel(x+2,y+2,1);
+	Lcd_PutPixel(x+2,y+3,1);
+	Lcd_PutPixel(x+2,y+4,1);
 }
-disp_dian(unsigned char x,unsigned char y)
+void disp_dian(unsigned char x,unsigned char y)
 {
-Lcd_PutPixel(x+0,y+4,1);
+	Lcd_PutPixel(x+0,y+4,1);
 }
-disp_k(unsigned char x,unsigned char y)
+void disp_k(unsigned char x,unsigned char y)
 {
-Lcd_PutPixel(x+0,y+0,1);
-Lcd_PutPixel(x+0,y+1,1);
-Lcd_PutPixel(x+0,y+2,1);
-Lcd_PutPixel(x+0,y+3,1);
-Lcd_PutPixel(x+0,y+4,1);
-Lcd_PutPixel(x+1,y+2,1);
-Lcd_PutPixel(x+2,y+1,1);
-Lcd_PutPixel(x+2,y+3,1);
-Lcd_PutPixel(x+3,y+0,1);
-Lcd_PutPixel(x+3,y+4,1);
+	Lcd_PutPixel(x+0,y+0,1);
+	Lcd_PutPixel(x+0,y+1,1);
+	Lcd_PutPixel(x+0,y+2,1);
+	Lcd_PutPixel(x+0,y+3,1);
+	Lcd_PutPixel(x+0,y+4,1);
+	Lcd_PutPixel(x+1,y+2,1);
+	Lcd_PutPixel(x+2,y+1,1);
+	Lcd_PutPixel(x+2,y+3,1);
+	Lcd_PutPixel(x+3,y+0,1);
+	Lcd_PutPixel(x+3,y+4,1);
 }
 void disp_hz(unsigned char x,unsigned char y)
 {
-Lcd_PutPixel(x+0,y+0,1);
-Lcd_PutPixel(x+0,y+1,1);
-Lcd_PutPixel(x+0,y+2,1);
-Lcd_PutPixel(x+0,y+3,1);
-Lcd_PutPixel(x+0,y+4,1);
-Lcd_PutPixel(x+1,y+2,1);
-Lcd_PutPixel(x+2,y+2,1);
-Lcd_PutPixel(x+3,y+0,1);
-Lcd_PutPixel(x+3,y+1,1);
-Lcd_PutPixel(x+3,y+2,1);
-Lcd_PutPixel(x+3,y+3,1);
-Lcd_PutPixel(x+3,y+4,1);
-Lcd_PutPixel(x+5,y+1,1);
-Lcd_PutPixel(x+5,y+3,1);
-Lcd_PutPixel(x+5,y+4,1);
-Lcd_PutPixel(x+6,y+1,1);
-Lcd_PutPixel(x+6,y+2,1);
-Lcd_PutPixel(x+6,y+4,1);
+	Lcd_PutPixel(x+0,y+0,1);
+	Lcd_PutPixel(x+0,y+1,1);
+	Lcd_PutPixel(x+0,y+2,1);
+	Lcd_PutPixel(x+0,y+3,1);
+	Lcd_PutPixel(x+0,y+4,1);
+	Lcd_PutPixel(x+1,y+2,1);
+	Lcd_PutPixel(x+2,y+2,1);
+	Lcd_PutPixel(x+3,y+0,1);
+	Lcd_PutPixel(x+3,y+1,1);
+	Lcd_PutPixel(x+3,y+2,1);
+	Lcd_PutPixel(x+3,y+3,1);
+	Lcd_PutPixel(x+3,y+4,1);
+	Lcd_PutPixel(x+5,y+1,1);
+	Lcd_PutPixel(x+5,y+3,1);
+	Lcd_PutPixel(x+5,y+4,1);
+	Lcd_PutPixel(x+6,y+1,1);
+	Lcd_PutPixel(x+6,y+2,1);
+	Lcd_PutPixel(x+6,y+4,1);
 }
 void disp_vd(unsigned char x,unsigned char y)
 {
-Lcd_PutPixel(x+0,y+0,1);
-Lcd_PutPixel(x+0,y+1,1);
-Lcd_PutPixel(x+1,y+2,1);
-Lcd_PutPixel(x+1,y+3,1);
-Lcd_PutPixel(x+2,y+4,1);
-Lcd_PutPixel(x+3,y+2,1);
-Lcd_PutPixel(x+3,y+3,1);
-Lcd_PutPixel(x+4,y+0,1);
-Lcd_PutPixel(x+4,y+1,1);
-Lcd_PutPixel(x+5,y+3,1);
-Lcd_PutPixel(x+5,y+4,1);
-Lcd_PutPixel(x+6,y+2,1);
-Lcd_PutPixel(x+7,y+0,1);
-Lcd_PutPixel(x+7,y+1,1);
-Lcd_PutPixel(x+8,y+2,1);
-Lcd_PutPixel(x+8,y+3,1);
-Lcd_PutPixel(x+8,y+4,1);
-Lcd_PutPixel(x+9,y+2,1);
-Lcd_PutPixel(x+9,y+4,1);
-Lcd_PutPixel(x+10,y+0,1);
-Lcd_PutPixel(x+10,y+1,1);
-Lcd_PutPixel(x+10,y+2,1);
-Lcd_PutPixel(x+10,y+3,1);
-Lcd_PutPixel(x+10,y+4,1);
+	Lcd_PutPixel(x+0,y+0,1);
+	Lcd_PutPixel(x+0,y+1,1);
+	Lcd_PutPixel(x+1,y+2,1);
+	Lcd_PutPixel(x+1,y+3,1);
+	Lcd_PutPixel(x+2,y+4,1);
+	Lcd_PutPixel(x+3,y+2,1);
+	Lcd_PutPixel(x+3,y+3,1);
+	Lcd_PutPixel(x+4,y+0,1);
+	Lcd_PutPixel(x+4,y+1,1);
+	Lcd_PutPixel(x+5,y+3,1);
+	Lcd_PutPixel(x+5,y+4,1);
+	Lcd_PutPixel(x+6,y+2,1);
+	Lcd_PutPixel(x+7,y+0,1);
+	Lcd_PutPixel(x+7,y+1,1);
+	Lcd_PutPixel(x+8,y+2,1);
+	Lcd_PutPixel(x+8,y+3,1);
+	Lcd_PutPixel(x+8,y+4,1);
+	Lcd_PutPixel(x+9,y+2,1);
+	Lcd_PutPixel(x+9,y+4,1);
+	Lcd_PutPixel(x+10,y+0,1);
+	Lcd_PutPixel(x+10,y+1,1);
+	Lcd_PutPixel(x+10,y+2,1);
+	Lcd_PutPixel(x+10,y+3,1);
+	Lcd_PutPixel(x+10,y+4,1);
 }
 void disp_ledon(unsigned char x,unsigned char y)
 {
-Lcd_PutPixel(x+0,y+0,1);
-Lcd_PutPixel(x+0,y+1,1);
-Lcd_PutPixel(x+0,y+2,1);
-Lcd_PutPixel(x+0,y+3,1);
-Lcd_PutPixel(x+0,y+4,1);
-Lcd_PutPixel(x+1,y+1,1);
-Lcd_PutPixel(x+1,y+2,1);
-Lcd_PutPixel(x+1,y+3,1);
-Lcd_PutPixel(x+2,y+0,1);
-Lcd_PutPixel(x+2,y+4,1);
-Lcd_PutPixel(x+3,y+2,1);
+	Lcd_PutPixel(x+0,y+0,1);
+	Lcd_PutPixel(x+0,y+1,1);
+	Lcd_PutPixel(x+0,y+2,1);
+	Lcd_PutPixel(x+0,y+3,1);
+	Lcd_PutPixel(x+0,y+4,1);
+	Lcd_PutPixel(x+1,y+1,1);
+	Lcd_PutPixel(x+1,y+2,1);
+	Lcd_PutPixel(x+1,y+3,1);
+	Lcd_PutPixel(x+2,y+0,1);
+	Lcd_PutPixel(x+2,y+4,1);
+	Lcd_PutPixel(x+3,y+2,1);
 }
 void disp_ledoff(unsigned char x,unsigned char y)
 {
-Lcd_PutPixel(x+0,y+0,1);
-Lcd_PutPixel(x+0,y+1,1);
-Lcd_PutPixel(x+0,y+2,1);
-Lcd_PutPixel(x+0,y+3,1);
-Lcd_PutPixel(x+0,y+4,1);
-Lcd_PutPixel(x+1,y+1,1);
-Lcd_PutPixel(x+1,y+2,1);
-Lcd_PutPixel(x+1,y+3,1);
+	Lcd_PutPixel(x+0,y+0,1);
+	Lcd_PutPixel(x+0,y+1,1);
+	Lcd_PutPixel(x+0,y+2,1);
+	Lcd_PutPixel(x+0,y+3,1);
+	Lcd_PutPixel(x+0,y+4,1);
+	Lcd_PutPixel(x+1,y+1,1);
+	Lcd_PutPixel(x+1,y+2,1);
+	Lcd_PutPixel(x+1,y+3,1);
 }
 void clr(unsigned char starx,unsigned char stary,unsigned char endx,unsigned char endy)
 {
-char x=0;
-char y=0;
-for(x=starx;x<endx;x++)
-{
-	for(y=stary;y<endy;y++)
+	char x=0;
+	char y=0;
+	for(x=starx;x<endx;x++)
 	{
-		Lcd_PutPixel(x,y,0);
+		for(y=stary;y<endy;y++)
+		{
+			Lcd_PutPixel(x,y,0);
+		}
 	}
-}
 }
 void disp_bj(void)
 {
-unsigned char x=0;
-unsigned char y=0;
-for(y=0;y<63;y=y+2)
-{
-Lcd_PutPixel(51,y,1);
-}
-for(y=0;y<63;y=y+2)
-{
-Lcd_PutPixel(77,y,1);
-}
-for(y=0;y<63;y=y+2)
-{
-Lcd_PutPixel(101,y,1);
-}
-for(x=27;x<127;x=x+2)
-{
-Lcd_PutPixel(x,0,1);
-}
-for(x=27;x<127;x=x+2)
-{
-Lcd_PutPixel(x,15,1);
-}
-for(x=27;x<127;x=x+2)
-{
-Lcd_PutPixel(x,31,1);
-}
-for(x=27;x<127;x=x+2)
-{
-Lcd_PutPixel(x,47,1);
-}
-for(x=27;x<127;x=x+2)
-{
-Lcd_PutPixel(x,63,1);
-}
-for(y=0;y<64;y++)
-{
-Lcd_PutPixel(26,y,1);
-Lcd_PutPixel(127,y,1);
-}
-}
-line(unsigned char x0,unsigned char y0,unsigned char x1,unsigned char y1,unsigned char color)
-{
-int i,dx,dy,e,x,y;
-Lcd_PutPixel(x0,y0,color);
-Lcd_PutPixel(x1,y1,color);
-dx=x1-x0;
-dy=y1-y0;
-x=x0;
-y=y0;
-if(dx>0&&dy>0)
-{
-if(dx>dy)
-{
-e=-dx;
-for(i=0;i<dx;i++)
+	unsigned char x=0;
+	unsigned char y=0;
+	for(y=0;y<63;y=y+2)
 	{
-	Lcd_PutPixel(x,y,color);
-	x++;
-	e=e+2*dy;
-	if(e>=0)
+		Lcd_PutPixel(51,y,1);
+	}
+	for(y=0;y<63;y=y+2)
+	{
+		Lcd_PutPixel(77,y,1);
+	}
+	for(y=0;y<63;y=y+2)
+	{
+		Lcd_PutPixel(101,y,1);
+	}
+	for(x=27;x<127;x=x+2)
+	{
+		Lcd_PutPixel(x,0,1);
+	}
+		for(x=27;x<127;x=x+2)
+	{
+		Lcd_PutPixel(x,15,1);
+	}
+	for(x=27;x<127;x=x+2)
+	{
+		Lcd_PutPixel(x,31,1);
+	}
+	for(x=27;x<127;x=x+2)
+	{
+		Lcd_PutPixel(x,47,1);
+	}
+	for(x=27;x<127;x=x+2)
+	{
+		Lcd_PutPixel(x,63,1);
+	}
+	for(y=0;y<64;y++)
+	{
+		Lcd_PutPixel(26,y,1);
+		Lcd_PutPixel(127,y,1);
+	}
+}
+void line(unsigned char x0,unsigned char y0,unsigned char x1,unsigned char y1,unsigned char color)
+{
+	int i,dx,dy,e,x,y;
+	Lcd_PutPixel(x0,y0,color);
+	Lcd_PutPixel(x1,y1,color);
+	dx=x1-x0;
+	dy=y1-y0;
+	x=x0;
+	y=y0;
+	if(dx>0&&dy>0)
+	{
+		if(dx>dy)
 		{
-		y++;
-		e=e-2*dx;
+			e=-dx;
+			for(i=0;i<dx;i++)
+			{
+				Lcd_PutPixel(x,y,color);
+				x++;
+				e=e+2*dy;
+				if(e>=0)
+				{
+					y++;
+					e=e-2*dx;
+				}
+			}
+		}
+		else
+		{
+			e=-dy;
+			x=x0;
+			y=y0;
+			for(i=0;i<dy;i++)
+			{
+				Lcd_PutPixel(x,y,color);
+				y++;
+				e=e+2*dx;
+				if(e>=0)
+				{
+					x++;
+					e=e-2*dy;
+				}
+			}
+		}
+	}
+	if(dx<0&&dy<0)
+	{
+		dx=x0-x1;
+		dy=y0-y1;
+		if(dx>dy)
+		{
+			e=-dx;
+			for(i=0;i<dx;i++)
+			{
+				Lcd_PutPixel(x,y,color);
+				x--;
+				e=e+2*dy;
+				if(e>=0)
+				{
+					y--;
+					e=e-2*dx;
+				}
+			}
+		}
+		else
+		{
+			e=-dy;
+			for(i=0;i<dy;i++)
+			{
+				Lcd_PutPixel(x,y,color);
+				y--;
+				e=e+2*dx;
+				if(e>=0)
+				{
+					x--;
+					e=e-2*dy;
+				}
+			}
+		}
+	}
+	if(dx>0&&dy<0)
+	{
+		dy=y0-y1;
+		if(dx>dy)
+		{
+			e=-dx;
+			for(i=0;i<dx;i++)
+			{
+				Lcd_PutPixel(x,y,color);
+				x++;
+				e=e+2*dy;
+				if(e>=0)
+				{
+					y--;
+					e=e-2*dx;
+				}
+			}
+		}
+		else
+		{
+			e=-dy;
+			for(i=0;i<dy;i++)
+			{
+				Lcd_PutPixel(x,y,color);
+				y--;
+				e=e+2*dx;
+				if(e>=0)
+				{
+					x++;
+					e=e-2*dy;
+				}
+			}
+		}
+	}
+	if(dx<0&&dy>0)
+	{
+		dx=x0-x1;
+		if(dx>dy)
+		{
+			e=-dx;
+			for(i=0;i<dx;i++)
+			{
+				Lcd_PutPixel(x,y,color);
+				x--;
+				e=e+2*dy;
+			if(e>=0)
+				{
+					y++;
+					e=e-2*dx;
+				}
+			}
+		}
+		else
+		{
+			e=-dy;
+			for(i=0;i<dy;i++)
+			{
+				Lcd_PutPixel(x,y,color);
+				y++;
+				e=e+2*dx;
+			if(e>=0)
+				{
+					x--;
+					e=e-2*dy;
+				}
+			}
+		}
+	}
+	if(dx!=0&&dy==0)
+	{
+		if(dx>0)
+		{
+			for(i=0;i<dx;i++)
+			{
+				Lcd_PutPixel(x,y,color);
+				x++;
+			}
+		}
+		else
+		{
+			dx=x0-x1;
+			for(i=0;i<dx;i++)
+			{
+				Lcd_PutPixel(x,y,color);
+				x--;
+			}
+		}
+	}
+	if(dx==0&&dy!=0)
+	{
+		if(dy>0)
+		{
+			for(i=0;i<dy;i++)
+			{
+				Lcd_PutPixel(x,y,color);
+				y++;
+			}
+		}
+		else
+		{
+			dy=y0-y1;
+			for(i=0;i<dy;i++)
+			{
+				Lcd_PutPixel(x,y,color);
+				y--;
+			}
 		}
 	}
 }
-else
+void disp_ware()
 {
-e=-dy;
-x=x0;
-y=y0;
-for(i=0;i<dy;i++)
+	unsigned char x;
+	for(x=0;x<100;x++)
 	{
-	Lcd_PutPixel(x,y,color);
-	y++;
-	e=e+2*dx;
-	if(e>=0)
-		{
-		x++;
-		e=e-2*dy;
-		}
+		line(x+27,(dat0[x]/vd)-cha,x+1+27,(dat0[x+1]/vd)-cha,0);
+		line(x+27,(dat[x]/vd)-cha,x+1+27,(dat[x+1]/vd)-cha,1);
+		dat0[x]=dat[x];
 	}
+	dat0[101]=dat[101];
+	disp_bj();
 }
-}
-if(dx<0&&dy<0)
+void disp_ware50()
 {
-dx=x0-x1;
-dy=y0-y1;
-if(dx>dy)
-{
-e=-dx;
-for(i=0;i<dx;i++)
+	unsigned char x;
+	for(x=0;x<50;x++)
 	{
-	Lcd_PutPixel(x,y,color);
-	x--;
-	e=e+2*dy;
-	if(e>=0)
-		{
-		y--;
-		e=e-2*dx;
-		}
+		line(x*2+27,(dat0[x]/vd)-cha,(x+1)*2+27,(dat0[x+1]/vd)-cha,0);
+		line(x*2+27,(dat[x]/vd)-cha,(x+1)*2+27,(dat[x+1]/vd)-cha,1);
+		dat0[x]=dat[x];
 	}
-}
-else
-{
-e=-dy;
-for(i=0;i<dy;i++)
-	{
-	Lcd_PutPixel(x,y,color);
-	y--;
-	e=e+2*dx;
-	if(e>=0)
-		{
-		x--;
-		e=e-2*dy;
-		}
-	}
-}
-}
-if(dx>0&&dy<0)
-{
-dy=y0-y1;
-if(dx>dy)
-{
-e=-dx;
-for(i=0;i<dx;i++)
-	{
-	Lcd_PutPixel(x,y,color);
-	x++;
-	e=e+2*dy;
-	if(e>=0)
-		{
-		y--;
-		e=e-2*dx;
-		}
-	}
-}
-else
-{
-e=-dy;
-for(i=0;i<dy;i++)
-	{
-	Lcd_PutPixel(x,y,color);
-	y--;
-	e=e+2*dx;
-	if(e>=0)
-		{
-		x++;
-		e=e-2*dy;
-		}
-	}
-}
-}
-if(dx<0&&dy>0)
-{
-dx=x0-x1;
-if(dx>dy)
-{
-e=-dx;
-for(i=0;i<dx;i++)
-	{
-	Lcd_PutPixel(x,y,color);
-	x--;
-	e=e+2*dy;
-	if(e>=0)
-		{
-		y++;
-		e=e-2*dx;
-		}
-	}
-}
-else
-{
-e=-dy;
-for(i=0;i<dy;i++)
-	{
-	Lcd_PutPixel(x,y,color);
-	y++;
-	e=e+2*dx;
-	if(e>=0)
-		{
-		x--;
-		e=e-2*dy;
-		}
-	}
-}
-}
-if(dx!=0&&dy==0)
-{
-if(dx>0)
-{
-for(i=0;i<dx;i++)
-	{
-	Lcd_PutPixel(x,y,color);
-	x++;
-	}
-}
-else
-{
-dx=x0-x1;
-for(i=0;i<dx;i++)
-	{
-	Lcd_PutPixel(x,y,color);
-	x--;
-	}
-}
-}
-if(dx==0&&dy!=0)
-{
-if(dy>0)
-{
-for(i=0;i<dy;i++)
-	{
-	Lcd_PutPixel(x,y,color);
-	y++;
-	}
-}
-else
-{
-dy=y0-y1;
-for(i=0;i<dy;i++)
-	{
-	Lcd_PutPixel(x,y,color);
-	y--;
-	}
-}
-}
-}
-disp_ware()
-{
-unsigned char x;
-for(x=0;x<100;x++)
-{
-line(x+27,(dat0[x]/vd)-cha,x+1+27,(dat0[x+1]/vd)-cha,0);
-line(x+27,(dat[x]/vd)-cha,x+1+27,(dat[x+1]/vd)-cha,1);
-dat0[x]=dat[x];
-}
-dat0[101]=dat[101];
-disp_bj();
-}
-disp_ware50()
-{
-unsigned char x;
-for(x=0;x<50;x++)
-{
-line(x*2+27,(dat0[x]/vd)-cha,(x+1)*2+27,(dat0[x+1]/vd)-cha,0);
-line(x*2+27,(dat[x]/vd)-cha,(x+1)*2+27,(dat[x+1]/vd)-cha,1);
-dat0[x]=dat[x];
-}
-disp_bj();
+	disp_bj();
 }
 //////////////////////////////////////
-main()
+void main()
 {
-Lcd_Reset();
-Lcd_Clear(0);
-InitADC();
+	Lcd_Reset();
+	Lcd_Clear(0);
+	InitADC();
 
-disp_4(0,10);
-disp_k(4,10);
-disp_hz(9,10);
+	disp_4(0,10);
+	disp_k(4,10);
+	disp_hz(9,10);
 
-disp_1(0,30);
-disp_vd(4,30);
+	disp_1(0,30);
+	disp_vd(4,30);
 
-disp_ledon(0,50);
+	disp_ledon(0,50);
 
-EA=1;
-while(1)
-{
-if(over)
+	EA=1;
+	while(1)
 	{
-		if(mode==0)
+		if(over)
 		{
-		disp_ware50();
-		}
-		else
-		{
-		disp_ware();
-		}
-		if(ledkey==0)
-		{
-		led=~led;
-		if(led)
-		{
-			clr(0,50,5,55);
-			disp_ledon(0,50);
-		}
-		else
-		{
-			clr(0,50,5,55);
-			disp_ledoff(0,50);
-		}
-		}
-		if(fkey==0)
-		{
-		if(mode<4)
+			if(mode==0)
 			{
-			mode++;
+				disp_ware50();
 			}
-		else
+			else
 			{
-			mode=0;
+				disp_ware();
 			}
-		switch(mode)
+			if(ledkey==0)
 			{
-		case 0://4khz
-			delnop=1;
-			Lcd_Clear(0);
-			disp_bj();
-			clr(0,10,20,15);
-			disp_4(0,10);
-			disp_k(4,10);
-			disp_hz(9,10);
-			break;
-		case 1://2khz
-			delnop=1;
-			clr(0,10,20,15);
-			disp_2(0,10);
-			disp_k(4,10);
-			disp_hz(9,10);
-			break;
-		case 2://200hz
-			delnop=40;
-			clr(0,10,20,15);
-			disp_2(0,10);
-			disp_0(4,10);
-			disp_0(8,10);
-			disp_hz(12,10);
-			break;
-		case 3://20hz
-			delnop=440;
-			clr(0,10,20,15);
-			disp_2(0,10);
-			disp_0(4,10);
-			disp_hz(8,10);
-			break;
-		case 4://2hz
-			delnop=4440;
-			clr(0,10,20,15);
-			disp_2(0,10);
-			disp_hz(4,10);
-			break;
-		default:
-			break;
-		}
-		}
-		if(vkey==0)
-		{
-		if(vmode<2)
-			{
-			vmode++;
+				led=~led;
+				if(led)
+				{
+					clr(0,50,5,55);
+					disp_ledon(0,50);
+				}
+				else
+				{
+					clr(0,50,5,55);
+					disp_ledoff(0,50);
+				}
 			}
-		else
+			if(fkey==0)
 			{
-			vmode=0;
+				if(mode<4)
+				{
+					mode++;
+				}
+				else
+				{
+					mode=0;
+				}
+				switch(mode)
+				{
+					case 0://4khz
+						delnop=1;
+						Lcd_Clear(0);
+						disp_bj();
+						clr(0,10,20,15);
+						disp_4(0,10);
+						disp_k(4,10);
+						disp_hz(9,10);
+						break;
+					case 1://2khz
+						delnop=1;
+						clr(0,10,20,15);
+						disp_2(0,10);
+						disp_k(4,10);
+						disp_hz(9,10);
+						break;
+					case 2://200hz
+						delnop=40;
+						clr(0,10,20,15);
+						disp_2(0,10);
+						disp_0(4,10);
+						disp_0(8,10);
+						disp_hz(12,10);
+						break;
+					case 3://20hz
+						delnop=440;
+						clr(0,10,20,15);
+						disp_2(0,10);
+						disp_0(4,10);
+						disp_hz(8,10);
+						break;
+					case 4://2hz
+						delnop=4440;
+						clr(0,10,20,15);
+						disp_2(0,10);
+						disp_hz(4,10);
+						break;
+					default:
+						break;
+				}
 			}
-		switch(vmode)
+			if(vkey==0)
 			{
-		case 0://1v/d
-			vd=4;
-			cha=0;
-			clr(0,30,26,35);
-			disp_1(0,30);
-			disp_vd(4,30);
-			break;
-		case 1://0.5v/d
-			vd=2;
-			cha=32;
-			clr(0,30,26,35);
-			disp_0(0,30);
-			disp_dian(4,30);
-			disp_5(6,30);
-			disp_vd(10,30);
-			break;
-		case 2://0.25v/d
-			vd=1;
-			cha=96;
-			clr(0,30,26,35);
-			disp_0(0,30);
-			disp_dian(4,30);
-			disp_2(6,30);
-			disp_5(10,30);
-			disp_vd(14,30);
-			break;
-		default:
-			break;
+				if(vmode<2)
+				{
+					vmode++;
+				}
+				else
+				{
+					vmode=0;
+				}
+				switch(vmode)
+				{
+					case 0://1v/d
+						vd=4;
+						cha=0;
+						clr(0,30,26,35);
+						disp_1(0,30);
+						disp_vd(4,30);
+						break;
+					case 1://0.5v/d
+						vd=2;
+						cha=32;
+						clr(0,30,26,35);
+						disp_0(0,30);
+						disp_dian(4,30);
+						disp_5(6,30);
+						disp_vd(10,30);
+						break;
+					case 2://0.25v/d
+						vd=1;
+						cha=96;
+						clr(0,30,26,35);
+						disp_0(0,30);
+						disp_dian(4,30);
+						disp_2(6,30);
+						disp_5(10,30);
+						disp_vd(14,30);
+						break;
+					default:
+						break;
+				}
+			}
+			over=0;
 		}
-		}
-	over=0;
 	}
-}
 }

@@ -16,8 +16,8 @@ QING: MOV @R0,A        ;将数据存放单元清零
       INC R0
       DJNZ R2,QING
       ;MOV R4,#08H      ;8路计数初值
-	  MOV R4,#01H      ;8路计数初值
-      MOV 34H,#00H     ;初始通道显示单元为1号通道
+	  ;MOV R4,#01H      ;8路计数初值
+      ;MOV 34H,#00H     ;初始通道显示单元为1号通道
       SETB IT1         ;INT1置为边沿触发
       SETB EA          ;开中断
       SETB EX1         ;允许INT1中断
@@ -32,16 +32,18 @@ INT_1: CLR EX1
       PUSH PSW         ;保护现场
       MOVX A,@DPTR     ;读A/D转换结果
       MOV R1,A         ;存数据
-      INC DPTR         ;更新通道
-      MOV A,34H
-      INC A
-      MOV 34H,A
-      DJNZ R4,LOOP     ;巡回未完继续
+     ; INC DPTR         ;更新通道
+     ; MOV A,34H
+     ; INC A
+     ; MOV 34H,A
+      ;DJNZ R4,LOOP     ;巡回未完继续
       ;MOV R4,#08H      ;重新赋初值
-	  MOV R4,#01H      ;重新赋初值
+	  ;MOV R4,#01H      ;重新赋初值
       MOV DPTR,#7FF8H
 LOOP:
+		MOV A,#00H
       MOVX @DPTR,A     ;启动A/D转换
+	  
       POP PSW
       RETI             ;返回中断
 
