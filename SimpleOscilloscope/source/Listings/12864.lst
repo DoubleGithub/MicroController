@@ -1,10 +1,10 @@
-C51 COMPILER V9.52.0.0   12864                                                             12/07/2016 13:32:49 PAGE 1   
+C51 COMPILER V9.52.0.0   12864                                                             12/15/2016 20:07:01 PAGE 1   
 
 
 C51 COMPILER V9.52.0.0, COMPILATION OF MODULE 12864
 OBJECT MODULE PLACED IN .\Objects\12864.obj
-COMPILER INVOKED BY: C:\MySoftWare\keil\C51\BIN\C51.EXE 12864.c LARGE BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\12864.l
-                    -st) TABS(2) OBJECT(.\Objects\12864.obj)
+COMPILER INVOKED BY: C:\MySoftWare\keil\C51\BIN\C51.EXE 12864.c BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\12864.lst) OB
+                    -JECT(.\Objects\12864.obj)
 
 line level    source
 
@@ -34,7 +34,7 @@ line level    source
   24          unsigned char Lcd_CheckBusy(void)
   25          {
   26   1          unsigned char Busy;
-  27   1         LcdData=0xff;
+  27   1               LcdData=0xff;
   28   1          RS=0;
   29   1          RW=1;
   30   1          E=1;
@@ -48,54 +48,54 @@ line level    source
   38          **********************************/
   39          void Lcd_WriteData(unsigned char Data)
   40          {  
-  41   1        while(Lcd_CheckBusy());
-  42   1        RS=1;
-  43   1        RW=0;
-  44   1        E=0;
-  45   1        _nop_();  
-  46   1        _nop_(); 
-  47   1        LcdData=Data;
-  48   1        E=1;
-  49   1        _nop_();
-  50   1        _nop_();
-  51   1        E=0;
+  41   1              while(Lcd_CheckBusy());
+  42   1              RS=1;
+  43   1              RW=0;
+  44   1              E=0;
+  45   1              _nop_();  
+  46   1              _nop_(); 
+  47   1              LcdData=Data;
+  48   1              E=1;
+  49   1              _nop_();
+  50   1              _nop_();
+  51   1              E=0;
   52   1      }
   53          /***********************************
   54          从LCD中读出数据
-C51 COMPILER V9.52.0.0   12864                                                             12/07/2016 13:32:49 PAGE 2   
+C51 COMPILER V9.52.0.0   12864                                                             12/15/2016 20:07:01 PAGE 2   
 
   55          ************************************/
   56          unsigned char Lcd_ReadData(void)
   57          {
-  58   1        unsigned char Temp;
-  59   1        while(Lcd_CheckBusy());
-  60   1        LcdData=0xff;
-  61   1        RS=1;
-  62   1        RW=1;
-  63   1        E=1;
-  64   1        _nop_();
-  65   1          Temp=LcdData;
-  66   1          E=0;
-  67   1          return Temp;
+  58   1              unsigned char Temp;
+  59   1              while(Lcd_CheckBusy());
+  60   1              LcdData=0xff;
+  61   1              RS=1;
+  62   1              RW=1;
+  63   1              E=1;
+  64   1              _nop_();
+  65   1              Temp=LcdData;
+  66   1              E=0;
+  67   1              return Temp;
   68   1      }
   69          /*************************************
   70          想LCD中写入指令代码
   71          **************************************/
   72          void Lcd_WriteCmd(unsigned char CmdCode)
   73          {  
-  74   1        while(Lcd_CheckBusy());
-  75   1          RS=0;
-  76   1          RW=0;
-  77   1          E=0;
-  78   1          _nop_();  
-  79   1        _nop_();
-  80   1          LcdData=CmdCode;
-  81   1          _nop_(); 
-  82   1        _nop_();
-  83   1          E=1;
-  84   1          _nop_();  
-  85   1        _nop_();
-  86   1          E=0;
+  74   1              while(Lcd_CheckBusy());
+  75   1              RS=0;
+  76   1              RW=0;
+  77   1              E=0;
+  78   1              _nop_();  
+  79   1              _nop_();
+  80   1              LcdData=CmdCode;
+  81   1              _nop_(); 
+  82   1              _nop_();
+  83   1              E=1;
+  84   1              _nop_();  
+  85   1              _nop_();
+  86   1              E=0;
   87   1      }
   88          /**************************************
   89          为加速逻辑运算而设置的掩码表，这是以牺牲空间而换取时间的办法
@@ -108,41 +108,41 @@ line level    source
   94          ****************************************/
   95          void Lcd_PutPixel(unsigned char x,unsigned char y,unsigned char Color)
   96          {
-  97   1        unsigned char z,w;
-  98   1        unsigned int Temp;
-  99   1        if(x>=128||y>=64)
- 100   1          return;
- 101   1        Color=Color%2;
- 102   1        w=15-x%16;//确定对这个字的第多少位进行操作
- 103   1        x=x/16;//确定为一行上的第几字
+  97   1              unsigned char z,w;
+  98   1              unsigned int Temp;
+  99   1              if(x>=128||y>=64)
+ 100   1                      return;
+ 101   1              Color=Color%2;
+ 102   1              w=15-x%16;//确定对这个字的第多少位进行操作
+ 103   1              x=x/16;//确定为一行上的第几字
  104   1      
- 105   1        if(y<32) //如果为上页
- 106   1          z=0x80;
- 107   1        else     //否则如果为下页
- 108   1          z=0x88;
+ 105   1              if(y<32) //如果为上页
+ 106   1                      z=0x80;
+ 107   1              else     //否则如果为下页
+ 108   1                      z=0x88;
  109   1      
- 110   1        y=y%32;
- 111   1        //EA=0;
- 112   1        Lcd_WriteCmd(0x36);
- 113   1        Lcd_WriteCmd(y+0x80);        //行地址
- 114   1        Lcd_WriteCmd(x+z);     //列地址 
-C51 COMPILER V9.52.0.0   12864                                                             12/07/2016 13:32:49 PAGE 3   
+ 110   1              y=y%32;
+ 111   1              //EA=0;
+ 112   1              Lcd_WriteCmd(0x36);
+ 113   1              Lcd_WriteCmd(y+0x80);        //行地址
+ 114   1              Lcd_WriteCmd(x+z);     //列地址 
+C51 COMPILER V9.52.0.0   12864                                                             12/15/2016 20:07:01 PAGE 3   
 
- 115   1        Temp=Lcd_ReadData();//先空读一次
- 116   1        Temp=(unsigned int)Lcd_ReadData()<<8;//再读出高8位
- 117   1        Temp|=(unsigned int)Lcd_ReadData();//再读出低8位
- 118   1        //EA=1;
- 119   1        if(Color==1) //如果写入颜色为1
- 120   1          Temp|=LcdMaskTab[w];//在此处查表实现加速
- 121   1        else         //如果写入颜色为0
- 122   1          Temp&=~LcdMaskTab[w];//在此处查表实现加速
- 123   1        //EA=0;
- 124   1        Lcd_WriteCmd(y+0x80);        //行地址
- 125   1        Lcd_WriteCmd(x+z);     //列地址
- 126   1        Lcd_WriteData(Temp>>8);//先写入高8位，再写入低8位
- 127   1        Lcd_WriteData(Temp&0x00ff);
- 128   1        Lcd_WriteCmd(0x30);
- 129   1        //EA=1;
+ 115   1              Temp=Lcd_ReadData();//先空读一次
+ 116   1              Temp=(unsigned int)Lcd_ReadData()<<8;//再读出高8位
+ 117   1              Temp|=(unsigned int)Lcd_ReadData();//再读出低8位
+ 118   1              //EA=1;
+ 119   1              if(Color==1) //如果写入颜色为1
+ 120   1                      Temp|=LcdMaskTab[w];//在此处查表实现加速
+ 121   1              else         //如果写入颜色为0
+ 122   1                      Temp&=~LcdMaskTab[w];//在此处查表实现加速
+ 123   1              //EA=0;
+ 124   1              Lcd_WriteCmd(y+0x80);        //行地址
+ 125   1              Lcd_WriteCmd(x+z);     //列地址
+ 126   1              Lcd_WriteData(Temp>>8);//先写入高8位，再写入低8位
+ 127   1              Lcd_WriteData(Temp&0x00ff);
+ 128   1              Lcd_WriteCmd(0x30);
+ 129   1              //EA=1;
  130   1      }
  131          /*****************************************
  132          清除Lcd全屏，如果清除模式Mode为0，则为全屏清除为颜色0（无任何显示）
@@ -150,656 +150,645 @@ line level    source
  134          ******************************************/
  135          void Lcd_Clear(unsigned char Mode)
  136          {
- 137   1        unsigned char x,y,ii;
- 138   1        unsigned char Temp;
- 139   1        if(Mode%2==0)
- 140   1          Temp=0x00;
- 141   1        else
- 142   1          Temp=0xff;
- 143   1        Lcd_WriteCmd(0x36);//扩充指令 绘图显示
- 144   1        for(ii=0;ii<9;ii+=8)   
- 145   1          for(y=0;y<0x20;y++)     
- 146   1            for(x=0;x<8;x++)
- 147   1            {   
- 148   2              //EA=0;
- 149   2              Lcd_WriteCmd(y+0x80);        //行地址
- 150   2              Lcd_WriteCmd(x+0x80+ii);     //列地址     
- 151   2              Lcd_WriteData(Temp); //写数据 D15－D8 
- 152   2              Lcd_WriteData(Temp); //写数据 D7－D0 
- 153   2              //EA=1;
- 154   2            }
- 155   1        Lcd_WriteCmd(0x30);
+ 137   1              unsigned char x,y,ii;
+ 138   1              unsigned char Temp;
+ 139   1              if(Mode%2==0)
+ 140   1                      Temp=0x00;
+ 141   1              else
+ 142   1                      Temp=0xff;
+ 143   1              Lcd_WriteCmd(0x36);//扩充指令 绘图显示
+ 144   1              for(ii=0;ii<9;ii+=8)   
+ 145   1                      for(y=0;y<0x20;y++)     
+ 146   1                              for(x=0;x<8;x++)
+ 147   1                              {       
+ 148   2                                      //EA=0;
+ 149   2                                      Lcd_WriteCmd(y+0x80);        //行地址
+ 150   2                                      Lcd_WriteCmd(x+0x80+ii);     //列地址     
+ 151   2                                      Lcd_WriteData(Temp); //写数据 D15－D8 
+ 152   2                                      Lcd_WriteData(Temp); //写数据 D7－D0 
+ 153   2                                      //EA=1;
+ 154   2                              }
+ 155   1              Lcd_WriteCmd(0x30);
  156   1      }
  157          /****************************************
  158          LCD初始化
  159          *****************************************/
  160          void Lcd_Reset()
  161          {  
- 162   1        PSB=1;
- 163   1        Lcd_WriteCmd(0x30);       //选择基本指令集
- 164   1        Lcd_WriteCmd(0x0c);       //开显示(无游标、不反白)
- 165   1        Lcd_WriteCmd(0x01);       //清除显示，并且设定地址指针为00H
- 166   1        Lcd_WriteCmd(0x06);       //指定在资料的读取及写入时，设定游标的移动方向及指定�
+ 162   1              PSB=1;
+ 163   1              Lcd_WriteCmd(0x30);       //选择基本指令集
+ 164   1              Lcd_WriteCmd(0x0c);       //开显示(无游标、不反白)
+ 165   1              Lcd_WriteCmd(0x01);       //清除显示，并且设定地址指针为00H
+ 166   1              Lcd_WriteCmd(0x06);       //指定在资料的读取及写入时，设定游标的移动方向及指定�
              -�示的移位
  167   1      }
  168          //////////////////////////////////////
  169          void InitADC()
  170          {
- 171   1        P1ASF=0X80;
- 172   1        ADC_RES=0;
- 173   1        ADC_CONTR=0xef;
- 174   1        EADC=1;
+ 171   1              P1ASF=0X80;
+ 172   1              ADC_RES=0;
+ 173   1              ADC_CONTR=0xef;
+ 174   1              EADC=1;
  175   1      }
-C51 COMPILER V9.52.0.0   12864                                                             12/07/2016 13:32:49 PAGE 4   
+C51 COMPILER V9.52.0.0   12864                                                             12/15/2016 20:07:01 PAGE 4   
 
  176          void adc_isr() interrupt 5 using 1
  177          {
- 178   1        ADC_CONTR=0xef;
- 179   1        if(over==0)
- 180   1        {
- 181   2          temp=delnop;
- 182   2          while(temp)
- 183   2          {
- 184   3          temp--;
- 185   3          }
- 186   2          dat[dati]=ADC_RES;
- 187   2          dati++;
- 188   2          if(dati>101)
- 189   2          {
- 190   3          dati=0;
- 191   3          over=1;
- 192   3          }
- 193   2        }
+ 178   1              ADC_CONTR=0xef;
+ 179   1              if(over==0)
+ 180   1              {
+ 181   2                      temp=delnop;
+ 182   2                      while(temp)
+ 183   2                      {
+ 184   3                              temp--;
+ 185   3                      }
+ 186   2                      dat[dati]=ADC_RES;
+ 187   2                      dati++;
+ 188   2                      if(dati>101)
+ 189   2                      {
+ 190   3                              dati=0;
+ 191   3                              over=1;
+ 192   3                      }
+ 193   2              }
  194   1      }
  195          //////////////////////////////////////
  196          void disp_0(unsigned char x,unsigned char y)
  197          {
- 198   1        Lcd_PutPixel(x+0,y+1,1);
- 199   1        Lcd_PutPixel(x+0,y+2,1);
- 200   1        Lcd_PutPixel(x+0,y+3,1);
- 201   1        Lcd_PutPixel(x+1,y+0,1);
- 202   1        Lcd_PutPixel(x+1,y+4,1);
- 203   1        Lcd_PutPixel(x+2,y+1,1);
- 204   1        Lcd_PutPixel(x+2,y+2,1);
- 205   1        Lcd_PutPixel(x+2,y+3,1);
+ 198   1              Lcd_PutPixel(x+0,y+1,1);
+ 199   1              Lcd_PutPixel(x+0,y+2,1);
+ 200   1              Lcd_PutPixel(x+0,y+3,1);
+ 201   1              Lcd_PutPixel(x+1,y+0,1);
+ 202   1              Lcd_PutPixel(x+1,y+4,1);
+ 203   1              Lcd_PutPixel(x+2,y+1,1);
+ 204   1              Lcd_PutPixel(x+2,y+2,1);
+ 205   1              Lcd_PutPixel(x+2,y+3,1);
  206   1      }
  207          void disp_1(unsigned char x,unsigned char y)
  208          {
- 209   1        Lcd_PutPixel(x+0,y+1,1);
- 210   1        Lcd_PutPixel(x+0,y+4,1);
- 211   1        Lcd_PutPixel(x+1,y+0,1);
- 212   1        Lcd_PutPixel(x+1,y+1,1);
- 213   1        Lcd_PutPixel(x+1,y+2,1);
- 214   1        Lcd_PutPixel(x+1,y+3,1);
- 215   1        Lcd_PutPixel(x+1,y+4,1);
- 216   1        Lcd_PutPixel(x+2,y+4,1);
+ 209   1              Lcd_PutPixel(x+0,y+1,1);
+ 210   1              Lcd_PutPixel(x+0,y+4,1);
+ 211   1              Lcd_PutPixel(x+1,y+0,1);
+ 212   1              Lcd_PutPixel(x+1,y+1,1);
+ 213   1              Lcd_PutPixel(x+1,y+2,1);
+ 214   1              Lcd_PutPixel(x+1,y+3,1);
+ 215   1              Lcd_PutPixel(x+1,y+4,1);
+ 216   1              Lcd_PutPixel(x+2,y+4,1);
  217   1      }
  218          void disp_2(unsigned char x,unsigned char y)
  219          {
- 220   1        Lcd_PutPixel(x+0,y+0,1);
- 221   1        Lcd_PutPixel(x+0,y+2,1);
- 222   1        Lcd_PutPixel(x+0,y+3,1);
- 223   1        Lcd_PutPixel(x+0,y+4,1);
- 224   1        Lcd_PutPixel(x+1,y+0,1);
- 225   1        Lcd_PutPixel(x+1,y+2,1);
- 226   1        Lcd_PutPixel(x+1,y+4,1);
- 227   1        Lcd_PutPixel(x+2,y+0,1);
- 228   1        Lcd_PutPixel(x+2,y+1,1);
- 229   1        Lcd_PutPixel(x+2,y+2,1);
- 230   1        Lcd_PutPixel(x+2,y+4,1);
+ 220   1              Lcd_PutPixel(x+0,y+0,1);
+ 221   1              Lcd_PutPixel(x+0,y+2,1);
+ 222   1              Lcd_PutPixel(x+0,y+3,1);
+ 223   1              Lcd_PutPixel(x+0,y+4,1);
+ 224   1              Lcd_PutPixel(x+1,y+0,1);
+ 225   1              Lcd_PutPixel(x+1,y+2,1);
+ 226   1              Lcd_PutPixel(x+1,y+4,1);
+ 227   1              Lcd_PutPixel(x+2,y+0,1);
+ 228   1              Lcd_PutPixel(x+2,y+1,1);
+ 229   1              Lcd_PutPixel(x+2,y+2,1);
+ 230   1              Lcd_PutPixel(x+2,y+4,1);
  231   1      }
  232          void disp_4(unsigned char x,unsigned char y)
  233          {
- 234   1        Lcd_PutPixel(x+0,y+0,1);
- 235   1        Lcd_PutPixel(x+0,y+1,1);
- 236   1        Lcd_PutPixel(x+0,y+2,1);
- 237   1        Lcd_PutPixel(x+1,y+2,1);
-C51 COMPILER V9.52.0.0   12864                                                             12/07/2016 13:32:49 PAGE 5   
+ 234   1              Lcd_PutPixel(x+0,y+0,1);
+ 235   1              Lcd_PutPixel(x+0,y+1,1);
+ 236   1              Lcd_PutPixel(x+0,y+2,1);
+ 237   1              Lcd_PutPixel(x+1,y+2,1);
+C51 COMPILER V9.52.0.0   12864                                                             12/15/2016 20:07:01 PAGE 5   
 
- 238   1        Lcd_PutPixel(x+2,y+0,1);
- 239   1        Lcd_PutPixel(x+2,y+1,1);
- 240   1        Lcd_PutPixel(x+2,y+2,1);
- 241   1        Lcd_PutPixel(x+2,y+3,1);
- 242   1        Lcd_PutPixel(x+2,y+4,1);
+ 238   1              Lcd_PutPixel(x+2,y+0,1);
+ 239   1              Lcd_PutPixel(x+2,y+1,1);
+ 240   1              Lcd_PutPixel(x+2,y+2,1);
+ 241   1              Lcd_PutPixel(x+2,y+3,1);
+ 242   1              Lcd_PutPixel(x+2,y+4,1);
  243   1      }
  244          void disp_5(unsigned char x,unsigned char y)
  245          {
- 246   1        Lcd_PutPixel(x+0,y+0,1);
- 247   1        Lcd_PutPixel(x+0,y+1,1);
- 248   1        Lcd_PutPixel(x+0,y+2,1);
- 249   1        Lcd_PutPixel(x+0,y+4,1);
- 250   1        Lcd_PutPixel(x+1,y+0,1);
- 251   1        Lcd_PutPixel(x+1,y+2,1);
- 252   1        Lcd_PutPixel(x+1,y+4,1);
- 253   1        Lcd_PutPixel(x+2,y+0,1);
- 254   1        Lcd_PutPixel(x+2,y+2,1);
- 255   1        Lcd_PutPixel(x+2,y+3,1);
- 256   1        Lcd_PutPixel(x+2,y+4,1);
+ 246   1              Lcd_PutPixel(x+0,y+0,1);
+ 247   1              Lcd_PutPixel(x+0,y+1,1);
+ 248   1              Lcd_PutPixel(x+0,y+2,1);
+ 249   1              Lcd_PutPixel(x+0,y+4,1);
+ 250   1              Lcd_PutPixel(x+1,y+0,1);
+ 251   1              Lcd_PutPixel(x+1,y+2,1);
+ 252   1              Lcd_PutPixel(x+1,y+4,1);
+ 253   1              Lcd_PutPixel(x+2,y+0,1);
+ 254   1              Lcd_PutPixel(x+2,y+2,1);
+ 255   1              Lcd_PutPixel(x+2,y+3,1);
+ 256   1              Lcd_PutPixel(x+2,y+4,1);
  257   1      }
  258          void disp_dian(unsigned char x,unsigned char y)
  259          {
- 260   1        Lcd_PutPixel(x+0,y+4,1);
+ 260   1              Lcd_PutPixel(x+0,y+4,1);
  261   1      }
  262          void disp_k(unsigned char x,unsigned char y)
  263          {
- 264   1        Lcd_PutPixel(x+0,y+0,1);
- 265   1        Lcd_PutPixel(x+0,y+1,1);
- 266   1        Lcd_PutPixel(x+0,y+2,1);
- 267   1        Lcd_PutPixel(x+0,y+3,1);
- 268   1        Lcd_PutPixel(x+0,y+4,1);
- 269   1        Lcd_PutPixel(x+1,y+2,1);
- 270   1        Lcd_PutPixel(x+2,y+1,1);
- 271   1        Lcd_PutPixel(x+2,y+3,1);
- 272   1        Lcd_PutPixel(x+3,y+0,1);
- 273   1        Lcd_PutPixel(x+3,y+4,1);
+ 264   1              Lcd_PutPixel(x+0,y+0,1);
+ 265   1              Lcd_PutPixel(x+0,y+1,1);
+ 266   1              Lcd_PutPixel(x+0,y+2,1);
+ 267   1              Lcd_PutPixel(x+0,y+3,1);
+ 268   1              Lcd_PutPixel(x+0,y+4,1);
+ 269   1              Lcd_PutPixel(x+1,y+2,1);
+ 270   1              Lcd_PutPixel(x+2,y+1,1);
+ 271   1              Lcd_PutPixel(x+2,y+3,1);
+ 272   1              Lcd_PutPixel(x+3,y+0,1);
+ 273   1              Lcd_PutPixel(x+3,y+4,1);
  274   1      }
  275          void disp_hz(unsigned char x,unsigned char y)
  276          {
- 277   1        Lcd_PutPixel(x+0,y+0,1);
- 278   1        Lcd_PutPixel(x+0,y+1,1);
- 279   1        Lcd_PutPixel(x+0,y+2,1);
- 280   1        Lcd_PutPixel(x+0,y+3,1);
- 281   1        Lcd_PutPixel(x+0,y+4,1);
- 282   1        Lcd_PutPixel(x+1,y+2,1);
- 283   1        Lcd_PutPixel(x+2,y+2,1);
- 284   1        Lcd_PutPixel(x+3,y+0,1);
- 285   1        Lcd_PutPixel(x+3,y+1,1);
- 286   1        Lcd_PutPixel(x+3,y+2,1);
- 287   1        Lcd_PutPixel(x+3,y+3,1);
- 288   1        Lcd_PutPixel(x+3,y+4,1);
- 289   1        Lcd_PutPixel(x+5,y+1,1);
- 290   1        Lcd_PutPixel(x+5,y+3,1);
- 291   1        Lcd_PutPixel(x+5,y+4,1);
- 292   1        Lcd_PutPixel(x+6,y+1,1);
- 293   1        Lcd_PutPixel(x+6,y+2,1);
- 294   1        Lcd_PutPixel(x+6,y+4,1);
+ 277   1              Lcd_PutPixel(x+0,y+0,1);
+ 278   1              Lcd_PutPixel(x+0,y+1,1);
+ 279   1              Lcd_PutPixel(x+0,y+2,1);
+ 280   1              Lcd_PutPixel(x+0,y+3,1);
+ 281   1              Lcd_PutPixel(x+0,y+4,1);
+ 282   1              Lcd_PutPixel(x+1,y+2,1);
+ 283   1              Lcd_PutPixel(x+2,y+2,1);
+ 284   1              Lcd_PutPixel(x+3,y+0,1);
+ 285   1              Lcd_PutPixel(x+3,y+1,1);
+ 286   1              Lcd_PutPixel(x+3,y+2,1);
+ 287   1              Lcd_PutPixel(x+3,y+3,1);
+ 288   1              Lcd_PutPixel(x+3,y+4,1);
+ 289   1              Lcd_PutPixel(x+5,y+1,1);
+ 290   1              Lcd_PutPixel(x+5,y+3,1);
+ 291   1              Lcd_PutPixel(x+5,y+4,1);
+ 292   1              Lcd_PutPixel(x+6,y+1,1);
+ 293   1              Lcd_PutPixel(x+6,y+2,1);
+ 294   1              Lcd_PutPixel(x+6,y+4,1);
  295   1      }
  296          void disp_vd(unsigned char x,unsigned char y)
  297          {
- 298   1        Lcd_PutPixel(x+0,y+0,1);
- 299   1        Lcd_PutPixel(x+0,y+1,1);
-C51 COMPILER V9.52.0.0   12864                                                             12/07/2016 13:32:49 PAGE 6   
+ 298   1              Lcd_PutPixel(x+0,y+0,1);
+ 299   1              Lcd_PutPixel(x+0,y+1,1);
+C51 COMPILER V9.52.0.0   12864                                                             12/15/2016 20:07:01 PAGE 6   
 
- 300   1        Lcd_PutPixel(x+1,y+2,1);
- 301   1        Lcd_PutPixel(x+1,y+3,1);
- 302   1        Lcd_PutPixel(x+2,y+4,1);
- 303   1        Lcd_PutPixel(x+3,y+2,1);
- 304   1        Lcd_PutPixel(x+3,y+3,1);
- 305   1        Lcd_PutPixel(x+4,y+0,1);
- 306   1        Lcd_PutPixel(x+4,y+1,1);
- 307   1        Lcd_PutPixel(x+5,y+3,1);
- 308   1        Lcd_PutPixel(x+5,y+4,1);
- 309   1        Lcd_PutPixel(x+6,y+2,1);
- 310   1        Lcd_PutPixel(x+7,y+0,1);
- 311   1        Lcd_PutPixel(x+7,y+1,1);
- 312   1        Lcd_PutPixel(x+8,y+2,1);
- 313   1        Lcd_PutPixel(x+8,y+3,1);
- 314   1        Lcd_PutPixel(x+8,y+4,1);
- 315   1        Lcd_PutPixel(x+9,y+2,1);
- 316   1        Lcd_PutPixel(x+9,y+4,1);
- 317   1        Lcd_PutPixel(x+10,y+0,1);
- 318   1        Lcd_PutPixel(x+10,y+1,1);
- 319   1        Lcd_PutPixel(x+10,y+2,1);
- 320   1        Lcd_PutPixel(x+10,y+3,1);
- 321   1        Lcd_PutPixel(x+10,y+4,1);
+ 300   1              Lcd_PutPixel(x+1,y+2,1);
+ 301   1              Lcd_PutPixel(x+1,y+3,1);
+ 302   1              Lcd_PutPixel(x+2,y+4,1);
+ 303   1              Lcd_PutPixel(x+3,y+2,1);
+ 304   1              Lcd_PutPixel(x+3,y+3,1);
+ 305   1              Lcd_PutPixel(x+4,y+0,1);
+ 306   1              Lcd_PutPixel(x+4,y+1,1);
+ 307   1              Lcd_PutPixel(x+5,y+3,1);
+ 308   1              Lcd_PutPixel(x+5,y+4,1);
+ 309   1              Lcd_PutPixel(x+6,y+2,1);
+ 310   1              Lcd_PutPixel(x+7,y+0,1);
+ 311   1              Lcd_PutPixel(x+7,y+1,1);
+ 312   1              Lcd_PutPixel(x+8,y+2,1);
+ 313   1              Lcd_PutPixel(x+8,y+3,1);
+ 314   1              Lcd_PutPixel(x+8,y+4,1);
+ 315   1              Lcd_PutPixel(x+9,y+2,1);
+ 316   1              Lcd_PutPixel(x+9,y+4,1);
+ 317   1              Lcd_PutPixel(x+10,y+0,1);
+ 318   1              Lcd_PutPixel(x+10,y+1,1);
+ 319   1              Lcd_PutPixel(x+10,y+2,1);
+ 320   1              Lcd_PutPixel(x+10,y+3,1);
+ 321   1              Lcd_PutPixel(x+10,y+4,1);
  322   1      }
  323          void disp_ledon(unsigned char x,unsigned char y)
  324          {
- 325   1        Lcd_PutPixel(x+0,y+0,1);
- 326   1        Lcd_PutPixel(x+0,y+1,1);
- 327   1        Lcd_PutPixel(x+0,y+2,1);
- 328   1        Lcd_PutPixel(x+0,y+3,1);
- 329   1        Lcd_PutPixel(x+0,y+4,1);
- 330   1        Lcd_PutPixel(x+1,y+1,1);
- 331   1        Lcd_PutPixel(x+1,y+2,1);
- 332   1        Lcd_PutPixel(x+1,y+3,1);
- 333   1        Lcd_PutPixel(x+2,y+0,1);
- 334   1        Lcd_PutPixel(x+2,y+4,1);
- 335   1        Lcd_PutPixel(x+3,y+2,1);
+ 325   1              Lcd_PutPixel(x+0,y+0,1);
+ 326   1              Lcd_PutPixel(x+0,y+1,1);
+ 327   1              Lcd_PutPixel(x+0,y+2,1);
+ 328   1              Lcd_PutPixel(x+0,y+3,1);
+ 329   1              Lcd_PutPixel(x+0,y+4,1);
+ 330   1              Lcd_PutPixel(x+1,y+1,1);
+ 331   1              Lcd_PutPixel(x+1,y+2,1);
+ 332   1              Lcd_PutPixel(x+1,y+3,1);
+ 333   1              Lcd_PutPixel(x+2,y+0,1);
+ 334   1              Lcd_PutPixel(x+2,y+4,1);
+ 335   1              Lcd_PutPixel(x+3,y+2,1);
  336   1      }
  337          void disp_ledoff(unsigned char x,unsigned char y)
  338          {
- 339   1        Lcd_PutPixel(x+0,y+0,1);
- 340   1        Lcd_PutPixel(x+0,y+1,1);
- 341   1        Lcd_PutPixel(x+0,y+2,1);
- 342   1        Lcd_PutPixel(x+0,y+3,1);
- 343   1        Lcd_PutPixel(x+0,y+4,1);
- 344   1        Lcd_PutPixel(x+1,y+1,1);
- 345   1        Lcd_PutPixel(x+1,y+2,1);
- 346   1        Lcd_PutPixel(x+1,y+3,1);
+ 339   1              Lcd_PutPixel(x+0,y+0,1);
+ 340   1              Lcd_PutPixel(x+0,y+1,1);
+ 341   1              Lcd_PutPixel(x+0,y+2,1);
+ 342   1              Lcd_PutPixel(x+0,y+3,1);
+ 343   1              Lcd_PutPixel(x+0,y+4,1);
+ 344   1              Lcd_PutPixel(x+1,y+1,1);
+ 345   1              Lcd_PutPixel(x+1,y+2,1);
+ 346   1              Lcd_PutPixel(x+1,y+3,1);
  347   1      }
  348          void clr(unsigned char starx,unsigned char stary,unsigned char endx,unsigned char endy)
  349          {
- 350   1        char x=0;
- 351   1        char y=0;
- 352   1        for(x=starx;x<endx;x++)
- 353   1        {
- 354   2          for(y=stary;y<endy;y++)
- 355   2          {
- 356   3            Lcd_PutPixel(x,y,0);
- 357   3          }
- 358   2        }
+ 350   1              char x=0;
+ 351   1              char y=0;
+ 352   1              for(x=starx;x<endx;x++)
+ 353   1              {
+ 354   2                      for(y=stary;y<endy;y++)
+ 355   2                      {
+ 356   3                              Lcd_PutPixel(x,y,0);
+ 357   3                      }
+ 358   2              }
  359   1      }
  360          void disp_bj(void)
  361          {
-C51 COMPILER V9.52.0.0   12864                                                             12/07/2016 13:32:49 PAGE 7   
+C51 COMPILER V9.52.0.0   12864                                                             12/15/2016 20:07:01 PAGE 7   
 
- 362   1        unsigned char x=0;
- 363   1        unsigned char y=0;
- 364   1        for(y=0;y<63;y=y+2)
- 365   1        {
- 366   2          Lcd_PutPixel(51,y,1);
- 367   2        }
- 368   1        for(y=0;y<63;y=y+2)
- 369   1        {
- 370   2          Lcd_PutPixel(77,y,1);
- 371   2        }
- 372   1        for(y=0;y<63;y=y+2)
- 373   1        {
- 374   2          Lcd_PutPixel(101,y,1);
- 375   2        }
- 376   1        for(x=27;x<127;x=x+2)
- 377   1        {
- 378   2          Lcd_PutPixel(x,0,1);
- 379   2        }
- 380   1          for(x=27;x<127;x=x+2)
- 381   1        {
- 382   2          Lcd_PutPixel(x,15,1);
- 383   2        }
- 384   1        for(x=27;x<127;x=x+2)
- 385   1        {
- 386   2          Lcd_PutPixel(x,31,1);
- 387   2        }
- 388   1        for(x=27;x<127;x=x+2)
- 389   1        {
- 390   2          Lcd_PutPixel(x,47,1);
- 391   2        }
- 392   1        for(x=27;x<127;x=x+2)
- 393   1        {
- 394   2          Lcd_PutPixel(x,63,1);
- 395   2        }
- 396   1        for(y=0;y<64;y++)
- 397   1        {
- 398   2          Lcd_PutPixel(26,y,1);
- 399   2          Lcd_PutPixel(127,y,1);
- 400   2        }
+ 362   1              unsigned char x=0;
+ 363   1              unsigned char y=0;
+ 364   1              for(y=0;y<63;y=y+2)
+ 365   1              {
+ 366   2                      Lcd_PutPixel(51,y,1);
+ 367   2              }
+ 368   1              for(y=0;y<63;y=y+2)
+ 369   1              {
+ 370   2                      Lcd_PutPixel(77,y,1);
+ 371   2              }
+ 372   1              for(y=0;y<63;y=y+2)
+ 373   1              {
+ 374   2                      Lcd_PutPixel(101,y,1);
+ 375   2              }
+ 376   1              for(x=27;x<127;x=x+2)
+ 377   1              {
+ 378   2                      Lcd_PutPixel(x,0,1);
+ 379   2              }
+ 380   1                      for(x=27;x<127;x=x+2)
+ 381   1              {
+ 382   2                      Lcd_PutPixel(x,15,1);
+ 383   2              }
+ 384   1              for(x=27;x<127;x=x+2)
+ 385   1              {
+ 386   2                      Lcd_PutPixel(x,31,1);
+ 387   2              }
+ 388   1              for(x=27;x<127;x=x+2)
+ 389   1              {
+ 390   2                      Lcd_PutPixel(x,47,1);
+ 391   2              }
+ 392   1              for(x=27;x<127;x=x+2)
+ 393   1              {
+ 394   2                      Lcd_PutPixel(x,63,1);
+ 395   2              }
+ 396   1              for(y=0;y<64;y++)
+ 397   1              {
+ 398   2                      Lcd_PutPixel(26,y,1);
+ 399   2                      Lcd_PutPixel(127,y,1);
+ 400   2              }
  401   1      }
  402          void line(unsigned char x0,unsigned char y0,unsigned char x1,unsigned char y1,unsigned char color)
  403          {
- 404   1        int i,dx,dy,e,x,y;
- 405   1        Lcd_PutPixel(x0,y0,color);
- 406   1        Lcd_PutPixel(x1,y1,color);
- 407   1        dx=x1-x0;
- 408   1        dy=y1-y0;
- 409   1        x=x0;
- 410   1        y=y0;
- 411   1        if(dx>0&&dy>0)
- 412   1        {
- 413   2          if(dx>dy)
- 414   2          {
- 415   3            e=-dx;
- 416   3            for(i=0;i<dx;i++)
- 417   3            {
- 418   4              Lcd_PutPixel(x,y,color);
- 419   4              x++;
- 420   4              e=e+2*dy;
- 421   4              if(e>=0)
- 422   4              {
- 423   5                y++;
-C51 COMPILER V9.52.0.0   12864                                                             12/07/2016 13:32:49 PAGE 8   
+ 404   1              int i,dx,dy,e,x,y;
+ 405   1              Lcd_PutPixel(x0,y0,color);
+ 406   1              Lcd_PutPixel(x1,y1,color);
+ 407   1              dx=x1-x0;
+ 408   1              dy=y1-y0;
+ 409   1              x=x0;
+ 410   1              y=y0;
+ 411   1              if(dx>0&&dy>0)
+ 412   1              {
+ 413   2                      if(dx>dy)
+ 414   2                      {
+ 415   3                              e=-dx;
+ 416   3                              for(i=0;i<dx;i++)
+ 417   3                              {
+ 418   4                                      Lcd_PutPixel(x,y,color);
+ 419   4                                      x++;
+ 420   4                                      e=e+2*dy;
+ 421   4                                      if(e>=0)
+ 422   4                                      {
+ 423   5                                              y++;
+C51 COMPILER V9.52.0.0   12864                                                             12/15/2016 20:07:01 PAGE 8   
 
- 424   5                e=e-2*dx;
- 425   5              }
- 426   4            }
- 427   3          }
- 428   2          else
- 429   2          {
- 430   3            e=-dy;
- 431   3            x=x0;
- 432   3            y=y0;
- 433   3            for(i=0;i<dy;i++)
- 434   3            {
- 435   4              Lcd_PutPixel(x,y,color);
- 436   4              y++;
- 437   4              e=e+2*dx;
- 438   4              if(e>=0)
- 439   4              {
- 440   5                x++;
- 441   5                e=e-2*dy;
- 442   5              }
- 443   4            }
- 444   3          }
- 445   2        }
- 446   1        if(dx<0&&dy<0)
- 447   1        {
- 448   2          dx=x0-x1;
- 449   2          dy=y0-y1;
- 450   2          if(dx>dy)
- 451   2          {
- 452   3            e=-dx;
- 453   3            for(i=0;i<dx;i++)
- 454   3            {
- 455   4              Lcd_PutPixel(x,y,color);
- 456   4              x--;
- 457   4              e=e+2*dy;
- 458   4              if(e>=0)
- 459   4              {
- 460   5                y--;
- 461   5                e=e-2*dx;
- 462   5              }
- 463   4            }
- 464   3          }
- 465   2          else
- 466   2          {
- 467   3            e=-dy;
- 468   3            for(i=0;i<dy;i++)
- 469   3            {
- 470   4              Lcd_PutPixel(x,y,color);
- 471   4              y--;
- 472   4              e=e+2*dx;
- 473   4              if(e>=0)
- 474   4              {
- 475   5                x--;
- 476   5                e=e-2*dy;
- 477   5              }
- 478   4            }
- 479   3          }
- 480   2        }
- 481   1        if(dx>0&&dy<0)
- 482   1        {
- 483   2          dy=y0-y1;
- 484   2          if(dx>dy)
- 485   2          {
-C51 COMPILER V9.52.0.0   12864                                                             12/07/2016 13:32:49 PAGE 9   
+ 424   5                                              e=e-2*dx;
+ 425   5                                      }
+ 426   4                              }
+ 427   3                      }
+ 428   2                      else
+ 429   2                      {
+ 430   3                              e=-dy;
+ 431   3                              x=x0;
+ 432   3                              y=y0;
+ 433   3                              for(i=0;i<dy;i++)
+ 434   3                              {
+ 435   4                                      Lcd_PutPixel(x,y,color);
+ 436   4                                      y++;
+ 437   4                                      e=e+2*dx;
+ 438   4                                      if(e>=0)
+ 439   4                                      {
+ 440   5                                              x++;
+ 441   5                                              e=e-2*dy;
+ 442   5                                      }
+ 443   4                              }
+ 444   3                      }
+ 445   2              }
+ 446   1              if(dx<0&&dy<0)
+ 447   1              {
+ 448   2                      dx=x0-x1;
+ 449   2                      dy=y0-y1;
+ 450   2                      if(dx>dy)
+ 451   2                      {
+ 452   3                              e=-dx;
+ 453   3                              for(i=0;i<dx;i++)
+ 454   3                              {
+ 455   4                                      Lcd_PutPixel(x,y,color);
+ 456   4                                      x--;
+ 457   4                                      e=e+2*dy;
+ 458   4                                      if(e>=0)
+ 459   4                                      {
+ 460   5                                              y--;
+ 461   5                                              e=e-2*dx;
+ 462   5                                      }
+ 463   4                              }
+ 464   3                      }
+ 465   2                      else
+ 466   2                      {
+ 467   3                              e=-dy;
+ 468   3                              for(i=0;i<dy;i++)
+ 469   3                              {
+ 470   4                                      Lcd_PutPixel(x,y,color);
+ 471   4                                      y--;
+ 472   4                                      e=e+2*dx;
+ 473   4                                      if(e>=0)
+ 474   4                                      {
+ 475   5                                              x--;
+ 476   5                                              e=e-2*dy;
+ 477   5                                      }
+ 478   4                              }
+ 479   3                      }
+ 480   2              }
+ 481   1              if(dx>0&&dy<0)
+ 482   1              {
+ 483   2                      dy=y0-y1;
+ 484   2                      if(dx>dy)
+ 485   2                      {
+C51 COMPILER V9.52.0.0   12864                                                             12/15/2016 20:07:01 PAGE 9   
 
- 486   3            e=-dx;
- 487   3            for(i=0;i<dx;i++)
- 488   3            {
- 489   4              Lcd_PutPixel(x,y,color);
- 490   4              x++;
- 491   4              e=e+2*dy;
- 492   4              if(e>=0)
- 493   4              {
- 494   5                y--;
- 495   5                e=e-2*dx;
- 496   5              }
- 497   4            }
- 498   3          }
- 499   2          else
- 500   2          {
- 501   3            e=-dy;
- 502   3            for(i=0;i<dy;i++)
- 503   3            {
- 504   4              Lcd_PutPixel(x,y,color);
- 505   4              y--;
- 506   4              e=e+2*dx;
- 507   4              if(e>=0)
- 508   4              {
- 509   5                x++;
- 510   5                e=e-2*dy;
- 511   5              }
- 512   4            }
- 513   3          }
- 514   2        }
- 515   1        if(dx<0&&dy>0)
- 516   1        {
- 517   2          dx=x0-x1;
- 518   2          if(dx>dy)
- 519   2          {
- 520   3            e=-dx;
- 521   3            for(i=0;i<dx;i++)
- 522   3            {
- 523   4              Lcd_PutPixel(x,y,color);
- 524   4              x--;
- 525   4              e=e+2*dy;
- 526   4            if(e>=0)
- 527   4              {
- 528   5                y++;
- 529   5                e=e-2*dx;
- 530   5              }
- 531   4            }
- 532   3          }
- 533   2          else
- 534   2          {
- 535   3            e=-dy;
- 536   3            for(i=0;i<dy;i++)
- 537   3            {
- 538   4              Lcd_PutPixel(x,y,color);
- 539   4              y++;
- 540   4              e=e+2*dx;
- 541   4            if(e>=0)
- 542   4              {
- 543   5                x--;
- 544   5                e=e-2*dy;
- 545   5              }
- 546   4            }
- 547   3          }
-C51 COMPILER V9.52.0.0   12864                                                             12/07/2016 13:32:49 PAGE 10  
+ 486   3                              e=-dx;
+ 487   3                              for(i=0;i<dx;i++)
+ 488   3                              {
+ 489   4                                      Lcd_PutPixel(x,y,color);
+ 490   4                                      x++;
+ 491   4                                      e=e+2*dy;
+ 492   4                                      if(e>=0)
+ 493   4                                      {
+ 494   5                                              y--;
+ 495   5                                              e=e-2*dx;
+ 496   5                                      }
+ 497   4                              }
+ 498   3                      }
+ 499   2                      else
+ 500   2                      {
+ 501   3                              e=-dy;
+ 502   3                              for(i=0;i<dy;i++)
+ 503   3                              {
+ 504   4                                      Lcd_PutPixel(x,y,color);
+ 505   4                                      y--;
+ 506   4                                      e=e+2*dx;
+ 507   4                                      if(e>=0)
+ 508   4                                      {
+ 509   5                                              x++;
+ 510   5                                              e=e-2*dy;
+ 511   5                                      }
+ 512   4                              }
+ 513   3                      }
+ 514   2              }
+ 515   1              if(dx<0&&dy>0)
+ 516   1              {
+ 517   2                      dx=x0-x1;
+ 518   2                      if(dx>dy)
+ 519   2                      {
+ 520   3                              e=-dx;
+ 521   3                              for(i=0;i<dx;i++)
+ 522   3                              {
+ 523   4                                      Lcd_PutPixel(x,y,color);
+ 524   4                                      x--;
+ 525   4                                      e=e+2*dy;
+ 526   4                              if(e>=0)
+ 527   4                                      {
+ 528   5                                              y++;
+ 529   5                                              e=e-2*dx;
+ 530   5                                      }
+ 531   4                              }
+ 532   3                      }
+ 533   2                      else
+ 534   2                      {
+ 535   3                              e=-dy;
+ 536   3                              for(i=0;i<dy;i++)
+ 537   3                              {
+ 538   4                                      Lcd_PutPixel(x,y,color);
+ 539   4                                      y++;
+ 540   4                                      e=e+2*dx;
+ 541   4                              if(e>=0)
+ 542   4                                      {
+ 543   5                                              x--;
+ 544   5                                              e=e-2*dy;
+ 545   5                                      }
+ 546   4                              }
+ 547   3                      }
+C51 COMPILER V9.52.0.0   12864                                                             12/15/2016 20:07:01 PAGE 10  
 
- 548   2        }
- 549   1        if(dx!=0&&dy==0)
- 550   1        {
- 551   2          if(dx>0)
- 552   2          {
- 553   3            for(i=0;i<dx;i++)
- 554   3            {
- 555   4              Lcd_PutPixel(x,y,color);
- 556   4              x++;
- 557   4            }
- 558   3          }
- 559   2          else
- 560   2          {
- 561   3            dx=x0-x1;
- 562   3            for(i=0;i<dx;i++)
- 563   3            {
- 564   4              Lcd_PutPixel(x,y,color);
- 565   4              x--;
- 566   4            }
- 567   3          }
- 568   2        }
- 569   1        if(dx==0&&dy!=0)
- 570   1        {
- 571   2          if(dy>0)
- 572   2          {
- 573   3            for(i=0;i<dy;i++)
- 574   3            {
- 575   4              Lcd_PutPixel(x,y,color);
- 576   4              y++;
- 577   4            }
- 578   3          }
- 579   2          else
- 580   2          {
- 581   3            dy=y0-y1;
- 582   3            for(i=0;i<dy;i++)
- 583   3            {
- 584   4              Lcd_PutPixel(x,y,color);
- 585   4              y--;
- 586   4            }
- 587   3          }
- 588   2        }
+ 548   2              }
+ 549   1              if(dx!=0&&dy==0)
+ 550   1              {
+ 551   2                      if(dx>0)
+ 552   2                      {
+ 553   3                              for(i=0;i<dx;i++)
+ 554   3                              {
+ 555   4                                      Lcd_PutPixel(x,y,color);
+ 556   4                                      x++;
+ 557   4                              }
+ 558   3                      }
+ 559   2                      else
+ 560   2                      {
+ 561   3                              dx=x0-x1;
+ 562   3                              for(i=0;i<dx;i++)
+ 563   3                              {
+ 564   4                                      Lcd_PutPixel(x,y,color);
+ 565   4                                      x--;
+ 566   4                              }
+ 567   3                      }
+ 568   2              }
+ 569   1              if(dx==0&&dy!=0)
+ 570   1              {
+ 571   2                      if(dy>0)
+ 572   2                      {
+ 573   3                              for(i=0;i<dy;i++)
+ 574   3                              {
+ 575   4                                      Lcd_PutPixel(x,y,color);
+ 576   4                                      y++;
+ 577   4                              }
+ 578   3                      }
+ 579   2                      else
+ 580   2                      {
+ 581   3                              dy=y0-y1;
+ 582   3                              for(i=0;i<dy;i++)
+ 583   3                              {
+ 584   4                                      Lcd_PutPixel(x,y,color);
+ 585   4                                      y--;
+ 586   4                              }
+ 587   3                      }
+ 588   2              }
  589   1      }
  590          void disp_ware()
  591          {
- 592   1        unsigned char x;
- 593   1        for(x=0;x<100;x++)
- 594   1        {
- 595   2          line(x+27,(dat0[x]/vd)-cha,x+1+27,(dat0[x+1]/vd)-cha,0);
- 596   2          line(x+27,(dat[x]/vd)-cha,x+1+27,(dat[x+1]/vd)-cha,1);
- 597   2          dat0[x]=dat[x];
- 598   2        }
- 599   1        dat0[101]=dat[101];
- 600   1        disp_bj();
+ 592   1              unsigned char x;
+ 593   1              for(x=0;x<100;x++)
+ 594   1              {
+ 595   2                      line(x+27,(dat0[x]/vd)-cha,x+1+27,(dat0[x+1]/vd)-cha,0);
+ 596   2                      line(x+27,(dat[x]/vd)-cha,x+1+27,(dat[x+1]/vd)-cha,1);
+ 597   2                      dat0[x]=dat[x];
+ 598   2              }
+ 599   1              dat0[101]=dat[101];
+ 600   1              disp_bj();
  601   1      }
  602          void disp_ware50()
  603          {
- 604   1        unsigned char x;
- 605   1        for(x=0;x<50;x++)
- 606   1        {
- 607   2          line(x*2+27,(dat0[x]/vd)-cha,(x+1)*2+27,(dat0[x+1]/vd)-cha,0);
- 608   2          line(x*2+27,(dat[x]/vd)-cha,(x+1)*2+27,(dat[x+1]/vd)-cha,1);
- 609   2          dat0[x]=dat[x];
-C51 COMPILER V9.52.0.0   12864                                                             12/07/2016 13:32:49 PAGE 11  
+ 604   1              unsigned char x;
+ 605   1              for(x=0;x<50;x++)
+ 606   1              {
+ 607   2                      line(x*2+27,(dat0[x]/vd)-cha,(x+1)*2+27,(dat0[x+1]/vd)-cha,0);
+ 608   2                      line(x*2+27,(dat[x]/vd)-cha,(x+1)*2+27,(dat[x+1]/vd)-cha,1);
+ 609   2                      dat0[x]=dat[x];
+C51 COMPILER V9.52.0.0   12864                                                             12/15/2016 20:07:01 PAGE 11  
 
- 610   2        }
- 611   1        disp_bj();
+ 610   2              }
+ 611   1              disp_bj();
  612   1      }
  613          //////////////////////////////////////
  614          void main()
  615          {
- 616   1        Lcd_Reset();
- 617   1        Lcd_Clear(0);
- 618   1        InitADC();
+ 616   1              Lcd_Reset();
+ 617   1              Lcd_Clear(0);
+ 618   1              InitADC();
  619   1      
- 620   1        disp_4(0,10);
- 621   1        disp_k(4,10);
- 622   1        disp_hz(9,10);
+ 620   1              disp_4(0,10);
+ 621   1              disp_k(4,10);
+ 622   1              disp_hz(9,10);
  623   1      
- 624   1        disp_1(0,30);
- 625   1        disp_vd(4,30);
+ 624   1              disp_1(0,30);
+ 625   1              disp_vd(4,30);
  626   1      
- 627   1        disp_ledon(0,50);
+ 627   1              disp_ledon(0,50);
  628   1      
- 629   1        EA=1;
- 630   1        while(1)
- 631   1        {
- 632   2          if(over)
- 633   2          {
- 634   3            if(mode==0)
- 635   3            {
- 636   4              disp_ware50();
- 637   4            }
- 638   3            else
- 639   3            {
- 640   4              disp_ware();
- 641   4            }
- 642   3            if(ledkey==0)
- 643   3            {
- 644   4              led=~led;
- 645   4              if(led)
- 646   4              {
- 647   5                clr(0,50,5,55);
- 648   5                disp_ledon(0,50);
- 649   5              }
- 650   4              else
- 651   4              {
- 652   5                clr(0,50,5,55);
- 653   5                disp_ledoff(0,50);
- 654   5              }
- 655   4            }
- 656   3            if(fkey==0)
- 657   3            {
- 658   4              if(mode<4)
- 659   4              {
- 660   5                mode++;
- 661   5              }
- 662   4              else
- 663   4              {
- 664   5                mode=0;
- 665   5              }
- 666   4              switch(mode)
- 667   4              {
- 668   5                case 0://4khz
- 669   5                  delnop=1;
- 670   5                  Lcd_Clear(0);
- 671   5                  disp_bj();
-C51 COMPILER V9.52.0.0   12864                                                             12/07/2016 13:32:49 PAGE 12  
+ 629   1              EA=1;
+ 630   1              while(1)
+ 631   1              {
+ 632   2                      if(over)
+ 633   2                      {
+ 634   3                              if(mode==0)
+ 635   3                              {
+ 636   4                                      disp_ware50();
+ 637   4                              }
+ 638   3                              else
+ 639   3                              {
+ 640   4                                      disp_ware();
+ 641   4                              }
+ 642   3                              if(ledkey==0)
+ 643   3                              {
+ 644   4                                      led=~led;
+ 645   4                                      if(led)
+ 646   4                                      {
+ 647   5                                              clr(0,50,5,55);
+ 648   5                                              disp_ledon(0,50);
+ 649   5                                      }
+ 650   4                                      else
+ 651   4                                      {
+ 652   5                                              clr(0,50,5,55);
+ 653   5                                              disp_ledoff(0,50);
+ 654   5                                      }
+ 655   4                              }
+ 656   3                              if(fkey==0)
+ 657   3                              {
+ 658   4                                      if(mode<4)
+ 659   4                                      {
+ 660   5                                              mode++;
+ 661   5                                      }
+ 662   4                                      else
+ 663   4                                      {
+ 664   5                                              mode=0;
+ 665   5                                      }
+ 666   4                                      switch(mode)
+ 667   4                                      {
+ 668   5                                              case 0://4khz
+ 669   5                                                      delnop=1;
+ 670   5                                                      Lcd_Clear(0);
+ 671   5                                                      disp_bj();
+C51 COMPILER V9.52.0.0   12864                                                             12/15/2016 20:07:01 PAGE 12  
 
- 672   5                  clr(0,10,20,15);
- 673   5                  disp_4(0,10);
- 674   5                  disp_k(4,10);
- 675   5                  disp_hz(9,10);
- 676   5                  break;
- 677   5                case 1://2khz
- 678   5                  delnop=1;
- 679   5                  clr(0,10,20,15);
- 680   5                  disp_2(0,10);
- 681   5                  disp_k(4,10);
- 682   5                  disp_hz(9,10);
- 683   5                  break;
- 684   5                case 2://200hz
- 685   5                  delnop=40;
- 686   5                  clr(0,10,20,15);
- 687   5                  disp_2(0,10);
- 688   5                  disp_0(4,10);
- 689   5                  disp_0(8,10);
- 690   5                  disp_hz(12,10);
- 691   5                  break;
- 692   5                case 3://20hz
- 693   5                  delnop=440;
- 694   5                  clr(0,10,20,15);
- 695   5                  disp_2(0,10);
- 696   5                  disp_0(4,10);
- 697   5                  disp_hz(8,10);
- 698   5                  break;
- 699   5                case 4://2hz
- 700   5                  delnop=4440;
- 701   5                  clr(0,10,20,15);
- 702   5                  disp_2(0,10);
- 703   5                  disp_hz(4,10);
- 704   5                  break;
- 705   5                default:
- 706   5                  break;
- 707   5              }
- 708   4            }
- 709   3            if(vkey==0)
- 710   3            {
- 711   4              if(vmode<2)
- 712   4              {
- 713   5                vmode++;
- 714   5              }
- 715   4              else
- 716   4              {
- 717   5                vmode=0;
- 718   5              }
- 719   4              switch(vmode)
- 720   4              {
- 721   5                case 0://1v/d
- 722   5                  vd=4;
- 723   5                  cha=0;
- 724   5                  clr(0,30,26,35);
- 725   5                  disp_1(0,30);
- 726   5                  disp_vd(4,30);
- 727   5                  break;
- 728   5                case 1://0.5v/d
- 729   5                  vd=2;
- 730   5                  cha=32;
- 731   5                  clr(0,30,26,35);
- 732   5                  disp_0(0,30);
- 733   5                  disp_dian(4,30);
-C51 COMPILER V9.52.0.0   12864                                                             12/07/2016 13:32:49 PAGE 13  
+ 672   5                                                      clr(0,10,20,15);
+ 673   5                                                      disp_4(0,10);
+ 674   5                                                      disp_k(4,10);
+ 675   5                                                      disp_hz(9,10);
+ 676   5                                                      break;
+ 677   5                                              case 1://2khz
+ 678   5                                                      delnop=1;
+ 679   5                                                      clr(0,10,20,15);
+ 680   5                                                      disp_2(0,10);
+ 681   5                                                      disp_k(4,10);
+ 682   5                                                      disp_hz(9,10);
+ 683   5                                                      break;
+ 684   5                                              case 2://200hz
+ 685   5                                                      delnop=40;
+ 686   5                                                      clr(0,10,20,15);
+ 687   5                                                      disp_2(0,10);
+ 688   5                                                      disp_0(4,10);
+ 689   5                                                      disp_0(8,10);
+ 690   5                                                      disp_hz(12,10);
+ 691   5                                                      break;
+ 692   5                                              case 3://20hz
+ 693   5                                                      delnop=440;
+ 694   5                                                      clr(0,10,20,15);
+ 695   5                                                      disp_2(0,10);
+ 696   5                                                      disp_0(4,10);
+ 697   5                                                      disp_hz(8,10);
+ 698   5                                                      break;
+ 699   5                                              case 4://2hz
+ 700   5                                                      delnop=4440;
+ 701   5                                                      clr(0,10,20,15);
+ 702   5                                                      disp_2(0,10);
+ 703   5                                                      disp_hz(4,10);
+ 704   5                                                      break;
+ 705   5                                              default:
+ 706   5                                                      break;
+ 707   5                                      }
+ 708   4                              }
+ 709   3                              if(vkey==0)
+ 710   3                              {
+ 711   4                                      if(vmode<2)
+ 712   4                                      {
+ 713   5                                              vmode++;
+ 714   5                                      }
+ 715   4                                      else
+ 716   4                                      {
+ 717   5                                              vmode=0;
+ 718   5                                      }
+ 719   4                                      switch(vmode)
+ 720   4                                      {
+ 721   5                                              case 0://1v/d
+ 722   5                                                      vd=4;
+ 723   5                                                      cha=0;
+ 724   5                                                      clr(0,30,26,35);
+ 725   5                                                      disp_1(0,30);
+ 726   5                                                      disp_vd(4,30);
+ 727   5                                                      break;
+ 728   5                                              case 1://0.5v/d
+ 729   5                                                      vd=2;
+ 730   5                                                      cha=32;
+ 731   5                                                      clr(0,30,26,35);
+ 732   5                                                      disp_0(0,30);
+ 733   5                                                      disp_dian(4,30);
+C51 COMPILER V9.52.0.0   12864                                                             12/15/2016 20:07:01 PAGE 13  
 
- 734   5                  disp_5(6,30);
- 735   5                  disp_vd(10,30);
- 736   5                  break;
- 737   5                case 2://0.25v/d
- 738   5                  vd=1;
- 739   5                  cha=96;
- 740   5                  clr(0,30,26,35);
- 741   5                  disp_0(0,30);
- 742   5                  disp_dian(4,30);
- 743   5                  disp_2(6,30);
- 744   5                  disp_5(10,30);
- 745   5                  disp_vd(14,30);
- 746   5                  break;
- 747   5                default:
- 748   5                  break;
- 749   5              }
- 750   4            }
- 751   3            over=0;
- 752   3          }
- 753   2        }
+ 734   5                                                      disp_5(6,30);
+ 735   5                                                      disp_vd(10,30);
+ 736   5                                                      break;
+ 737   5                                              case 2://0.25v/d
+ 738   5                                                      vd=1;
+ 739   5                                                      cha=96;
+ 740   5                                                      clr(0,30,26,35);
+ 741   5                                                      disp_0(0,30);
+ 742   5                                                      disp_dian(4,30);
+ 743   5                                                      disp_2(6,30);
+ 744   5                                                      disp_5(10,30);
+ 745   5                                                      disp_vd(14,30);
+ 746   5                                                      break;
+ 747   5                                              default:
+ 748   5                                                      break;
+ 749   5                                      }
+ 750   4                              }
+ 751   3                              over=0;
+ 752   3                      }
+ 753   2              }
  754   1      }
+*** ERROR C249 IN LINE 754 OF 12864.c: 'DATA': SEGMENT TOO LARGE
 
-
-MODULE INFORMATION:   STATIC OVERLAYABLE
-   CODE SIZE        =   5461    ----
-   CONSTANT SIZE    =     32    ----
-   XDATA SIZE       =    212      39
-   PDATA SIZE       =   ----    ----
-   DATA SIZE        =   ----    ----
-   IDATA SIZE       =   ----    ----
-   BIT SIZE         =   ----    ----
-END OF MODULE INFORMATION.
-
-
-C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
+C51 COMPILATION COMPLETE.  0 WARNING(S),  1 ERROR(S)

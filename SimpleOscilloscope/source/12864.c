@@ -181,14 +181,14 @@ void adc_isr() interrupt 5 using 1
 		temp=delnop;
 		while(temp)
 		{
-		temp--;
+			temp--;
 		}
 		dat[dati]=ADC_RES;
 		dati++;
 		if(dati>101)
 		{
-		dati=0;
-		over=1;
+			dati=0;
+			over=1;
 		}
 	}
 }

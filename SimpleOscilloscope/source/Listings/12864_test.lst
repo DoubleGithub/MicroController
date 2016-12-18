@@ -1,0 +1,278 @@
+C51 COMPILER V9.52.0.0   12864_TEST                                                        12/15/2016 20:05:00 PAGE 1   
+
+
+C51 COMPILER V9.52.0.0, COMPILATION OF MODULE 12864_TEST
+OBJECT MODULE PLACED IN .\Objects\12864_test.obj
+COMPILER INVOKED BY: C:\MySoftWare\keil\C51\BIN\C51.EXE 12864_test.c BROWSE DEBUG OBJECTEXTEND PRINT(.\Listings\12864_te
+                    -st.lst) OBJECT(.\Objects\12864_test.obj)
+
+line level    source
+
+   1          /**************************************  
+   2           * 控制器：KS0108   
+   3           * MCU:AT89C5* ,晶体频率:12MHz   
+   4           * 取模方式：纵向字节倒序   
+   5           * CS1和CS2为低电平有效    
+   6          **************************************/  
+   7          #include <reg51.H>   
+   8          typedef unsigned char uchar;   
+   9          typedef unsigned int uint;     
+  10          #define LCD_PORT P1   
+  11          #define Left  1   
+  12          #define Right 2   
+  13          sbit  LCD_Busy=P1^7;   
+  14          sbit  LCD_EN = P2^0;   
+  15          sbit  LCD_RS = P2^2;   
+  16          sbit  LCD_RW = P2^1;   
+  17          sbit  LCD_RST= P2^5;   
+  18          sbit  LCD_CS2= P2^3;   
+  19          sbit  LCD_CS1= P2^4;   
+  20             
+  21          uchar DisBuf[32],Page_Num,Clm_Num;   
+  22             
+  23          code unsigned char Table[]=   
+  24          {   
+  25          /*--  文字:  天  --*/   
+  26          /*--  宋体12;  此字体下对应的点阵为：宽x高=16x16   --*/   
+  27          0x00,0x40,0x42,0x42,0x42,0x42,0x42,0xFE,0x42,0x42,0x42,0x42,0x42,0x42,0x40,0x00,   
+  28          0x00,0x80,0x40,0x20,0x10,0x08,0x06,0x01,0x02,0x04,0x08,0x10,0x30,0x60,0x20,0x00,   
+  29             
+  30          /*--  文字:  仙  --*/   
+  31          /*--  宋体12;  此字体下对应的点阵为：宽x高=16x16   --*/   
+  32          0x00,0x80,0x60,0xF8,0x07,0x02,0xE0,0x00,0x00,0x00,0xFF,0x00,0x00,0x00,0xE0,0x00,   
+  33          0x01,0x00,0x00,0x7F,0x00,0x20,0x7F,0x20,0x20,0x20,0x3F,0x20,0x20,0x20,0x7F,0x00,   
+  34             
+  35          /*--  文字:  妹  --*/   
+  36          /*--  宋体12;  此字体下对应的点阵为：宽x高=16x16   --*/   
+  37          0x08,0x88,0x7F,0x0A,0x08,0xF8,0x80,0x88,0x88,0x88,0xFF,0x88,0x88,0x88,0x80,0x00,   
+  38          0x40,0x21,0x12,0x0C,0x3A,0x11,0x40,0x30,0x0C,0x03,0xFF,0x06,0x08,0x30,0x10,0x00,   
+  39             
+  40          /*--  文字:  妹  --*/   
+  41          /*--  宋体12;  此字体下对应的点阵为：宽x高=16x16   --*/   
+  42          0x08,0x88,0x7F,0x0A,0x08,0xF8,0x80,0x88,0x88,0x88,0xFF,0x88,0x88,0x88,0x80,0x00,   
+  43          0x40,0x21,0x12,0x0C,0x3A,0x11,0x40,0x30,0x0C,0x03,0xFF,0x06,0x08,0x30,0x10,0x00   
+  44           };   
+  45             
+  46          code unsigned char Table0[]=   
+  47          {   
+  48          /*--  文字:  我  --*/   
+  49          /*--  宋体12;  此字体下对应的点阵为：宽x高=16x16   --*/   
+  50          0x20,0x20,0x22,0x22,0xFE,0x21,0x21,0x20,0x20,0xFF,0x20,0x22,0xAC,0x20,0x20,0x00,   
+  51          0x04,0x04,0x42,0x82,0x7F,0x01,0x01,0x10,0x10,0x08,0x07,0x1A,0x21,0x40,0xF0,0x00,   
+  52             
+  53          /*--  文字:  好  --*/   
+  54          /*--  宋体12;  此字体下对应的点阵为：宽x高=16x16   --*/   
+C51 COMPILER V9.52.0.0   12864_TEST                                                        12/15/2016 20:05:00 PAGE 2   
+
+  55          0x10,0x10,0xF0,0x1F,0x10,0xF0,0x80,0x82,0x82,0x82,0xF2,0x8A,0x86,0x82,0x80,0x00,   
+  56          0x80,0x43,0x22,0x14,0x0C,0x73,0x20,0x00,0x40,0x80,0x7F,0x00,0x00,0x00,0x00,0x00,   
+  57             
+  58          /*--  文字:  想  --*/   
+  59          /*--  宋体12;  此字体下对应的点阵为：宽x高=16x16   --*/   
+  60          0x08,0xC8,0x38,0xFF,0x18,0x68,0x08,0x00,0xFE,0x2A,0x2A,0x2A,0x2A,0xFE,0x00,0x00,   
+  61          0x01,0x40,0x70,0x01,0x38,0x40,0x40,0x44,0x59,0x41,0x41,0x61,0x01,0x09,0x30,0x00,   
+  62             
+  63          /*--  文字:  你  --*/   
+  64          /*--  宋体12;  此字体下对应的点阵为：宽x高=16x16   --*/   
+  65          0x80,0x40,0xF0,0x2C,0x43,0x20,0x98,0x0F,0x0A,0xE8,0x08,0x88,0x28,0x1C,0x08,0x00,   
+  66          0x00,0x00,0x7F,0x00,0x10,0x0C,0x03,0x21,0x40,0x3F,0x00,0x00,0x03,0x1C,0x08,0x00   
+  67          };   
+  68            
+  69          void Delay_us(unsigned int DelayTime)   
+  70          {   
+  71   1         while(DelayTime) DelayTime--;   
+  72   1      }   
+  73             
+  74          void Delay_x10ms(unsigned char DelayTime)   //***************10ms延时**********//   
+  75          {   
+  76   1             unsigned char i,j,k;   
+  77   1             for(i=0;i<DelayTime;i++)   
+  78   1                for(j=0;j<10;j++)   
+  79   1                   for(k=0;k<120;k++) {;}   
+  80   1      }   
+  81          /*----------------------------------------------------------------------------   
+  82          下面这个函数用于液晶模块的忙信号检测。   
+  83          ----------------------------------------------------------------------------*/    
+  84          void LCD_Check_Busy(void)   
+  85          {   
+  86   1         while(1)   
+  87   1         {   
+  88   2            LCD_EN = 0;   
+  89   2            LCD_RS = 0;   
+  90   2            LCD_RW = 1;   
+  91   2            LCD_PORT = 0xff;   
+  92   2            LCD_EN = 1;   
+  93   2            if(!LCD_Busy) 
+  94   2                        break;   
+  95   2         }   
+  96   1         LCD_EN = 0;   
+  97   1      }   
+  98             
+  99          /*----------------------------------------------------------------------------   
+ 100          下面这个函数用于向液晶模块写入控制指令代码。   
+ 101          函数入口参数：Command ------ 向液晶模块写入的控制指令代码 。   
+ 102                        CS_Num  ------ 左右半屏的选数值   
+ 103          ----------------------------------------------------------------------------*/    
+ 104          void LCD_WriteCommand(uchar Command, uchar CS_Num)    
+ 105          {    
+ 106   1         //LCD_Check_Busy();   
+ 107   1         if(CS_Num==1)         /*选择左半屏*/   
+ 108   1         {   
+ 109   2           LCD_CS1 = 0;   
+ 110   2           LCD_CS2 = 1;   
+ 111   2         }   
+ 112   1         else if(CS_Num==2)    /*选择右半屏*/   
+ 113   1         {   
+ 114   2           LCD_CS1 = 1;   
+ 115   2           LCD_CS2 = 0;   
+ 116   2         }   
+C51 COMPILER V9.52.0.0   12864_TEST                                                        12/15/2016 20:05:00 PAGE 3   
+
+ 117   1         LCD_EN = 0;           /* 使能信号为L */    
+ 118   1         LCD_RS = 0;           /* 置寄存器选择为L */    
+ 119   1         LCD_RW = 0;           /* 置读/写选择为L */    
+ 120   1         LCD_PORT = Command;   /* 将控制指令代码输出到的数据端口 */    
+ 121   1         LCD_EN = 1;           /* 使能信号为H */    
+ 122   1         Delay_us(1);          /* 延时2us */    
+ 123   1         LCD_EN = 0;           /* 使能信号为L */    
+ 124   1         LCD_CS1 = 1;          /* 置片选1为L */    
+ 125   1         LCD_CS2 = 1;          /* 置片选2为L */    
+ 126   1      }     
+ 127          /*----------------------------------------------------------------------------   
+ 128          下面这个函数用于向液晶模块写入显示数据。   
+ 129          函数入口参数：Data------ 向液晶模块写入的显示数据 。   
+ 130                      CS_Num-------左右半屏的选数值   
+ 131          ----------------------------------------------------------------------------*/    
+ 132          void LCD_WriteData(uchar Data,uchar CS_Num)    
+ 133          {    
+ 134   1         //LCD_Check_Busy();   
+ 135   1         if(CS_Num==1)      /*选择左半屏*/   
+ 136   1         {   
+ 137   2           LCD_CS1 = 0;   
+ 138   2           LCD_CS2 = 1;   
+ 139   2         }   
+ 140   1         else if(CS_Num==2)  /*选择右半屏*/   
+ 141   1         {   
+ 142   2           LCD_CS1 = 1;   
+ 143   2           LCD_CS2 = 0;   
+ 144   2         }   
+ 145   1         LCD_EN = 0;   
+ 146   1         LCD_RS = 1;       /* 置寄存器选择为H */    
+ 147   1         LCD_RW = 0;       /* 置读/写选择为L */     
+ 148   1         LCD_PORT = Data;  /* 将显示数据输出到的数据端口 */    
+ 149   1         LCD_EN = 1;       /* 使能信号为H */    
+ 150   1         Delay_us(1);      /* 延时2us */    
+ 151   1         LCD_EN = 0;       /* 使能信号为L */    
+ 152   1         LCD_CS1= 1;       /* 置片选1为L */    
+ 153   1         LCD_CS2= 1;       /* 置片选2为L */    
+ 154   1      }       
+ 155          /*---------------------------------------------------------------------------  
+ 156          *下面这个函数用于向液晶模块左右半屏写入汉字显示数据。  
+ 157          *函数入口参数：DisBuf-----向液晶模块写入的汉字显示数据  
+ 158                      Side_Num------液晶模块左右半屏的选择数  
+ 159                      Page_Num------开始显示页数（0----7），共八页  
+ 160                       Clm_Num------开始显示列数 （16的倍数），共64列  
+ 161                      Word_Num------每页显示的汉字个数（最多为4个）  
+ 162          ---------------------------------------------------------------------------*/   
+ 163          void LCD_Play(uchar Page_Num,uchar Clm_Num,uchar Word_Num,uchar *DisBuf,uchar Side_Num)   
+ 164          {   
+ 165   1         uchar i,k,COM;   
+ 166   1                       
+ 167   1         COM=0xB8+Page_Num;   
+ 168   1         LCD_WriteCommand(COM,Side_Num);       
+ 169   1         COM=0x40+Clm_Num;   
+ 170   1         LCD_WriteCommand(COM,Side_Num);   
+ 171   1         for(i=0;i<Word_Num;i++)   
+ 172   1         {            
+ 173   2           for(k=0;k<16;k++)   
+ 174   2           {   
+ 175   3              LCD_WriteData(DisBuf[k+32*i],Side_Num);   
+ 176   3           }   
+ 177   2         }    
+ 178   1         Page_Num++;   
+C51 COMPILER V9.52.0.0   12864_TEST                                                        12/15/2016 20:05:00 PAGE 4   
+
+ 179   1         COM=0xB8+Page_Num;   
+ 180   1         LCD_WriteCommand(COM,Side_Num);       
+ 181   1         COM=0x40+Clm_Num;   
+ 182   1         LCD_WriteCommand(COM,Side_Num);   
+ 183   1         for(i=0;i<Word_Num;i++)   
+ 184   1         {   
+ 185   2            for(k=16;k<32;k++)   
+ 186   2            {   
+ 187   3               LCD_WriteData(DisBuf[k+32*i],Side_Num);   
+ 188   3            }   
+ 189   2         }   
+ 190   1         Delay_us(2);   
+ 191   1       }   
+ 192             
+ 193             
+ 194          /*---------------------------------------------------------------------------  
+ 195          下面这个函数用于液晶模块的清屏。  
+ 196          ---------------------------------------------------------------------------*/   
+ 197          void LCD_CLR(uchar Side_Num)   
+ 198          {   
+ 199   1         uchar i,k,COM;      
+ 200   1         for(i=0;i<8;i++)                   
+ 201   1         {   
+ 202   2            COM=0xB8+i;   
+ 203   2            LCD_WriteCommand(COM,Side_Num);       
+ 204   2            COM=0x40;   
+ 205   2            LCD_WriteCommand(COM,Side_Num);     
+ 206   2                  
+ 207   2            for(k=0;k<64;k++)   
+ 208   2            {   
+ 209   3               LCD_WriteData(0x00,Side_Num);   
+ 210   3            }   
+ 211   2         }   
+ 212   1         Delay_us(2);   
+ 213   1      }   
+ 214          /*---------------------------------------------------------------------------  
+ 215          下面这个函数用于向液晶模块初始化。  
+ 216          如果没有写完一个半屏的数据就要充分结合此函数来达到要显示的效果  
+ 217          ---------------------------------------------------------------------------*/   
+ 218          void LCD_Initial(void)    
+ 219          {      
+ 220   1          LCD_RST = 0;    /* 置复位信号为低电平 */    
+ 221   1          Delay_us(2);     
+ 222   1          LCD_RST = 1;    /* 置复位信号为高电平 */     
+ 223   1          LCD_WriteCommand(0x3F,Left);    /*显示开*/   
+ 224   1          LCD_WriteCommand(0x3F,Right);   
+ 225   1          LCD_WriteCommand(0xC0,Left);    /*起始行*/   
+ 226   1          LCD_WriteCommand(0xC0,Right);                
+ 227   1          LCD_WriteCommand(0xB8,Left);    /*起始页*/   
+ 228   1          LCD_WriteCommand(0xB8,Right);     
+ 229   1          LCD_WriteCommand(0x40,Left);    /*起始列*/   
+ 230   1          LCD_WriteCommand(0x40,Right);    
+ 231   1      }    
+ 232          /*---------------------------------------------------------------------------  
+ 233          下面这个函数为主函数，根据程序要实现的功能写相应的应用程序  
+ 234          ---------------------------------------------------------------------------*/   
+ 235          void main(void)    
+ 236          {    
+ 237   1          LCD_Initial(); //液晶屏初始化    
+ 238   1          LCD_CLR(Left);   //清左边屏
+ 239   1          LCD_CLR(Right);//清右边屏   
+ 240   1          LCD_Play(3,0,4,Table,Left);//显示table数组数据,并显示在左边   
+C51 COMPILER V9.52.0.0   12864_TEST                                                        12/15/2016 20:05:00 PAGE 5   
+
+ 241   1          LCD_Play(3,0,4,Table0,Right); //显示table0数组，并显示在右边  
+ 242   1          Delay_x10ms(250);   //延时
+ 243   1          Delay_x10ms(250);   
+ 244   1          Delay_x10ms(250);   
+ 245   1          Delay_x10ms(250);   
+ 246   1       }    
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =    401    ----
+   CONSTANT SIZE    =    256    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =   ----    ----
+   DATA SIZE        =     34       9
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----    ----
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)

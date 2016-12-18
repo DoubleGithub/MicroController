@@ -1,4 +1,4 @@
-".\Objects\STARTUP.obj",
-".\Objects\12864.obj" 
+".\Objects\SimpleOscilloscope.obj",
+".\Objects\STARTUP.obj" 
 TO ".\Objects\test" 
 PRINT(".\Listings\test.m51") RAMSIZE(256) 

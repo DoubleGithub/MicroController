@@ -4,12 +4,445 @@
 <h1>µVision Build Log</h1>
 <h2>Project:</h2>
 E:\Workspace\MicroController\SimpleOscilloscope\source\test.uvproj
-Project File Date:  12/06/2016
+Project File Date:  12/15/2016
 
 <h2>Output:</h2>
+compiling 12864_test.c...
+12864_test.c - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LCD_CHECK_BUSY?12864_TEST
+Program Size: data=52.0 xdata=0 code=717
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 1 Warning(s).
+Rebuild target 'Target 1'
+assembling STARTUP.A51...
+compiling 12864_test.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LCD_CHECK_BUSY?12864_TEST
+Program Size: data=52.0 xdata=0 code=717
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 1 Warning(s).
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c(150): warning C280: 'p': unreferenced local variable
+SimpleOscilloscope.c(151): warning C280: 'm': unreferenced local variable
+SimpleOscilloscope.c - 0 Error(s), 2 Warning(s).
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c(150): warning C280: 'p': unreferenced local variable
+SimpleOscilloscope.c(151): warning C280: 'm': unreferenced local variable
+SimpleOscilloscope.c - 0 Error(s), 2 Warning(s).
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c(150): warning C280: 'p': unreferenced local variable
+SimpleOscilloscope.c(151): warning C280: 'm': unreferenced local variable
+SimpleOscilloscope.c - 0 Error(s), 2 Warning(s).
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c(150): warning C280: 'p': unreferenced local variable
+SimpleOscilloscope.c(151): warning C280: 'm': unreferenced local variable
+SimpleOscilloscope.c - 0 Error(s), 2 Warning(s).
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c(150): warning C280: 'p': unreferenced local variable
+SimpleOscilloscope.c(151): warning C280: 'm': unreferenced local variable
+SimpleOscilloscope.c - 0 Error(s), 2 Warning(s).
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c(150): warning C280: 'p': unreferenced local variable
+SimpleOscilloscope.c(151): warning C280: 'm': unreferenced local variable
+SimpleOscilloscope.c - 0 Error(s), 2 Warning(s).
+Build target 'Target 1'
+linking...
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: _DATA_GROUP_
+    LENGTH:  0014H
+Program Size: data=130.0 xdata=0 code=2215
+Target not created
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c(150): warning C280: 'p': unreferenced local variable
+SimpleOscilloscope.c(151): warning C280: 'm': unreferenced local variable
+SimpleOscilloscope.c - 0 Error(s), 2 Warning(s).
+Build target 'Target 1'
+linking...
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: _DATA_GROUP_
+    LENGTH:  0014H
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?ADC?SIMPLEOSCILLOSCOPE
+    OFFSET:  000AH
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?INIT?SIMPLEOSCILLOSCOPE
+    OFFSET:  0002H
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?INIT?SIMPLEOSCILLOSCOPE
+    OFFSET:  0006H
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?SHUJU?SIMPLEOSCILLOSCOPE
+    OFFSET:  000BH
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  000FH
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  014EH
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  01A7H
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  0380H
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  03DFH
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  041DH
+Program Size: data=130.0 xdata=0 code=2176
+Target not created
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c(150): warning C280: 'p': unreferenced local variable
+SimpleOscilloscope.c(151): warning C280: 'm': unreferenced local variable
+SimpleOscilloscope.c - 0 Error(s), 2 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+linking...
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  0010H
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  0012H
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  0014H
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  001AH
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  00EDH
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  0109H
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  017EH
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  0195H
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  01FCH
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  0433H
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  04B5H
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  050AH
+Program Size: data=9.0 xdata=121 code=2436
+Target not created
+Rebuild target 'Target 1'
+assembling STARTUP.A51...
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c(150): warning C280: 'p': unreferenced local variable
+SimpleOscilloscope.c(151): warning C280: 'm': unreferenced local variable
+linking...
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  0010H
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  0012H
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  0014H
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  001AH
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  00EDH
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  0109H
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  017EH
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  0195H
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  01FCH
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  0433H
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  04B5H
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  050AH
+Program Size: data=9.0 xdata=121 code=2436
+Target not created
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c(150): warning C280: 'p': unreferenced local variable
+SimpleOscilloscope.c(151): warning C280: 'm': unreferenced local variable
+SimpleOscilloscope.c - 0 Error(s), 2 Warning(s).
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c(150): warning C280: 'p': unreferenced local variable
+SimpleOscilloscope.c(151): warning C280: 'm': unreferenced local variable
+SimpleOscilloscope.c - 0 Error(s), 2 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+linking...
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  0012H
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  0014H
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  0016H
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  001CH
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  0113H
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  0130H
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  01B7H
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  01D9H
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  0250H
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  04C9H
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  0562H
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  05C4H
+Program Size: data=9.0 xdata=121 code=2634
+Target not created
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c(150): warning C280: 'p': unreferenced local variable
+SimpleOscilloscope.c(151): warning C280: 'm': unreferenced local variable
+SimpleOscilloscope.c - 0 Error(s), 2 Warning(s).
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c(150): warning C280: 'p': unreferenced local variable
+SimpleOscilloscope.c(151): warning C280: 'm': unreferenced local variable
+SimpleOscilloscope.c - 0 Error(s), 2 Warning(s).
+Build target 'Target 1'
+linking...
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  0012H
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  0014H
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  0016H
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  001CH
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  0113H
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  0130H
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  01B7H
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  01D9H
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  0250H
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  04C9H
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  0562H
+*** ERROR L121: IMPROPER FIXUP
+    MODULE:  .\Objects\SimpleOscilloscope.obj (SIMPLEOSCILLOSCOPE)
+    SEGMENT: ?PR?MAIN?SIMPLEOSCILLOSCOPE
+    OFFSET:  05C4H
+Program Size: data=9.0 xdata=121 code=2634
+Target not created
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c(150): warning C280: 'p': unreferenced local variable
+SimpleOscilloscope.c(151): warning C280: 'm': unreferenced local variable
+SimpleOscilloscope.c - 0 Error(s), 2 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+linking...
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: _DATA_GROUP_
+    LENGTH:  0014H
+Program Size: data=130.0 xdata=0 code=2215
+Target not created
+compiling 12864_test.c...
+12864_test.c - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LCD_CHECK_BUSY?12864_TEST
+Program Size: data=52.0 xdata=0 code=717
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 1 Warning(s).
+Rebuild target 'Target 1'
+assembling STARTUP.A51...
+compiling 12864_test.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LCD_CHECK_BUSY?12864_TEST
+Program Size: data=52.0 xdata=0 code=717
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 1 Warning(s).
+compiling 12864_test.c...
+12864_test.c - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LCD_CHECK_BUSY?12864_TEST
+Program Size: data=9.0 xdata=43 code=770
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 1 Warning(s).
+Rebuild target 'Target 1'
+assembling STARTUP.A51...
+compiling 12864_test.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LCD_CHECK_BUSY?12864_TEST
+Program Size: data=9.0 xdata=43 code=770
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 1 Warning(s).
+compiling 12864_test.c...
+12864_test.c - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+assembling STARTUP.A51...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LCD_CHECK_BUSY?12864_TEST
+Program Size: data=52.0 xdata=0 code=717
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 1 Warning(s).
+Rebuild target 'Target 1'
+assembling STARTUP.A51...
+compiling 12864_test.c...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?PR?LCD_CHECK_BUSY?12864_TEST
+Program Size: data=52.0 xdata=0 code=717
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 1 Warning(s).
+Build target 'Target 1'
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c(150): warning C280: 'p': unreferenced local variable
+SimpleOscilloscope.c(151): warning C280: 'm': unreferenced local variable
+linking...
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: _DATA_GROUP_
+    LENGTH:  0014H
+Program Size: data=130.0 xdata=0 code=2215
+Target not created
+Rebuild target 'Target 1'
+assembling STARTUP.A51...
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c(150): warning C280: 'p': unreferenced local variable
+SimpleOscilloscope.c(151): warning C280: 'm': unreferenced local variable
+linking...
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: _DATA_GROUP_
+    LENGTH:  0014H
+Program Size: data=130.0 xdata=0 code=2215
+Target not created
+compiling 12864.c...
+12864.c(754): error C249: 'DATA': SEGMENT TOO LARGE
+12864.c - 1 Error(s), 0 Warning(s).
 compiling 12864.c...
 12864.c - 0 Error(s), 0 Warning(s).
 Build target 'Target 1'
+assembling STARTUP.A51...
 linking...
 Program Size: data=17.0 xdata=234 code=5674
 creating hex file from ".\Objects\test"...
@@ -22,11 +455,336 @@ Program Size: data=17.0 xdata=234 code=5674
 creating hex file from ".\Objects\test"...
 ".\Objects\test" - 0 Error(s), 0 Warning(s).
 compiling 12864.c...
-12864.c - 0 Error(s), 0 Warning(s).
-Rebuild target 'Target 1'
+12864.c(754): error C249: 'DATA': SEGMENT TOO LARGE
+12864.c - 1 Error(s), 0 Warning(s).
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c(150): warning C280: 'k': unreferenced local variable
+SimpleOscilloscope.c(150): warning C280: 'p': unreferenced local variable
+SimpleOscilloscope.c(151): warning C280: 'm': unreferenced local variable
+SimpleOscilloscope.c - 0 Error(s), 3 Warning(s).
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c(150): warning C280: 'k': unreferenced local variable
+SimpleOscilloscope.c(150): warning C280: 'p': unreferenced local variable
+SimpleOscilloscope.c(151): warning C280: 'm': unreferenced local variable
+SimpleOscilloscope.c - 0 Error(s), 3 Warning(s).
+Build target 'Target 1'
 assembling STARTUP.A51...
-compiling 12864.c...
 linking...
-Program Size: data=17.0 xdata=234 code=5674
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: _DATA_GROUP_
+    LENGTH:  0015H
+Program Size: data=131.0 xdata=0 code=1907
+Target not created
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c(150): warning C280: 'k': unreferenced local variable
+SimpleOscilloscope.c(150): warning C280: 'p': unreferenced local variable
+SimpleOscilloscope.c(151): warning C280: 'm': unreferenced local variable
+SimpleOscilloscope.c - 0 Error(s), 3 Warning(s).
+Build target 'Target 1'
+linking...
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: _DATA_GROUP_
+    LENGTH:  0015H
+Program Size: data=131.0 xdata=0 code=1907
+Target not created
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c(150): warning C280: 'k': unreferenced local variable
+SimpleOscilloscope.c(150): warning C280: 'p': unreferenced local variable
+SimpleOscilloscope.c(151): warning C280: 'm': unreferenced local variable
+SimpleOscilloscope.c - 0 Error(s), 3 Warning(s).
+Build target 'Target 1'
+linking...
+Program Size: data=9.0 xdata=122 code=2301
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 0 Warning(s).
+Rebuild target 'Target 1'
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c(150): warning C280: 'k': unreferenced local variable
+SimpleOscilloscope.c(150): warning C280: 'p': unreferenced local variable
+SimpleOscilloscope.c(151): warning C280: 'm': unreferenced local variable
+linking...
+Program Size: data=9.0 xdata=122 code=2301
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 3 Warning(s).
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c(150): warning C280: 'k': unreferenced local variable
+SimpleOscilloscope.c(150): warning C280: 'p': unreferenced local variable
+SimpleOscilloscope.c(151): warning C280: 'm': unreferenced local variable
+SimpleOscilloscope.c - 0 Error(s), 3 Warning(s).
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c(150): warning C280: 'p': unreferenced local variable
+SimpleOscilloscope.c(151): warning C280: 'm': unreferenced local variable
+SimpleOscilloscope.c - 0 Error(s), 2 Warning(s).
+Build target 'Target 1'
+linking...
+Program Size: data=9.0 xdata=121 code=2675
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 0 Warning(s).
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c(150): warning C280: 'p': unreferenced local variable
+SimpleOscilloscope.c(151): warning C280: 'm': unreferenced local variable
+SimpleOscilloscope.c - 0 Error(s), 2 Warning(s).
+Build target 'Target 1'
+linking...
+*** ERROR L107: ADDRESS SPACE OVERFLOW
+    SPACE:   DATA    
+    SEGMENT: _DATA_GROUP_
+    LENGTH:  0014H
+Program Size: data=130.0 xdata=0 code=2215
+Target not created
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c(150): warning C280: 'p': unreferenced local variable
+SimpleOscilloscope.c(151): warning C280: 'm': unreferenced local variable
+SimpleOscilloscope.c - 0 Error(s), 2 Warning(s).
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+linking...
+Program Size: data=127.0 xdata=0 code=2215
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 0 Warning(s).
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+linking...
+Program Size: data=127.0 xdata=0 code=2215
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 0 Warning(s).
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+linking...
+Program Size: data=127.0 xdata=0 code=2215
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 0 Warning(s).
+Rebuild target 'Target 1'
+compiling SimpleOscilloscope.c...
+assembling STARTUP.A51...
+linking...
+Program Size: data=127.0 xdata=0 code=2215
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 0 Warning(s).
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c(150): warning C280: 'k': unreferenced local variable
+SimpleOscilloscope.c(151): warning C280: 'l': unreferenced local variable
+SimpleOscilloscope.c - 0 Error(s), 2 Warning(s).
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?CO?SIMPLEOSCILLOSCOPE
+Program Size: data=125.0 xdata=0 code=2032
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 1 Warning(s).
+Rebuild target 'Target 1'
+compiling SimpleOscilloscope.c...
+assembling STARTUP.A51...
+linking...
+*** WARNING L16: UNCALLED SEGMENT, IGNORED FOR OVERLAY PROCESS
+    SEGMENT: ?CO?SIMPLEOSCILLOSCOPE
+Program Size: data=125.0 xdata=0 code=2032
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 1 Warning(s).
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+linking...
+Program Size: data=127.0 xdata=0 code=2215
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 0 Warning(s).
+Rebuild target 'Target 1'
+compiling SimpleOscilloscope.c...
+assembling STARTUP.A51...
+linking...
+Program Size: data=127.0 xdata=0 code=2215
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 0 Warning(s).
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+linking...
+Program Size: data=127.0 xdata=0 code=2215
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 0 Warning(s).
+Rebuild target 'Target 1'
+compiling SimpleOscilloscope.c...
+assembling STARTUP.A51...
+linking...
+Program Size: data=127.0 xdata=0 code=2215
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 0 Warning(s).
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+linking...
+Program Size: data=127.0 xdata=0 code=2215
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 0 Warning(s).
+Rebuild target 'Target 1'
+compiling SimpleOscilloscope.c...
+assembling STARTUP.A51...
+linking...
+Program Size: data=127.0 xdata=0 code=2215
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 0 Warning(s).
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+linking...
+Program Size: data=127.0 xdata=0 code=2183
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 0 Warning(s).
+Rebuild target 'Target 1'
+compiling SimpleOscilloscope.c...
+assembling STARTUP.A51...
+linking...
+Program Size: data=127.0 xdata=0 code=2183
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 0 Warning(s).
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+linking...
+Program Size: data=127.0 xdata=0 code=2215
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 0 Warning(s).
+Rebuild target 'Target 1'
+compiling SimpleOscilloscope.c...
+assembling STARTUP.A51...
+linking...
+Program Size: data=127.0 xdata=0 code=2215
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 0 Warning(s).
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+linking...
+Program Size: data=127.0 xdata=0 code=2215
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 0 Warning(s).
+Rebuild target 'Target 1'
+compiling SimpleOscilloscope.c...
+assembling STARTUP.A51...
+linking...
+Program Size: data=127.0 xdata=0 code=2215
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 0 Warning(s).
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c - 0 Error(s), 0 Warning(s).
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+linking...
+Program Size: data=127.0 xdata=0 code=2215
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 0 Warning(s).
+Rebuild target 'Target 1'
+compiling SimpleOscilloscope.c...
+assembling STARTUP.A51...
+linking...
+Program Size: data=127.0 xdata=0 code=2215
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 0 Warning(s).
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c - 0 Error(s), 0 Warning(s).
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+linking...
+Program Size: data=127.0 xdata=0 code=2215
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 0 Warning(s).
+Rebuild target 'Target 1'
+compiling SimpleOscilloscope.c...
+assembling STARTUP.A51...
+linking...
+Program Size: data=127.0 xdata=0 code=2215
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 0 Warning(s).
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+linking...
+Program Size: data=127.0 xdata=0 code=2215
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 0 Warning(s).
+Rebuild target 'Target 1'
+compiling SimpleOscilloscope.c...
+assembling STARTUP.A51...
+linking...
+Program Size: data=127.0 xdata=0 code=2215
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 0 Warning(s).
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+linking...
+Program Size: data=127.0 xdata=0 code=2215
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 0 Warning(s).
+Rebuild target 'Target 1'
+compiling SimpleOscilloscope.c...
+assembling STARTUP.A51...
+linking...
+Program Size: data=127.0 xdata=0 code=2215
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 0 Warning(s).
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+linking...
+Program Size: data=127.0 xdata=0 code=2215
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 0 Warning(s).
+Rebuild target 'Target 1'
+compiling SimpleOscilloscope.c...
+assembling STARTUP.A51...
+linking...
+Program Size: data=127.0 xdata=0 code=2215
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 0 Warning(s).
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+linking...
+Program Size: data=127.0 xdata=0 code=2215
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 0 Warning(s).
+Rebuild target 'Target 1'
+compiling SimpleOscilloscope.c...
+assembling STARTUP.A51...
+linking...
+Program Size: data=127.0 xdata=0 code=2215
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 0 Warning(s).
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+linking...
+Program Size: data=127.0 xdata=0 code=2247
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 0 Warning(s).
+Rebuild target 'Target 1'
+compiling SimpleOscilloscope.c...
+assembling STARTUP.A51...
+linking...
+Program Size: data=127.0 xdata=0 code=2247
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 0 Warning(s).
+compiling SimpleOscilloscope.c...
+SimpleOscilloscope.c - 0 Error(s), 0 Warning(s).
+Build target 'Target 1'
+linking...
+Program Size: data=127.0 xdata=0 code=2215
+creating hex file from ".\Objects\test"...
+".\Objects\test" - 0 Error(s), 0 Warning(s).
+Rebuild target 'Target 1'
+compiling SimpleOscilloscope.c...
+assembling STARTUP.A51...
+linking...
+Program Size: data=127.0 xdata=0 code=2215
 creating hex file from ".\Objects\test"...
 ".\Objects\test" - 0 Error(s), 0 Warning(s).

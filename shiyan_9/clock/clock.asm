@@ -8,9 +8,7 @@
 		HBF EQU 20H;存放小时 
         ORG 0000H 
         LJMP START 
-        ORG 401BH 
-        LJMP CLOCK 
-        ORG 4100H 
+        ORG 0040H 
 START: 	MOV R0,#40H ;40H-45H是显示缓冲区，依次存放秒高位、秒低位
 					;以及分高位、分底位以及小时高位、小时低位 
         MOV A,#00H ;  
@@ -90,6 +88,10 @@ START: 	MOV R0,#40H ;40H-45H是显示缓冲区，依次存放秒高位、秒低位
         MOV @R0,A 
         DEC R0 ;R0指针下移一位 
         RET 
+		
+		ORG 001BH 
+        LJMP CLOCK
+		ORG 0100H
  CLOCK: MOV TL1,#038H ;置时间常数 
         MOV TH1,#00H 
         PUSH PSW  

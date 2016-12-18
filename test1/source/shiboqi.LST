@@ -1,0 +1,701 @@
+C51 COMPILER V9.52.0.0   SHIBOQI                                                           12/14/2016 19:17:35 PAGE 1   
+
+
+C51 COMPILER V9.52.0.0, COMPILATION OF MODULE SHIBOQI
+OBJECT MODULE PLACED IN shiboqi.OBJ
+COMPILER INVOKED BY: C:\MySoftWare\keil\C51\BIN\C51.EXE shiboqi.c BROWSE DEBUG OBJECTEXTEND TABS(2)
+
+line level    source
+
+   1          #include <reg51.h>
+   2          #define uchar unsigned char
+   3          #define uint unsigned int
+   4          sfr P1ASF = 0X9D;
+   5          sfr ADC_CONTR=0XBC;
+   6          sfr ADC_RES=0XBD;
+   7          sfr ADC_RESL=0XBE;
+   8          sfr AUXR1=0XA2;
+   9          sbit D7=P0^7;
+  10          sbit rs=P2^0;
+  11          sbit rw=P2^1;
+  12          sbit en=P2^2;
+  13          sbit psb=P2^3;
+  14          sbit GD = P1^7;
+  15          sbit VD = P3^4;
+  16          sbit VI = P3^6;
+  17          sbit TD = P3^7;
+  18          sbit TE = P3^5;
+  19          sbit clock = P1^0;
+  20          uint pdata a[128];
+  21          uchar code biaoge[]={
+  22          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  23          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  24          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  25          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  26          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  27          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  28          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  29          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  30          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  31          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  32          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  33          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  34          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  35          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  36          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  37          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  38          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  39          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  40          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  41          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  42          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  43          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  44          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  45          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  46          0x00,0xC0,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  47          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  48          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  49          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  50          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  51          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  52          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  53          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  54          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  55          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+C51 COMPILER V9.52.0.0   SHIBOQI                                                           12/14/2016 19:17:35 PAGE 2   
+
+  56          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  57          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  58          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  59          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  60          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  61          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  62          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  63          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  64          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  65          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  66          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  67          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  68          0x00,0x80,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  69          0x00,0x80,0x00,0x08,0x00,0x00,0x80,0x00,0x08,0x00,0x00,0x80,0x00,0x08,0x00,0x00,
+  70          0x00,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,0xFF,
+  71          0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  72          0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  73          0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  74          0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  75          0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  76          0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  77          0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,0x00,
+  78          0x3E,0xF3,0xE7,0x00,0x00,0x11,0x7C,0x01,0xE0,0x78,0x00,0x00,0x04,0x40,0x00,0x00,
+  79          0x20,0x8A,0x08,0xB0,0x00,0x11,0x0C,0x01,0x10,0x44,0xC0,0x00,0x04,0x40,0x00,0x00,
+  80          0x20,0x8A,0x08,0xB0,0x00,0x11,0x18,0x01,0x10,0x44,0xC0,0x00,0x04,0x40,0x00,0x00,
+  81          0x3E,0xF3,0xE8,0x80,0x00,0x1F,0x30,0x01,0xE0,0x78,0x00,0x00,0x04,0x40,0x00,0x00,
+  82          0x20,0xC2,0x08,0xB0,0x00,0x11,0x30,0x01,0x0F,0x40,0x00,0x00,0x04,0x40,0x00,0x00,
+  83          0x20,0xA2,0x0B,0xB0,0x00,0x11,0x60,0x01,0x00,0x40,0xC0,0x00,0x06,0xC0,0x00,0x00,
+  84          0x20,0x92,0x09,0x80,0x00,0x11,0x60,0x01,0x00,0x40,0xC0,0x00,0x03,0x80,0x00,0x00,
+  85          0x20,0x8B,0xE7,0xC0,0x00,0x11,0x7C,0x01,0x00,0x40,0x00,0x00,0x01,0x00,0x00,0x00};
+  86          uchar heng,zong;
+  87          uchar num_5ms;
+  88          uchar freq1,volt1,freq;
+  89          void delay(uint t)//延时2*1*t+5us
+  90          {
+  91   1        while(t--);
+  92   1      }
+  93          void delay1ms(uint t) //1ms
+  94          {
+  95   1        uint i,j;
+  96   1        i=0;
+  97   1        for(i=0;i<t;i++)
+  98   1          for(j=0;j<64;j++);  
+  99   1      }
+ 100          bit lcd_busy()//判断数据口是否忙绿
+ 101          {
+ 102   1        bit result;
+ 103   1        D7 = 1;
+ 104   1        rs = 0;
+ 105   1        rw = 1;
+ 106   1        en = 0;
+ 107   1        delay(50);
+ 108   1        result = D7;
+ 109   1        en = 0;
+ 110   1        return(result);
+ 111   1      }
+ 112          void lcd_wcmd(uchar wcmd)//写命令
+ 113          {
+ 114   1        while(~lcd_busy());
+ 115   1        rs=0;
+ 116   1        rw=0;
+ 117   1        en=0;
+C51 COMPILER V9.52.0.0   SHIBOQI                                                           12/14/2016 19:17:35 PAGE 3   
+
+ 118   1        P0=wcmd;
+ 119   1        delay1ms(5);
+ 120   1        en=1;
+ 121   1        delay1ms(5);
+ 122   1        en=0;
+ 123   1      }
+ 124          void lcd_wdat(uchar dat)//写数据
+ 125          {
+ 126   1        while(~lcd_busy());
+ 127   1        rs=1;
+ 128   1        rw=0;
+ 129   1        en=0;
+ 130   1        P0=dat;
+ 131   1        delay1ms(5);
+ 132   1        en=1;
+ 133   1        delay1ms(5);
+ 134   1        en=0;
+ 135   1      }
+ 136          uchar lcd_rdat(void)//读数据
+ 137          {
+ 138   1        uchar rdat;
+ 139   1        while(!lcd_busy());
+ 140   1        P0=0xff;
+ 141   1        rs=1;
+ 142   1        rw=1;
+ 143   1        en=0;
+ 144   1        en=1;
+ 145   1        rdat=P0;
+ 146   1        delay(50);
+ 147   1        en=0;
+ 148   1        return rdat;
+ 149   1      }
+ 150          //void showgroup(uchar x,uchar y,uchar *p)//选择在哪一行写数据
+ 151          //{
+ 152          //  switch(y)
+ 153          //  {
+ 154          //    case 1:lcd_wcmd(0x80+x-1);break;
+ 155          //    case 2:lcd_wcmd(0x90+x-1);break;
+ 156          //    case 3:lcd_wcmd(0x88+x-1);break;
+ 157          //    case 4:lcd_wcmd(0x98+x-1);break;
+ 158          //  }
+ 159          //  while(*p)
+ 160          //  {
+ 161          //    lcd_wdat(*p++);
+ 162          //  }
+ 163          //}
+ 164          void lcd_init()
+ 165          {
+ 166   1        psb=1;
+ 167   1        lcd_wcmd(0x30);//基本指令集
+ 168   1        delay1ms(5);
+ 169   1        lcd_wcmd(0x0c);
+ 170   1        delay1ms(5);
+ 171   1        lcd_wcmd(0x01);
+ 172   1        delay1ms(5);
+ 173   1        lcd_wcmd(0x06);
+ 174   1        delay1ms(5);
+ 175   1      }
+ 176          void clear_screen()//清GDRAM
+ 177          {
+ 178   1        uchar i,j,k;
+ 179   1        lcd_wcmd(0x34);//关闭绘图显示功能
+C51 COMPILER V9.52.0.0   SHIBOQI                                                           12/14/2016 19:17:35 PAGE 4   
+
+ 180   1        i=0x80;
+ 181   1        for(j=0;j<32;j++)
+ 182   1        {
+ 183   2          lcd_wcmd(i++);//纵坐标Y加一
+ 184   2          lcd_wcmd(0x80);//横坐标
+ 185   2          for(k=0;k<16;k++)
+ 186   2          {
+ 187   3            lcd_wdat(0x00);//给某一行清零
+ 188   3          }
+ 189   2        }
+ 190   1        i=0x80;
+ 191   1        for(j=0;j<32;j++)
+ 192   1        {
+ 193   2          lcd_wcmd(i++);
+ 194   2          lcd_wcmd(0x88);
+ 195   2          for(k=0;k<16;k++)
+ 196   2          {
+ 197   3            lcd_wdat(0x00);
+ 198   3          }
+ 199   2        }
+ 200   1        lcd_wcmd(0x36);
+ 201   1        lcd_wcmd(0x30);
+ 202   1      }
+ 203          void draw_pic(uchar *pic)
+ 204          {
+ 205   1        uchar i,j,k;
+ 206   1        lcd_wcmd(0x34);
+ 207   1        i=0x80;
+ 208   1        for(j=0;j<32;j++)
+ 209   1        {
+ 210   2          lcd_wcmd(i++);
+ 211   2          lcd_wcmd(0x80);
+ 212   2          for(k=0;k<16;k++)
+ 213   2          {
+ 214   3            lcd_wdat(*pic);
+ 215   3            pic++;
+ 216   3          }
+ 217   2        }
+ 218   1        i=0x80;
+ 219   1        for(j=0;j<32;j++)
+ 220   1        {
+ 221   2          lcd_wcmd(i++);
+ 222   2          lcd_wcmd(0x88);
+ 223   2          for(k=0;k<16;k++)
+ 224   2          {
+ 225   3            lcd_wdat(*pic);
+ 226   3            pic++;
+ 227   3          }
+ 228   2        }
+ 229   1        lcd_wcmd(0x36);
+ 230   1        lcd_wcmd(0x30);
+ 231   1      }
+ 232          void draw_point(uchar x,uchar y)
+ 233          {
+ 234   1        uchar readh,readl,row,tier,tier_b;
+ 235   1        lcd_wcmd(0x34);
+ 236   1        lcd_wcmd(0x36);
+ 237   1        tier=x>>4;
+ 238   1        tier_b=x&0x0f;
+ 239   1        if(y<32)
+ 240   1        {
+ 241   2          row=y;
+C51 COMPILER V9.52.0.0   SHIBOQI                                                           12/14/2016 19:17:35 PAGE 5   
+
+ 242   2        }
+ 243   1        else
+ 244   1        {
+ 245   2          row=y-32;
+ 246   2          tier+=8;
+ 247   2        }
+ 248   1        lcd_wcmd(row+0x80);
+ 249   1        lcd_wcmd(tier+0x80);
+ 250   1        lcd_rdat();
+ 251   1        readh=lcd_rdat();
+ 252   1        readl=lcd_rdat();
+ 253   1        lcd_wcmd(row+0x80);
+ 254   1        lcd_wcmd(tier+0x80);
+ 255   1        if(tier_b<8)
+ 256   1        {
+ 257   2          readh|=(0x01<<(7-tier_b));
+ 258   2          
+ 259   2        }
+ 260   1        else
+ 261   1        {
+ 262   2          readl|=(0x01<<(15-tier_b)); 
+ 263   2        }
+ 264   1        lcd_wdat(readh);
+ 265   1        lcd_wdat(readl);
+ 266   1      
+ 267   1        lcd_wcmd(0x30); 
+ 268   1      }
+ 269          void draw_0(uchar x,uchar y)    //?0
+ 270          {  
+ 271   1        uchar i;
+ 272   1        for(i=0;i<3;i++)
+ 273   1        {
+ 274   2        draw_point(x+i,y);
+ 275   2        draw_point(x+i,y+4);
+ 276   2        }
+ 277   1        for(i=0;i<4;i++)
+ 278   1        {
+ 279   2        draw_point(x,y+1+i);
+ 280   2        draw_point(x+2,y+1+i);
+ 281   2        }
+ 282   1      }
+ 283          void draw_1(uchar x,uchar y)
+ 284          {
+ 285   1        uchar i;
+ 286   1        for(i=0;i<5;i++)
+ 287   1         draw_point(x+1 ,y+i);
+ 288   1      }
+ 289          void draw_2(uchar x,uchar y)
+ 290          {
+ 291   1        uchar i;
+ 292   1        for(i=0;i<3;i++)
+ 293   1        {
+ 294   2          draw_point(x+i,y);
+ 295   2          draw_point(x+i,y+4);
+ 296   2          draw_point(x+2-i,y+1+i);
+ 297   2        }
+ 298   1      }
+ 299          void draw_3(uchar x,uchar y)
+ 300          {
+ 301   1         uchar i;
+ 302   1        for(i=0;i<3;i++)
+ 303   1        {
+C51 COMPILER V9.52.0.0   SHIBOQI                                                           12/14/2016 19:17:35 PAGE 6   
+
+ 304   2          draw_point(x+i,y);
+ 305   2          draw_point(x+i,y+2);
+ 306   2          draw_point(x+i,y+4);
+ 307   2        }
+ 308   1         draw_point(x+2,y+1);
+ 309   1        draw_point(x+2,y+3);
+ 310   1      }
+ 311          void draw_4(uchar x,uchar y)
+ 312          {
+ 313   1        uchar i;
+ 314   1        for(i=0;i<2;i++)
+ 315   1          {
+ 316   2            draw_point(x,y+1+i);
+ 317   2          }
+ 318   1        for(i=0;i<5;i++)
+ 319   1          {
+ 320   2            draw_point(x+1,y+i);
+ 321   2          
+ 322   2          }   
+ 323   1        draw_point(x+2,y+2);  
+ 324   1      }
+ 325          void draw_5(uchar x,uchar y)
+ 326          {
+ 327   1        uchar i;
+ 328   1        for(i=0;i<3;i++)
+ 329   1        {
+ 330   2          draw_point(x+i,y);
+ 331   2          draw_point(x+i,y+2);
+ 332   2          draw_point(x+i,y+4);
+ 333   2        }
+ 334   1          draw_point(x,y+1);
+ 335   1        draw_point(x+2,y+3);
+ 336   1      
+ 337   1      }
+ 338          void draw_6(uchar x,uchar y)
+ 339          {
+ 340   1        uchar i;
+ 341   1        for(i=0;i<3;i++)
+ 342   1        {
+ 343   2          draw_point(x+i,y);
+ 344   2          draw_point(x+i,y+2);
+ 345   2          draw_point(x+i,y+4);
+ 346   2        }
+ 347   1         draw_point(x,y+1);
+ 348   1        draw_point(x+2,y+3);
+ 349   1        draw_point(x,y+3);
+ 350   1      }
+ 351          void draw_7(uchar x,uchar y)
+ 352          { 
+ 353   1        uchar i;
+ 354   1        for(i=0;i<3;i++)
+ 355   1        {
+ 356   2          draw_point(x+i,y);
+ 357   2        }
+ 358   1        for(i=0;i<4;i++)
+ 359   1        {
+ 360   2          draw_point(x+2,y+1+i);
+ 361   2        } 
+ 362   1      }
+ 363          void draw_8(uchar x,uchar y)
+ 364          {
+ 365   1        uchar i;
+C51 COMPILER V9.52.0.0   SHIBOQI                                                           12/14/2016 19:17:35 PAGE 7   
+
+ 366   1        for(i=0;i<5;i++)
+ 367   1        {
+ 368   2          draw_point(x,y+i);
+ 369   2          draw_point(x+2,y+i);
+ 370   2        }
+ 371   1          draw_point(x+1,y);
+ 372   1          draw_point(x+1,y+2);
+ 373   1          draw_point(x+1,y+4);
+ 374   1      }
+ 375          void draw_9(uchar x,uchar y)
+ 376          {
+ 377   1        uchar i;
+ 378   1        for(i=0;i<3;i++)
+ 379   1        {
+ 380   2          draw_point(x,y+i);
+ 381   2          draw_point(x+2,y+i);
+ 382   2        }
+ 383   1        for(i=0;i<2;i++)
+ 384   1        {
+ 385   2          draw_point(x+1,y+2*i);
+ 386   2          draw_point(x+2,y+i+3);
+ 387   2        }
+ 388   1      }
+ 389          void number(uchar x,uchar y,uchar i)
+ 390          { 
+ 391   1        switch(i)
+ 392   1        {
+ 393   2          case 0:draw_0(x,y);break;
+ 394   2          case 1:draw_1(x,y);break;
+ 395   2          case 2:draw_2(x,y);break;
+ 396   2          case 3:draw_3(x,y);break;
+ 397   2          case 4:draw_4(x,y);break;
+ 398   2          case 5:draw_5(x,y);break;
+ 399   2          case 6:draw_6(x,y);break;
+ 400   2          case 7:draw_7(x,y);break;
+ 401   2          case 8:draw_8(x,y);break;
+ 402   2          case 9:draw_9(x,y);break;         
+ 403   2        }
+ 404   1      }
+ 405          void draw_biaotemp(uchar heng_1,uchar zong_1)
+ 406          {
+ 407   1        
+ 408   1      
+ 409   1        lcd_wcmd(0x01);
+ 410   1        delay1ms(10);     
+ 411   1        draw_point(93,63);
+ 412   1        if(2*heng_1<10)
+ 413   1          number(27,50,2*heng_1);
+ 414   1        else
+ 415   1          {
+ 416   2           number(27,50,2*heng_1/10);
+ 417   2           number(32,50,2*heng_1%10);
+ 418   2          }
+ 419   1        if(4*heng_1<10)
+ 420   1          number(47,50,4*heng_1);
+ 421   1        else
+ 422   1          {
+ 423   2           number(47,50,4*heng_1/10);
+ 424   2           number(52,50,4*heng_1%10);
+ 425   2          }
+ 426   1        if(6*heng_1<10)
+ 427   1          number(67,50,6*heng_1);
+C51 COMPILER V9.52.0.0   SHIBOQI                                                           12/14/2016 19:17:35 PAGE 8   
+
+ 428   1        else
+ 429   1          {
+ 430   2           number(67,50,6*heng_1/10);
+ 431   2           number(72,50,6*heng_1%10);
+ 432   2          }
+ 433   1        if(8*heng_1<10)
+ 434   1          number(87,50,8*heng_1);
+ 435   1        else
+ 436   1          {
+ 437   2           number(87,50,8*heng_1/10);
+ 438   2           number(92,50,8*heng_1%10);
+ 439   2          }
+ 440   1        number(107,50,10*heng_1/10);
+ 441   1        number(112,50,10*heng_1%10);
+ 442   1        if(2*zong_1<10)
+ 443   1            number(4,0,2*zong_1);
+ 444   1          else
+ 445   1            {
+ 446   2             number(0,0,2*zong_1/10);
+ 447   2             number(4,0,2*zong_1%10);
+ 448   2            }   
+ 449   1        number(4,22,zong_1);
+ 450   1        number(4,44,0);
+ 451   1        //number(0,0,1);
+ 452   1        draw_0(95,58);          
+ 453   1      delay1ms(3);
+ 454   1      }
+ 455          void draw_temp(uchar freq,uchar volt)
+ 456          {
+ 457   1        lcd_wcmd(0x01);
+ 458   1        delay1ms(10);
+ 459   1        if(freq<10)
+ 460   1          number(35,58,freq);
+ 461   1        else
+ 462   1          {
+ 463   2           number(31,58,2*freq/10);
+ 464   2           number(35,58,2*freq%10);
+ 465   2          }
+ 466   1          if(volt<10)
+ 467   1          number(89,58,volt);
+ 468   1        else
+ 469   1          {
+ 470   2           number(85,58,volt/10);
+ 471   2           number(89,58,volt%10);
+ 472   2          }
+ 473   1      }
+ 474          uchar key_pcn()
+ 475          {
+ 476   1        uint key_num;
+ 477   1        if(GD==0)
+ 478   1        {
+ 479   2          delay1ms(10);
+ 480   2          if(GD==0)
+ 481   2          {   
+ 482   3            while(!GD);
+ 483   3            key_num = 1;
+ 484   3          }
+ 485   2        }
+ 486   1        if(VD==0)
+ 487   1        {
+ 488   2          delay1ms(10);
+ 489   2          if(VD==0)
+C51 COMPILER V9.52.0.0   SHIBOQI                                                           12/14/2016 19:17:35 PAGE 9   
+
+ 490   2          {     
+ 491   3            while(!VD);
+ 492   3            key_num = 2;
+ 493   3          }
+ 494   2        }
+ 495   1        if(VI==0)
+ 496   1        {
+ 497   2          delay1ms(10);
+ 498   2          if(VI==0)
+ 499   2          {   
+ 500   3            while(!VI);
+ 501   3            key_num = 3;
+ 502   3          }
+ 503   2        }
+ 504   1        if(TD==0)
+ 505   1        {
+ 506   2          delay1ms(10);
+ 507   2          if(TD==0)
+ 508   2          {
+ 509   3            while(!TD);
+ 510   3            key_num = 4;
+ 511   3          }
+ 512   2        }
+ 513   1        if(TE==0)
+ 514   1        {
+ 515   2          delay1ms(10);
+ 516   2          if(TE==0)
+ 517   2          { 
+ 518   3            while(!TE);
+ 519   3            key_num = 5;
+ 520   3          }
+ 521   2        }
+ 522   1        return key_num;
+ 523   1      }
+ 524          void key_process()
+ 525          {
+ 526   1        uchar key;  
+ 527   1        key=key_pcn();
+ 528   1        switch(key)
+ 529   1        {
+ 530   2          case 1:break;
+ 531   2          case 2:clear_screen();
+ 532   2            delay1ms(3);
+ 533   2            draw_pic(biaoge);
+ 534   2            zong++;
+ 535   2            if(zong==6)
+ 536   2              zong=0;
+ 537   2            break;
+ 538   2          case 3:clear_screen();
+ 539   2            delay1ms(3);
+ 540   2            draw_pic(biaoge);
+ 541   2            zong--;
+ 542   2            if(zong==0)
+ 543   2              zong=1;
+ 544   2            break;
+ 545   2          case 4:clear_screen();
+ 546   2            delay1ms(3);
+ 547   2            draw_pic(biaoge);
+ 548   2            heng++;
+ 549   2            if(heng==10)
+ 550   2              heng = 0;
+ 551   2            break;
+C51 COMPILER V9.52.0.0   SHIBOQI                                                           12/14/2016 19:17:35 PAGE 10  
+
+ 552   2          case 5:clear_screen();
+ 553   2            delay1ms(3);
+ 554   2            draw_pic(biaoge);
+ 555   2            heng--;
+ 556   2            if(heng==0)
+ 557   2              heng=9;
+ 558   2            break;
+ 559   2        } 
+ 560   1        
+ 561   1        draw_biaotemp(heng,zong);
+ 562   1      }
+ 563          void adc_init()
+ 564          {
+ 565   1        P1ASF =0x02;//用通道1
+ 566   1        AUXR1 = 0x04;//高位放在ADC_RES中，低8位放在ADC_RESL中
+ 567   1        //ADC_CONTR|=0x01;//确定通道1
+ 568   1        //ADC_CONTR&=0x9f;//转换速度,46.7Khz
+ 569   1        //ADC_CONTR|=0X80;//开启电源
+ 570   1        ADC_CONTR=0X81;
+ 571   1        delay(10);
+ 572   1      }
+ 573          uint get_adcresult()
+ 574          {
+ 575   1        uchar ad_finish=0;
+ 576   1        uint temp;
+ 577   1        uchar result;
+ 578   1        ADC_RES=0X00;
+ 579   1        ADC_RESL=0X00;
+ 580   1        ADC_CONTR|=0X08;//启动转换
+ 581   1        while(ad_finish==0)
+ 582   1        {
+ 583   2        ad_finish=ADC_CONTR&0x10;
+ 584   2        }
+ 585   1        ADC_CONTR&=0xef;
+ 586   1        delay(1);
+ 587   1        temp=ADC_RES;
+ 588   1        //result=temp*5/256//模拟8位AD转换
+ 589   1        temp=ADC_RES*256+ADC_RESL;
+ 590   1        result=temp*5/1024;
+ 591   1        return result;
+ 592   1      }
+ 593          void adc_process()
+ 594          {
+ 595   1        uchar i,y_temp;
+ 596   1        for(i=0;i++;i<128)
+ 597   1        {
+ 598   2          a[i]=get_adcresult(); 
+ 599   2          y_temp=a[i]/0.078;//5v,64格。每格0.078V
+ 600   2            draw_point(i+11,48-y_temp);
+ 601   2        }
+ 602   1        volt1=y_temp*0.078;
+ 603   1        ADC_CONTR&=0Xf7;//关闭转换
+ 604   1        ADC_CONTR&=0X7f;//关闭电源
+ 605   1      }
+ 606          void main()
+ 607          {
+ 608   1        TMOD=0X11;
+ 609   1        TH0=(65535-50000)/256;
+ 610   1        TL0=(65535-50000)%256;//20hz
+ 611   1        TH1=(65535-50000)/256;
+ 612   1        TL1=(65535-50000)%256;
+ 613   1        ET1=1;
+C51 COMPILER V9.52.0.0   SHIBOQI                                                           12/14/2016 19:17:35 PAGE 11  
+
+ 614   1        TR1=1;
+ 615   1        EX1=1;//开启外部定时器
+ 616   1        IT1=1;//跳变沿开启中断
+ 617   1        ET0=1;
+ 618   1        TR0=1;
+ 619   1        EA=1;
+ 620   1        freq=0;
+ 621   1        clock=1;
+ 622   1        heng=1;
+ 623   1        zong=1;
+ 624   1        adc_init();
+ 625   1        lcd_init();
+ 626   1        
+ 627   1        while(1)
+ 628   1        { 
+ 629   2          clear_screen();
+ 630   2          delay1ms(3);
+ 631   2          draw_pic(biaoge);
+ 632   2          key_process();
+ 633   2          adc_process();
+ 634   2          draw_temp(freq1,volt1);
+ 635   2          delay1ms(50000);
+ 636   2        }
+ 637   1      }
+ 638          void time_T0() interrupt 1
+ 639          {
+ 640   1        TH1=(65535-50000)/256;
+ 641   1        TL1=(65535-50000)%256;
+ 642   1        num_5ms++;
+ 643   1        if(num_5ms==20)
+ 644   1        {
+ 645   2          freq1=freq;
+ 646   2           freq=0;
+ 647   2        }
+ 648   1      }
+ 649          void time_INT1() interrupt 2//外部中断一
+ 650          {
+ 651   1        freq++;
+ 652   1      }
+ 653          void time_T1() interrupt 3//产生方波
+ 654          {
+ 655   1        TH1=(65535-50000)/256;
+ 656   1        TL1=(65535-50000)%256;
+ 657   1        clock=~clock;
+ 658   1      }
+
+
+MODULE INFORMATION:   STATIC OVERLAYABLE
+   CODE SIZE        =   2435    ----
+   CONSTANT SIZE    =   1024    ----
+   XDATA SIZE       =   ----    ----
+   PDATA SIZE       =    256    ----
+   DATA SIZE        =      6      51
+   IDATA SIZE       =   ----    ----
+   BIT SIZE         =   ----       1
+END OF MODULE INFORMATION.
+
+
+C51 COMPILATION COMPLETE.  0 WARNING(S),  0 ERROR(S)
