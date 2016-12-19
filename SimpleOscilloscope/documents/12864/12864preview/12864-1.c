@@ -31,7 +31,7 @@ void T_C_init (void){
 	ET0 = 1; //T/C0中断开关
 	TR0 = 1; //T/C0启动开关
 }
-void T_C0 (void) interrupt 1  using 1{ //切换寄存器组到1
+void T_C0 (void) interrupt 1  using 1{ //using 1 切换寄存器组到1
 	TH0 = 0x00; //16位计数寄存器T0高8位（重新写入初值）
 	TL0 = 0x00; //16位计数寄存器T0低8位
 	jm++;
@@ -71,7 +71,7 @@ unsigned char Lcd_CheckBusy(void)
 	 LcdData=0xff;
     RS=0;
     RW=1;
-    E=1;
+    E=1; 
     _nop_(); 
     Busy=LcdData&0x80;
     E=0;
@@ -210,7 +210,7 @@ void Lcd_Reset()
 	Lcd_WriteCmd(0x30);       //选择基本指令集
 	Lcd_WriteCmd(0x0c);       //开显示(无游标、不反白)
 	Lcd_WriteCmd(0x01);       //清除显示，并且设定地址指针为00H
-	Lcd_WriteCmd(0x06);       //指定在资料的读取及写入时，设定游标的移动方向及指定显示的移位
+	Lcd_WriteCmd(0x06);       //指定在数据的读取及写入时，设定游标的移动方向及指定显示的移位
 }
 //////////////////////////////////////
 void Delay(int n)
@@ -224,18 +224,18 @@ while(n--)
 }
 void InitADC()
 {
-P1ASF=0X80;
-ADC_RES=0;
-ADC_CONTR=ADC_POWER|ADC_SPEED|ADC_START|ch;
-Delay(2);
-EADC=1;
+	P1ASF=0X80;
+	ADC_RES=0;
+	ADC_CONTR=ADC_POWER|ADC_SPEED|ADC_START|ch;
+	Delay(2);
+	EADC=1;
 }
 void adc_isr() interrupt 5 using 1
 {
-ADC_CONTR&=!ADC_FLAG;
-if(over==0)
-{
-	for(temp=0;temp<delnop;temp++)
+	ADC_CONTR&=!ADC_FLAG;
+	if(over==0)
+	{
+		for(temp=0;temp<delnop;temp++)
 	{
 		_nop_();
 	}
@@ -243,8 +243,8 @@ if(over==0)
 	dati++;
 	if(dati>100)
 	{
-	dati=0;
-	over=1;
+		dati=0;
+		over=1;
 	}
 }
 ADC_CONTR=ADC_POWER|ADC_SPEED|ADC_START|ch;
@@ -410,24 +410,24 @@ for(x=starx;x<endx;x++)
 }
 void disp_bj(void)
 {
-int x=0;
-int y=0;
-for(x=13;x<114;x++)
-{
-Lcd_PutPixel(x,0,1);
-}
-for(x=13;x<114;x++)
-{
-Lcd_PutPixel(x,52,1);
-}
-for(y=0;y<52;y++)
-{
-Lcd_PutPixel(13,y,1);
-}
-for(y=0;y<52;y++)
-{
-Lcd_PutPixel(114,y,1);
-}
+	int x=0;
+	int y=0;
+	for(x=13;x<114;x++)
+	{
+		Lcd_PutPixel(x,0,1);
+	}
+	for(x=13;x<114;x++)
+	{
+		Lcd_PutPixel(x,52,1);
+	}
+	for(y=0;y<52;y++)
+	{
+		Lcd_PutPixel(13,y,1);
+	}
+	for(y=0;y<52;y++)
+	{
+		Lcd_PutPixel(114,y,1);
+	}
 Lcd_PutPixel(13,51,0);
 Lcd_PutPixel(13,41,0);
 Lcd_PutPixel(13,31,0);
