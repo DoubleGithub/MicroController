@@ -1,3 +1,3 @@
-".\Objects\shiyan_3.obj" 
+".\Objects\shiyan_3_new.obj" 
 TO ".\Objects\shiyan_3" 
 PRINT(".\Listings\shiyan_3.m51")

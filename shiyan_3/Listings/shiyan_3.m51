@@ -1,15 +1,15 @@
-BL51 BANKED LINKER/LOCATER V6.22                                                        10/18/2016  21:09:25  PAGE 1
+BL51 BANKED LINKER/LOCATER V6.22                                                        12/18/2016  23:24:55  PAGE 1
 
 
 BL51 BANKED LINKER/LOCATER V6.22, INVOKED BY:
-C:\KEIL_V5\C51\BIN\BL51.EXE .\Objects\shiyan_3.obj TO .\Objects\shiyan_3 PRINT (.\Listings\shiyan_3.m51)
+C:\MYSOFTWARE\KEIL\C51\BIN\BL51.EXE .\Objects\shiyan_3_new.obj TO .\Objects\shiyan_3 PRINT (.\Listings\shiyan_3.m51)
 
 
 INPUT MODULES INCLUDED:
-  .\Objects\shiyan_3.obj (SHIYAN_3)
+  .\Objects\shiyan_3_new.obj (SHIYAN_3_NEW)
 
 
-LINK MAP OF MODULE:  .\Objects\shiyan_3 (SHIYAN_3)
+LINK MAP OF MODULE:  .\Objects\shiyan_3 (SHIYAN_3_NEW)
 
 
             TYPE    BASE      LENGTH    RELOCATION   SEGMENT NAME
@@ -19,51 +19,47 @@ LINK MAP OF MODULE:  .\Objects\shiyan_3 (SHIYAN_3)
             REG     0000H     0008H     ABSOLUTE     "REG BANK 0"
 
             * * * * * * *   C O D E   M E M O R Y   * * * * * * *
-            CODE    0000H     012DH     ABSOLUTE     
+            CODE    0000H     0068H     ABSOLUTE     
 
 
 
-SYMBOL TABLE OF MODULE:  .\Objects\shiyan_3 (SHIYAN_3)
+SYMBOL TABLE OF MODULE:  .\Objects\shiyan_3 (SHIYAN_3_NEW)
 
   VALUE           TYPE          NAME
   ----------------------------------
 
-  -------         MODULE        SHIYAN_3
-  C:0122H         SYMBOL        ADDER
+  -------         MODULE        SHIYAN_3_NEW
   D:00F0H         SYMBOL        B
-  C:0126H         SYMBOL        DONE
-  C:0108H         SYMBOL        LOOP
-  C:011AH         SYMBOL        LOOP1
-  C:0100H         SYMBOL        MAIN
+  C:0056H         SYMBOL        LOOP
+  C:004AH         SYMBOL        LOOP1
+  C:0040H         SYMBOL        MAIN
+  N:0000H         SYMBOL        SHUZI
+  C:005DH         SYMBOL        TMP
   C:0000H         LINE#         2
-  C:0100H         LINE#         4
-  C:0103H         LINE#         5
-  C:0105H         LINE#         6
-  C:0108H         LINE#         7
-  C:0109H         LINE#         8
-  C:010AH         LINE#         9
-  C:010BH         LINE#         10
-  C:010EH         LINE#         12
-  C:0111H         LINE#         13
-  C:0113H         LINE#         14
-  C:0115H         LINE#         15
-  C:0118H         LINE#         16
-  C:011AH         LINE#         17
-  C:011BH         LINE#         18
-  C:011CH         LINE#         19
-  C:011EH         LINE#         20
-  C:0120H         LINE#         21
-  C:0122H         LINE#         23
-  C:0123H         LINE#         24
-  C:0124H         LINE#         25
-  C:0126H         LINE#         27
-  C:0129H         LINE#         28
-  C:012AH         LINE#         29
-BL51 BANKED LINKER/LOCATER V6.22                                                      10/18/2016  21:09:25  PAGE 2
+  C:0040H         LINE#         5
+  C:0043H         LINE#         6
+  C:0046H         LINE#         7
+  C:0048H         LINE#         8
+  C:004AH         LINE#         11
+  C:004BH         LINE#         12
+  C:004CH         LINE#         13
+  C:004DH         LINE#         14
+  C:0050H         LINE#         17
+  C:0053H         LINE#         18
+  C:0056H         LINE#         19
+  C:0057H         LINE#         20
+  C:0059H         LINE#         21
+  C:005CH         LINE#         22
+  C:005DH         LINE#         23
+  C:005EH         LINE#         24
+  C:0061H         LINE#         25
+  C:0064H         LINE#         26
+  C:0065H         LINE#         27
+  C:0066H         LINE#         28
+  -------         ENDMOD        SHIYAN_3_NEW
+
+Program Size: data=8.0 xdata=0 code=104
+BL51 BANKED LINKER/LOCATER V6.22                                                      12/18/2016  23:24:55  PAGE 2
 
 
-  C:012BH         LINE#         31
-  -------         ENDMOD        SHIYAN_3
-
-Program Size: data=8.0 xdata=0 code=301
 LINK/LOCATE RUN COMPLETE.  0 WARNING(S),  0 ERROR(S)

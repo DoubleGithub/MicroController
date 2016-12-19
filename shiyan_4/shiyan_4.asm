@@ -42,5 +42,5 @@ ADDER:	MOV B  , R7
 		MOV A , B
 		ADDC A , R0
 		MOV R2,A
-				
+		SJMP $		
 		END

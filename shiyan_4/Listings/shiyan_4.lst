@@ -1,106 +1,60 @@
-A51 MACRO ASSEMBLER  SHIYAN_4                                                             10/31/2016 14:45:11 PAGE     1
+A51 MACRO ASSEMBLER  SHIYAN_4                                                             12/18/2016 23:32:06 PAGE     1
 
 
-MACRO ASSEMBLER A51 V8.2.5.0
+MACRO ASSEMBLER A51 V8.02b
 OBJECT MODULE PLACED IN .\Objects\shiyan_4.obj
-ASSEMBLER INVOKED BY: C:\Keil_v5\C51\BIN\A51.EXE shiyan_4.asm SET(SMALL) DEBUG PRINT(.\Listings\shiyan_4.lst) OBJECT(.\O
-                      bjects\shiyan_4.obj) EP
+ASSEMBLER INVOKED BY: C:\MySoftWare\keil\C51\BIN\A51.EXE shiyan_4.asm SET(SMALL) DEBUG PRINT(.\Listings\shiyan_4.lst) OB
+                      JECT(.\Objects\shiyan_4.obj) EP
 
 LOC  OBJ            LINE     SOURCE
 
 0000                   1                     ORG 0000H
-
 0000 020100            2                     LJMP MAIN
-
 0100                   3                     ORG 0100H
-
 0100 7AF1              4     MAIN:   MOV R2 , #0F1H
-
 0102 7B23              5                     MOV R3 , #23H
-
 0104 7EF4              6                     MOV R6 , #0F4H
-
 0106 7F56              7                     MOV R7 , #56H
-
 0108 12010D            8                     LCALL ADDER
-
 010B 80FE              9                     SJMP $
-
 010D 8FF0             10     ADDER:  MOV B  , R7
-
 010F EB               11                     MOV A  , R3 
-
 0110 A4               12                     MUL AB
-
 0111 ACF0             13                     MOV R4 , B
-
 0113 FD               14                     MOV R5 , A
-
                       15                     
-
 0114 EB               16                     MOV A  , R3
-
 0115 8EF0             17                     MOV B  , R6
-
 0117 A4               18                     MUL AB
-
 0118 2C               19                     ADD A  , R4
-
 0119 FC               20                     MOV R4 , A
-
 011A E4               21                     CLR A
-
 011B 35F0             22                     ADDC A , B
-
 011D FB               23                     MOV R3 , A
-
                       24                     
-
 011E EA               25                     MOV A , R2 
-
 011F 8FF0             26                     MOV B , R7
-
 0121 A4               27                     MUL AB 
-
 0122 2C               28                     ADD A , R4
-
 0123 FC               29                     MOV R4,A
-
 0124 EB               30                     MOV A , R3
-
 0125 35F0             31                     ADDC A , B
-
 0127 FB               32                     MOV R3, A
-
 0128 E4               33                     CLR A
-
 0129 33               34                     RLC A
-
 012A F8               35                     MOV R0, A
-
                       36                     
-
 012B EA               37                     MOV A , R2
-
 012C 8EF0             38                     MOV B , R6
-
 012E A4               39                     MUL AB
-
 012F 2B               40                     ADD A , R3
-
 0130 FB               41                     MOV R3, A
-
 0131 E5F0             42                     MOV A , B
-
 0133 38               43                     ADDC A , R0
-
 0134 FA               44                     MOV R2,A
-
-                      45                                     
-
+0135 80FE             45                     SJMP $          
                       46                     END
-
-A51 MACRO ASSEMBLER  SHIYAN_4                                                             10/31/2016 14:45:11 PAGE     2
+A51 MACRO ASSEMBLER  SHIYAN_4                                                             12/18/2016 23:32:06 PAGE     2
 
 SYMBOL TABLE LISTING
 ------ ----- -------

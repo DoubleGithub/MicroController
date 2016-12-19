@@ -1,0 +1,60 @@
+A51 MACRO ASSEMBLER  SHIYAN_3_NEW                                                         12/18/2016 23:24:54 PAGE     1
+
+
+MACRO ASSEMBLER A51 V8.02b
+OBJECT MODULE PLACED IN .\Objects\shiyan_3_new.obj
+ASSEMBLER INVOKED BY: C:\MySoftWare\keil\C51\BIN\A51.EXE shiyan_3_new.asm SET(SMALL) DEBUG PRINT(.\Listings\shiyan_3_new
+                      .lst) OBJECT(.\Objects\shiyan_3_new.obj) EP
+
+LOC  OBJ            LINE     SOURCE
+
+0000                   1                     ORG 0000H
+0000 020040            2                     LJMP MAIN
+0040                   3                     ORG 0040H
+  0000                 4     SHUZI   EQU 00H
+0040 75F010            5     MAIN:   MOV B , #16
+0043 902000            6                     MOV DPTR , #2000H
+0046 7900              7                     MOV R1 , #00H
+0048 7400              8                     MOV A , #00
+004A                   9                     LOOP1:
+                      10                     
+004A F0               11                     MOVX @DPTR , A
+004B 04               12                     INC A
+004C A3               13                     INC DPTR
+004D D5F0FA           14                     DJNZ B , LOOP1
+                      15                     
+                      16                     
+0050 75F010           17                     MOV B , #16
+0053 902000           18                     MOV DPTR , #2000H
+0056 E0               19     LOOP:   MOVX A , @DPTR
+0057 6500             20                     XRL A , SHUZI
+0059 B40001           21                     CJNE A , #0 , TMP
+005C 09               22                     INC R1
+005D A3               23     TMP:    INC DPTR
+005E D5F0F5           24                     DJNZ B , LOOP
+0061 902010           25                     MOV DPTR , #2010H
+0064 E9               26                     MOV A , R1
+0065 F0               27                     MOVX @DPTR , A
+0066 80FE             28                     SJMP $
+                      29                     END
+                                             
+A51 MACRO ASSEMBLER  SHIYAN_3_NEW                                                         12/18/2016 23:24:54 PAGE     2
+
+SYMBOL TABLE LISTING
+------ ----- -------
+
+
+N A M E             T Y P E  V A L U E   ATTRIBUTES
+
+B. . . . . . . . .  D ADDR   00F0H   A   
+LOOP . . . . . . .  C ADDR   0056H   A   
+LOOP1. . . . . . .  C ADDR   004AH   A   
+MAIN . . . . . . .  C ADDR   0040H   A   
+SHUZI. . . . . . .  N NUMB   0000H   A   
+TMP. . . . . . . .  C ADDR   005DH   A   
+
+
+REGISTER BANK(S) USED: 0 
+
+
+ASSEMBLY COMPLETE.  0 WARNING(S), 0 ERROR(S)
